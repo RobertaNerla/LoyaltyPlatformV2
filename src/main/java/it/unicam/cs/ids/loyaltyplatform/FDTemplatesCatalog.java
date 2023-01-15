@@ -22,6 +22,8 @@ public class FDTemplatesCatalog {
             if(template.getTemplateId() == templateId)
                 description = template.getDescription();
         }
+
+        //comment for a commit
         return description;
     }
 }
