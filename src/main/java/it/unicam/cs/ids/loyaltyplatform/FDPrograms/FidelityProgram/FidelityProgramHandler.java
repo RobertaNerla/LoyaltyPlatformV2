@@ -1,8 +1,8 @@
-package it.unicam.cs.ids.loyaltyplatform.FidelityProgram;
+package it.unicam.cs.ids.loyaltyplatform.FDPrograms.FidelityProgram;
 
-import it.unicam.cs.ids.loyaltyplatform.FDTemplates.FDTemplate;
-import it.unicam.cs.ids.loyaltyplatform.FDTemplates.TemplatesCatalog;
-import it.unicam.cs.ids.loyaltyplatform.TemplateSettings.TemplateSettings;
+import it.unicam.cs.ids.loyaltyplatform.FDPrograms.FDTemplates.FDTemplate;
+import it.unicam.cs.ids.loyaltyplatform.FDPrograms.FDTemplates.TemplatesCatalog;
+import it.unicam.cs.ids.loyaltyplatform.FDPrograms.TemplateSettings.TemplateSettings;
 
 public class FidelityProgramHandler<D extends FDTemplate<S>,S extends TemplateSettings> {
     private final TemplatesCatalog<D,S> templatesCatalog;

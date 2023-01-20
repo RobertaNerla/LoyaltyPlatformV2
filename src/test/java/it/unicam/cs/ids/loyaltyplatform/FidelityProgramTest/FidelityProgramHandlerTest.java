@@ -1,12 +1,12 @@
 package it.unicam.cs.ids.loyaltyplatform.FidelityProgramTest;
 
-import it.unicam.cs.ids.loyaltyplatform.FDTemplates.FidelityProgramType;
-import it.unicam.cs.ids.loyaltyplatform.FDTemplates.SimpleFDTemplate;
-import it.unicam.cs.ids.loyaltyplatform.FDTemplates.TemplatesCatalog;
-import it.unicam.cs.ids.loyaltyplatform.FidelityProgram.FidelityProgramHandler;
-import it.unicam.cs.ids.loyaltyplatform.TemplateSettings.CashbackProgramSettings;
-import it.unicam.cs.ids.loyaltyplatform.TemplateSettings.PointsProgramSettings;
-import it.unicam.cs.ids.loyaltyplatform.TemplateSettings.TemplateSettings;
+import it.unicam.cs.ids.loyaltyplatform.FDPrograms.FDTemplates.FidelityProgramType;
+import it.unicam.cs.ids.loyaltyplatform.FDPrograms.FDTemplates.SimpleFDTemplate;
+import it.unicam.cs.ids.loyaltyplatform.FDPrograms.FDTemplates.TemplatesCatalog;
+import it.unicam.cs.ids.loyaltyplatform.FDPrograms.FidelityProgram.FidelityProgramHandler;
+import it.unicam.cs.ids.loyaltyplatform.FDPrograms.TemplateSettings.CashbackProgramSettings;
+import it.unicam.cs.ids.loyaltyplatform.FDPrograms.TemplateSettings.PointsProgramSettings;
+import it.unicam.cs.ids.loyaltyplatform.FDPrograms.TemplateSettings.TemplateSettings;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;

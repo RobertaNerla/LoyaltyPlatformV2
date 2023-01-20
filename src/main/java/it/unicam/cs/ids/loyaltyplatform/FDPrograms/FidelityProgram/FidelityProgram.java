@@ -1,6 +1,6 @@
-package it.unicam.cs.ids.loyaltyplatform.FidelityProgram;
+package it.unicam.cs.ids.loyaltyplatform.FDPrograms.FidelityProgram;
 
-import it.unicam.cs.ids.loyaltyplatform.TemplateSettings.TemplateSettings;
+import it.unicam.cs.ids.loyaltyplatform.FDPrograms.TemplateSettings.TemplateSettings;
 
 public interface FidelityProgram<S extends TemplateSettings> {
     /**

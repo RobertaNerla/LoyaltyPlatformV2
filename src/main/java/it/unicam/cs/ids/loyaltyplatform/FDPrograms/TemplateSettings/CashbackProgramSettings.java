@@ -1,6 +1,6 @@
-package it.unicam.cs.ids.loyaltyplatform.TemplateSettings;
+package it.unicam.cs.ids.loyaltyplatform.FDPrograms.TemplateSettings;
 
-import it.unicam.cs.ids.loyaltyplatform.FDTemplates.FidelityProgramType;
+import it.unicam.cs.ids.loyaltyplatform.FDPrograms.FDTemplates.FidelityProgramType;
 
 import java.util.Arrays;
 
