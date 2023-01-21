@@ -2,6 +2,7 @@ package it.unicam.cs.ids.loyaltyplatform.Entity;
 
 import jakarta.persistence.*;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 @Entity(name = "Cliente")
@@ -14,10 +15,10 @@ import java.util.Date;
         })
 public class Cliente {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "clienteId",
+    @Column(name = "cliente_id",
             nullable = false,
             updatable = false)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long clienteId;
 
     @Column(name = "nome",
@@ -38,7 +39,7 @@ public class Cliente {
     @Column(name = "email",
             nullable = false,
             columnDefinition = "TEXT")
-    public String email;
+    private String email;
 
     @Column(name = "indirizzo",
             nullable = false,
@@ -46,7 +47,7 @@ public class Cliente {
     private String indirizzo;
 
     @Column(name = "data_nascita")
-    private Date dataDiNascita;
+    private LocalDate dataDiNascita;
 
     @Column(name = "codice_fiscale",
             nullable = false,
@@ -56,20 +57,22 @@ public class Cliente {
     public Cliente() {
     }
 
-    public Cliente(Long clienteId, String nome, String cognome, String numCellulare, String indirizzo, Date dataDiNascita, String codiceFiscale) {
+    public Cliente(Long clienteId, String nome, String cognome, String numCellulare, String email, String indirizzo, LocalDate dataDiNascita, String codiceFiscale) {
         this.clienteId = clienteId;
         this.nome = nome;
         this.cognome = cognome;
         this.numCellulare = numCellulare;
+        this.email = email;
         this.indirizzo = indirizzo;
         this.dataDiNascita = dataDiNascita;
         this.codiceFiscale = codiceFiscale;
     }
 
-    public Cliente(String nome, String cognome, String numCellulare, String indirizzo, Date dataDiNascita, String codiceFiscale) {
+    public Cliente(String nome, String cognome, String numCellulare, String email, String indirizzo, LocalDate dataDiNascita, String codiceFiscale) {
         this.nome = nome;
         this.cognome = cognome;
         this.numCellulare = numCellulare;
+        this.email = email;
         this.indirizzo = indirizzo;
         this.dataDiNascita = dataDiNascita;
         this.codiceFiscale = codiceFiscale;
@@ -107,6 +110,14 @@ public class Cliente {
         this.numCellulare = numCellulare;
     }
 
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
     public String getIndirizzo() {
         return indirizzo;
     }
@@ -115,11 +126,11 @@ public class Cliente {
         this.indirizzo = indirizzo;
     }
 
-    public Date getDataDiNascita() {
+    public LocalDate getDataDiNascita() {
         return dataDiNascita;
     }
 
-    public void setDataDiNascita(Date dataDiNascita) {
+    public void setDataDiNascita(LocalDate dataDiNascita) {
         this.dataDiNascita = dataDiNascita;
     }
 
