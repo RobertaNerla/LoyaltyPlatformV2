@@ -8,9 +8,9 @@ import java.util.Date;
 @Entity(name = "Cliente")
 @Table(name = "cliente",
         uniqueConstraints = {
-                @UniqueConstraint(name = "student_email_unique",
+                @UniqueConstraint(name = "cliente_email_unique",
                         columnNames = "email"),
-                @UniqueConstraint(name = "student_num_cellulare_unique",
+                @UniqueConstraint(name = "cliente_num_cellulare_unique",
                         columnNames = "num_cellulare")
         })
 public class Cliente {
