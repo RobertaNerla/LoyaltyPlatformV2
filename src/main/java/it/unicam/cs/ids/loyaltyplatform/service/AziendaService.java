@@ -1,8 +1,7 @@
-package it.unicam.cs.ids.loyaltyplatform.Service;
+package it.unicam.cs.ids.loyaltyplatform.service;
 
-import it.unicam.cs.ids.loyaltyplatform.Entity.Azienda;
-import it.unicam.cs.ids.loyaltyplatform.Entity.Cliente;
-import it.unicam.cs.ids.loyaltyplatform.Repository.AziendaRepository;
+import it.unicam.cs.ids.loyaltyplatform.model.Azienda;
+import it.unicam.cs.ids.loyaltyplatform.dao.AziendaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

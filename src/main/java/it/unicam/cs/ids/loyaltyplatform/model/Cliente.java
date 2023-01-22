@@ -1,10 +1,13 @@
-package it.unicam.cs.ids.loyaltyplatform.Entity;
+package it.unicam.cs.ids.loyaltyplatform.model;
 
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
-import java.util.Date;
 
+/**
+ * Classe che rappresenta un cliente nel sistema.
+ * Corrisponde anche all'omonima entità nel database del progetto.
+ */
 @Entity(name = "Cliente")
 @Table(name = "cliente",
         uniqueConstraints = {
@@ -68,6 +71,17 @@ public class Cliente {
         this.codiceFiscale = codiceFiscale;
     }
 
+    /**
+     * Costrutore senza id, perchè quello viene generato automaticamente.
+     *
+     * @param nome          nome del cliente
+     * @param cognome       cognome del cliente
+     * @param numCellulare  numero di cellulare del cliente
+     * @param email         email del cliente
+     * @param indirizzo     indirizzo del cliente
+     * @param dataDiNascita data di nascita del cliente
+     * @param codiceFiscale codice fiscale del cliente
+     */
     public Cliente(String nome, String cognome, String numCellulare, String email, String indirizzo, LocalDate dataDiNascita, String codiceFiscale) {
         this.nome = nome;
         this.cognome = cognome;

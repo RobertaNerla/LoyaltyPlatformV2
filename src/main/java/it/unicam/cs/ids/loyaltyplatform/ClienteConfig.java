@@ -1,14 +1,13 @@
 package it.unicam.cs.ids.loyaltyplatform;
 
-import it.unicam.cs.ids.loyaltyplatform.Entity.Cliente;
-import it.unicam.cs.ids.loyaltyplatform.Repository.ClienteRepository;
+import it.unicam.cs.ids.loyaltyplatform.model.Cliente;
+import it.unicam.cs.ids.loyaltyplatform.dao.ClienteRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 import java.time.LocalDate;
 import java.time.Month;
-import java.util.List;
 
 @Configuration
 public class ClienteConfig {

@@ -1,16 +1,18 @@
-package it.unicam.cs.ids.loyaltyplatform.Service;
+package it.unicam.cs.ids.loyaltyplatform.service;
 
-import it.unicam.cs.ids.loyaltyplatform.Entity.Cliente;
-import it.unicam.cs.ids.loyaltyplatform.Repository.ClienteRepository;
+import it.unicam.cs.ids.loyaltyplatform.model.Cliente;
+import it.unicam.cs.ids.loyaltyplatform.dao.ClienteRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.GetMapping;
 
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 
+/**
+ * Classe che racchiude la business logic legata all'entità cliente.
+ */
 @Service
 public class ClienteService {
     private final ClienteRepository clienteRepository;

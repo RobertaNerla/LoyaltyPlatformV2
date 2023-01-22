@@ -1,17 +1,20 @@
-package it.unicam.cs.ids.loyaltyplatform.Controller;
+package it.unicam.cs.ids.loyaltyplatform.controller;
 
-import it.unicam.cs.ids.loyaltyplatform.Entity.Azienda;
-import it.unicam.cs.ids.loyaltyplatform.Entity.Cliente;
-import it.unicam.cs.ids.loyaltyplatform.Service.AziendaService;
-import it.unicam.cs.ids.loyaltyplatform.Service.ClienteService;
+import it.unicam.cs.ids.loyaltyplatform.model.Azienda;
+import it.unicam.cs.ids.loyaltyplatform.service.AziendaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+/**
+ * Classe controller, che gestisce le chiamate CRUD dell'entità azienda
+ */
 @RestController
 @RequestMapping(path = "/api/azienda")
 public class AziendaController {
+
+
     public final AziendaService aziendaService;
 
     @Autowired

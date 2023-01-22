@@ -1,6 +1,11 @@
-package it.unicam.cs.ids.loyaltyplatform.Entity;
+package it.unicam.cs.ids.loyaltyplatform.model;
 
 import jakarta.persistence.*;
+
+/**
+ * Classe che rappresenta un'azienda nel sistema.
+ * Corrisponde anche all'omonima entità nel database del progetto.
+ */
 
 @Entity(name = "Azienda")
 @Table(name = "azienda")
@@ -25,6 +30,12 @@ public class Azienda {
         this.indirizzo = indirizzo;
     }
 
+    /**
+     * Costruttore senza id, perchè esso viene generato automaticamente.
+     *
+     * @param nome      nome dell'azienda
+     * @param indirizzo indirizzo dell'azienda
+     */
     public Azienda(String nome, String indirizzo) {
         this.nome = nome;
         this.indirizzo = indirizzo;
