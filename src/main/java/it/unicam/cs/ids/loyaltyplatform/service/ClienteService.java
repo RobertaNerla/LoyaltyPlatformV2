@@ -22,10 +22,20 @@ public class ClienteService {
         this.clienteRepository = clienteRepository;
     }
 
+    /**
+     * Restituisce tutti i clienti presenti nel database
+     *
+     * @return una List<Cliente> contenente i clienti presenti nel database
+     */
     public List<Cliente> getClienti() {
         return clienteRepository.findAll();
     }
 
+    /**
+     * Aggiunge un nuovo cliente nel databse
+     *
+     * @param cliente cliente che si vuole aggiungere nel database
+     */
     public void addNewCliente(Cliente cliente) {
         Optional<Cliente> clientetByEmailOptional = clienteRepository.findClientetByEmail(cliente.getEmail());
         if (clientetByEmailOptional.isPresent()) {
@@ -40,6 +50,11 @@ public class ClienteService {
         clienteRepository.save(cliente);
     }
 
+    /**
+     * Elimina un cliente con lo specifico clienteId dal database
+     *
+     * @param clienteId id del cliente che si vuole eliminare
+     */
     public void deleteCliente(Long clienteId) {
         boolean exists = clienteRepository.existsById(clienteId);
 
@@ -49,6 +64,12 @@ public class ClienteService {
         clienteRepository.deleteById(clienteId);
     }
 
+    /**
+     * Metodo che aggiorna l'email del cliente con lo specifico id nel database
+     *
+     * @param clienteId id del cliente a cui si vuole modificare l'email
+     * @param email     nuova email da impostare al cliente
+     */
     @Transactional
     public void updateClienteEmail(Long clienteId, String email) {
         Cliente cliente = clienteRepository.findById(clienteId)

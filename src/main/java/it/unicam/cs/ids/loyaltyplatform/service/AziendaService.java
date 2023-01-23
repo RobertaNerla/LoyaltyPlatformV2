@@ -17,10 +17,21 @@ public class AziendaService {
         this.aziendaRepository = aziendaRepository;
     }
 
+
+    /**
+     * Restituisce tutte le aziende presenti nel database
+     *
+     * @return una List<Azienda> contenente tutte le aziende presenti nel databse
+     */
     public List<Azienda> getAziende() {
         return aziendaRepository.findAll();
     }
 
+    /**
+     * Aggiunge una nuova azienda al database
+     *
+     * @param azienda azienda che si vuole aggiungere nel database
+     */
     public void addNewAzienda(Azienda azienda) {
         Optional<Azienda> aziendaOptional = aziendaRepository.findByNomeAndIndirizzo
                 (azienda.getNome(), azienda.getIndirizzo());
@@ -31,6 +42,11 @@ public class AziendaService {
         aziendaRepository.save(azienda);
     }
 
+    /**
+     * Elimina un'azienda con lo specifico aziendaId dal database
+     *
+     * @param aziendaId id dell'azienda che si vuole eliminare dal database
+     */
     public void deleteAzienda(Long aziendaId) {
         boolean exists = aziendaRepository.existsById(aziendaId);
 
