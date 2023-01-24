@@ -11,7 +11,7 @@ public interface TemplateSettings {
 
     /**
      * Returns the fidelity program type
-     * @return the fidelity program type
+     * @return the fidelity program tipo
      */
     FidelityProgramType getTypeProgram();
 
