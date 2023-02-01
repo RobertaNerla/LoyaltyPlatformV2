@@ -10,7 +10,8 @@ import java.util.Optional;
 
 @Service
 public class AziendaService {
-    public final AziendaRepository aziendaRepository;
+    @Autowired
+    private final AziendaRepository aziendaRepository;
 
     @Autowired
     public AziendaService(AziendaRepository aziendaRepository) {
@@ -52,7 +53,9 @@ public class AziendaService {
 
         if (!exists) {
             throw new IllegalStateException("azienda con id " + aziendaId + " non esiste!");
+        } else {
+            aziendaRepository.deleteById(aziendaId);
         }
-        aziendaRepository.deleteById(aziendaId);
+
     }
 }

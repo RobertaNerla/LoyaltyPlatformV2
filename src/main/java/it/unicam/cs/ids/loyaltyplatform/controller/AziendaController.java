@@ -15,7 +15,7 @@ import java.util.List;
 public class AziendaController {
 
 
-    public final AziendaService aziendaService;
+    private final AziendaService aziendaService;
 
     @Autowired
     public AziendaController(AziendaService aziendaService) {
