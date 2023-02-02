@@ -5,17 +5,18 @@ import it.unicam.cs.ids.loyaltyplatform.dto.ProgrammaAPuntiDto;
 import it.unicam.cs.ids.loyaltyplatform.model.ProgrammaAPunti;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.validation.annotation.Validated;
 
 import java.util.List;
 
 @Service
 public class ProgrammaAPuntiService {
     @Autowired
-    private final ProgrammaAPuntiRepository progAPuntiRepository;
+    private final ProgrammaAPuntiRepository programmaAPuntiRepository;
 
     @Autowired
     public ProgrammaAPuntiService(ProgrammaAPuntiRepository progAPuntiRepository) {
-        this.progAPuntiRepository = progAPuntiRepository;
+        this.programmaAPuntiRepository = progAPuntiRepository;
     }
 
     /**
@@ -23,31 +24,28 @@ public class ProgrammaAPuntiService {
      *
      * @return una List<ProgrammaAPunti> contenente tutti programmi a punti salvati nel database.
      */
-    public List<ProgrammaAPunti> getProgAPunti(){
-        return progAPuntiRepository.findAll();
+    public List<ProgrammaAPunti> getProgrammaAPunti() {
+        return programmaAPuntiRepository.findAll();
     }
 
     /**
      * Aggiunge un nuovo programma a punti al database
      *
-     * @param progAPuntiDto oggetto di trasferimento dati per un programma a punti.
+     * @param programmaAPuntiDto oggetto di trasferimento dati per un programma a punti.
      */
 
-    public void addNewProgrammaAPunti(ProgrammaAPuntiDto progAPuntiDto){
-        ProgrammaAPunti programmaAPunti = new ProgrammaAPunti(
-                progAPuntiDto.getAziendaId(),
-                progAPuntiDto.getName(),
-                progAPuntiDto.getPointsEur());
-        this.progAPuntiRepository.save(programmaAPunti);
+    public ProgrammaAPunti addNewProgrammaAPunti(@Validated ProgrammaAPuntiDto programmaAPuntiDto) {
+        ProgrammaAPunti programmaAPunti = new ProgrammaAPunti(programmaAPuntiDto);
+        return programmaAPuntiRepository.save(programmaAPunti);
     }
 
-    public void deleteProgrammaAPunti(Long programId){
-        boolean exists = this.progAPuntiRepository.existsById(programId);
+    public void deleteProgrammaAPunti(Long programId) {
+        boolean exists = this.programmaAPuntiRepository.existsById(programId);
 
-        if(!exists){
+        if (!exists) {
             throw new IllegalStateException("Programma con id " + programId + " non esiste!");
         } else {
-            this.progAPuntiRepository.deleteById(programId);
+            this.programmaAPuntiRepository.deleteById(programId);
         }
     }
 }

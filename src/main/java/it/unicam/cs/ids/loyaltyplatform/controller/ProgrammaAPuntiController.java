@@ -4,6 +4,9 @@ import it.unicam.cs.ids.loyaltyplatform.dto.ProgrammaAPuntiDto;
 import it.unicam.cs.ids.loyaltyplatform.model.ProgrammaAPunti;
 import it.unicam.cs.ids.loyaltyplatform.service.ProgrammaAPuntiService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -25,33 +28,30 @@ public class ProgrammaAPuntiController {
      * @return una lista di tutti i programmi fedeltà a punti
      */
     @GetMapping
-    public List<ProgrammaAPunti> getProgrammiAPunti(){
-        return this.progAPuntiService.getProgAPunti();
+    public List<ProgrammaAPunti> getProgrammiAPunti() {
+        return this.progAPuntiService.getProgrammaAPunti();
     }
 
     @PostMapping
-    public void registraNuovoProgrammaAPunti(@RequestBody ProgrammaAPuntiDto dto){
-        if(!isValidInput(dto.getAziendaId(), dto.getPointsEur())){
-            throw new IllegalArgumentException("I campi inseriti non sono validi");
-        } else {
-            this.progAPuntiService.addNewProgrammaAPunti(dto);
-        }
+    public ResponseEntity<ProgrammaAPuntiDto> registraNuovoProgrammaAPunti(@RequestBody @Validated ProgrammaAPuntiDto dto) {
+        ProgrammaAPunti programmaAPunti = progAPuntiService.addNewProgrammaAPunti(dto);
+        return new ResponseEntity<>(new ProgrammaAPuntiDto(programmaAPunti), HttpStatus.CREATED);
     }
 
     @DeleteMapping(path = "{programmaId}")
-    public void deleteProgrammaAPunti(@PathVariable("programmaId") Long programmaId){
+    public void deleteProgrammaAPunti(@PathVariable("programmaId") Long programmaId) {
         this.progAPuntiService.deleteProgrammaAPunti(programmaId);
     }
 
-    private boolean isValidInput(Long aziendaId, double pointsEur){
+    private boolean isValidInput(Long aziendaId, double pointsEur) {
         return false;
     }
 
-    private boolean isValidAziendaId(Long AziendaId){
+    private boolean isValidAziendaId(Long AziendaId) {
         return false;
     }
 
-    private boolean isValidPointsEur(double pointsEur){
+    private boolean isValidPointsEur(double pointsEur) {
         return false;
     }
 }

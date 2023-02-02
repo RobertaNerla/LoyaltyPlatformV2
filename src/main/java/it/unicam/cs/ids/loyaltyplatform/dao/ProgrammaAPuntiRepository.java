@@ -10,7 +10,7 @@ import java.util.Optional;
 public interface ProgrammaAPuntiRepository extends JpaRepository<ProgrammaAPunti, Long> {
 
     /**
-     * Metodo corrispondente ad una query che cerca un programma a punti di una data azienda
+     * Metodo corrispondente a una query che cerca un programma a punti di una data azienda
      *
      * @param aziendaId identificatore dell'azienda che offre il programma fedeltà che si sta cercando
      * @return se esiste il programma a punti dell'azienda che si sta cercando.
@@ -18,7 +18,7 @@ public interface ProgrammaAPuntiRepository extends JpaRepository<ProgrammaAPunti
     Optional<ProgrammaAPunti> findProgrammaAPuntiByAziendaId(Long aziendaId);
 
     /**
-     * Metodo corrispondente ad una query che cerca un programma a punti con un certo nome.
+     * Metodo corrispondente a una query che cerca un programma a punti con un certo nome.
      *
      * @param nomeProgramma nome del programma che si sta cercando.
      * @return Il programma a punti con il nome dato.

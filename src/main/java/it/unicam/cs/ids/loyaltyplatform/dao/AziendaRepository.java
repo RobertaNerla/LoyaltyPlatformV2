@@ -10,7 +10,7 @@ import java.util.Optional;
 public interface AziendaRepository extends JpaRepository<Azienda, Long> {
 
     /**
-     * Metodo equivalente ad una query che cerca un'azienda che abbia un particolare nome e indirizzo
+     * Metodo equivalente a una query che cerca un'azienda che abbia un particolare nome e indirizzo
      *
      * @param nome      nome dell'azienda che si desidera cercare
      * @param indirizzo indirizzo dell'azienda che si desidera cercare
