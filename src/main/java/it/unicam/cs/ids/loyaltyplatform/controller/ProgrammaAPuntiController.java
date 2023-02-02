@@ -42,16 +42,4 @@ public class ProgrammaAPuntiController {
     public void deleteProgrammaAPunti(@PathVariable("programmaId") Long programmaId) {
         this.progAPuntiService.deleteProgrammaAPunti(programmaId);
     }
-
-    private boolean isValidInput(Long aziendaId, double pointsEur) {
-        return false;
-    }
-
-    private boolean isValidAziendaId(Long AziendaId) {
-        return false;
-    }
-
-    private boolean isValidPointsEur(double pointsEur) {
-        return false;
-    }
 }

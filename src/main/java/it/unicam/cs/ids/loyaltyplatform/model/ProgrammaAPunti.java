@@ -10,33 +10,17 @@ import jakarta.persistence.*;
 
 @Entity(name = "ProgrammaAPunti")
 @Table(name = "programma_punti")
-public class ProgrammaAPunti {
+public class ProgrammaAPunti extends ProgrammaFedelta {
 
-    @Id
-    @Column(name = "program_id", nullable = false, updatable = false)
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long programId;
-
-    //TODO: chiave?
-    @Column(name = "azienda_id", nullable = false, updatable = false)
-    private Long aziendaId;
-
-    @Column(name = "nome_programma")
-    private String nomeProgramma;
     @Column(name = "points_eur", nullable = false)
     private double pointsEur;
-
-    @Column(name = "num_clienti", nullable = false)
-    private int numClienti;
 
     public ProgrammaAPunti() {
     }
 
     public ProgrammaAPunti(ProgrammaAPuntiDto programmaAPuntiDto) {
-        this.aziendaId = programmaAPuntiDto.getAziendaId();
-        this.nomeProgramma = programmaAPuntiDto.getName();
+        super(programmaAPuntiDto.getAziendaId(),programmaAPuntiDto.getName());
         this.pointsEur = programmaAPuntiDto.getPointsEur();
-        numClienti = 0;
     }
 
     /**
@@ -48,33 +32,13 @@ public class ProgrammaAPunti {
      * @param pointsEur     rapporto points/eur
      */
     public ProgrammaAPunti(Long aziendaId, String nomeProgramma, double pointsEur) {
-        this.aziendaId = aziendaId;
-        this.nomeProgramma = nomeProgramma;
+        super(aziendaId,nomeProgramma);
         this.pointsEur = pointsEur;
-        numClienti = 0;
     }
 
     public ProgrammaAPunti(Long programId, Long aziendaId, String nomeProgramma, double pointsEur, int numClienti) {
-        this(aziendaId, nomeProgramma, pointsEur);
-        this.programId = programId;
-        this.numClienti = numClienti;
-    }
-
-
-    public Long getProgramId() {
-        return programId;
-    }
-
-    public Long getAziendaId() {
-        return aziendaId;
-    }
-
-    public String getNomeProgramma() {
-        return nomeProgramma;
-    }
-
-    public void setNomeProgramma(String nomeProgramma) {
-        this.nomeProgramma = nomeProgramma;
+        super(programId,aziendaId, nomeProgramma);
+        this.pointsEur = pointsEur;
     }
 
     public double getPointsEur() {
@@ -85,11 +49,4 @@ public class ProgrammaAPunti {
         this.pointsEur = pointsEur;
     }
 
-    public int getNumClienti() {
-        return numClienti;
-    }
-
-    public void setNumClienti(int numClienti) {
-        this.numClienti = numClienti;
-    }
 }
