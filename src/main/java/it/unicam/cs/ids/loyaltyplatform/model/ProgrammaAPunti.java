@@ -19,7 +19,7 @@ public class ProgrammaAPunti extends ProgrammaFedelta {
     }
 
     public ProgrammaAPunti(ProgrammaAPuntiDto programmaAPuntiDto) {
-        super(programmaAPuntiDto.getAziendaId(),programmaAPuntiDto.getName());
+        super(programmaAPuntiDto.getAziendaId(), programmaAPuntiDto.getName());
         this.pointsEur = programmaAPuntiDto.getPointsEur();
     }
 
@@ -32,12 +32,12 @@ public class ProgrammaAPunti extends ProgrammaFedelta {
      * @param pointsEur     rapporto points/eur
      */
     public ProgrammaAPunti(Long aziendaId, String nomeProgramma, double pointsEur) {
-        super(aziendaId,nomeProgramma);
+        super(aziendaId, nomeProgramma);
         this.pointsEur = pointsEur;
     }
 
     public ProgrammaAPunti(Long programId, Long aziendaId, String nomeProgramma, double pointsEur, int numClienti) {
-        super(programId,aziendaId, nomeProgramma);
+        super(programId, aziendaId, nomeProgramma);
         this.pointsEur = pointsEur;
     }
 
@@ -48,5 +48,4 @@ public class ProgrammaAPunti extends ProgrammaFedelta {
     public void setPointsEur(double pointsEur) {
         this.pointsEur = pointsEur;
     }
-
 }

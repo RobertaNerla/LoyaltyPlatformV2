@@ -1,10 +1,9 @@
 package it.unicam.cs.ids.loyaltyplatform.model;
 
-import it.unicam.cs.ids.loyaltyplatform.dto.ProgrammaAPuntiDto;
 import jakarta.persistence.*;
 
 @Entity(name = "ProgrammaFedelta")
-@Table(name = "programmaFedelta")
+@Table(name = "programma_fedelta")
 public class ProgrammaFedelta {
     @Id
     @Column(name = "program_id", nullable = false, updatable = false)
@@ -31,7 +30,7 @@ public class ProgrammaFedelta {
     }
 
     public ProgrammaFedelta(Long programId, Long aziendaId, String nomeProgramma) {
-        this(aziendaId,nomeProgramma);
+        this(aziendaId, nomeProgramma);
         this.programId = programId;
     }
 
