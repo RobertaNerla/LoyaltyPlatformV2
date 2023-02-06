@@ -1,6 +1,6 @@
 package it.unicam.cs.ids.loyaltyplatform.model;
 
-import it.unicam.cs.ids.loyaltyplatform.dto.ProgrammaAPuntiDto;
+import it.unicam.cs.ids.loyaltyplatform.dto.ProgrammaAPuntiDTO;
 import jakarta.persistence.*;
 
 /**
@@ -18,7 +18,7 @@ public class ProgrammaAPunti extends ProgrammaFedelta {
     public ProgrammaAPunti() {
     }
 
-    public ProgrammaAPunti(ProgrammaAPuntiDto programmaAPuntiDto) {
+    public ProgrammaAPunti(ProgrammaAPuntiDTO programmaAPuntiDto) {
         super(programmaAPuntiDto.getAziendaId(), programmaAPuntiDto.getName());
         this.pointsEur = programmaAPuntiDto.getPointsEur();
     }

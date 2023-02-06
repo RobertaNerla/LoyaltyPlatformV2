@@ -5,7 +5,7 @@ import it.unicam.cs.ids.loyaltyplatform.model.ProgrammaAPunti;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 
-public class ProgrammaAPuntiDto {
+public class ProgrammaAPuntiDTO {
 
     @Min(value = 0)
     private Long aziendaId;
@@ -14,13 +14,13 @@ public class ProgrammaAPuntiDto {
     @Min(value = 0)
     private double pointsEur;
 
-    public ProgrammaAPuntiDto(Long aziendaId, String name, double pointsEur) {
+    public ProgrammaAPuntiDTO(Long aziendaId, String name, double pointsEur) {
         this.aziendaId = aziendaId;
         this.name = name;
         this.pointsEur = pointsEur;
     }
 
-    public ProgrammaAPuntiDto(ProgrammaAPunti programmaAPunti) {
+    public ProgrammaAPuntiDTO(ProgrammaAPunti programmaAPunti) {
         this.aziendaId = programmaAPunti.getAziendaId();
         this.name = programmaAPunti.getNomeProgramma();
         this.pointsEur = programmaAPunti.getPointsEur();

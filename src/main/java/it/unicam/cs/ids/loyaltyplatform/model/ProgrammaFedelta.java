@@ -1,7 +1,14 @@
 package it.unicam.cs.ids.loyaltyplatform.model;
 
 import jakarta.persistence.*;
+import lombok.*;
+import org.hibernate.Hibernate;
 
+import java.util.Objects;
+
+@Getter
+@Setter
+@ToString
 @Entity(name = "ProgrammaFedelta")
 @Table(name = "programma_fedelta")
 public class ProgrammaFedelta {
@@ -34,35 +41,16 @@ public class ProgrammaFedelta {
         this.programId = programId;
     }
 
-    public Long getProgramId() {
-        return programId;
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
+        ProgrammaFedelta that = (ProgrammaFedelta) o;
+        return programId != null && Objects.equals(programId, that.programId);
     }
 
-    public void setProgramId(Long programId) {
-        this.programId = programId;
-    }
-
-    public Long getAziendaId() {
-        return aziendaId;
-    }
-
-    public void setAziendaId(Long aziendaId) {
-        this.aziendaId = aziendaId;
-    }
-
-    public String getNomeProgramma() {
-        return nomeProgramma;
-    }
-
-    public void setNomeProgramma(String nomeProgramma) {
-        this.nomeProgramma = nomeProgramma;
-    }
-
-    public int getNumClienti() {
-        return numClienti;
-    }
-
-    public void setNumClienti(int numClienti) {
-        this.numClienti = numClienti;
+    @Override
+    public int hashCode() {
+        return getClass().hashCode();
     }
 }

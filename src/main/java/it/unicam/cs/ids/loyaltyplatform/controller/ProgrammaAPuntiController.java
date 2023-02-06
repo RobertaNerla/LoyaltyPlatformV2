@@ -1,6 +1,6 @@
 package it.unicam.cs.ids.loyaltyplatform.controller;
 
-import it.unicam.cs.ids.loyaltyplatform.dto.ProgrammaAPuntiDto;
+import it.unicam.cs.ids.loyaltyplatform.dto.ProgrammaAPuntiDTO;
 import it.unicam.cs.ids.loyaltyplatform.model.ProgrammaAPunti;
 import it.unicam.cs.ids.loyaltyplatform.service.ProgrammaAPuntiService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,9 +33,9 @@ public class ProgrammaAPuntiController {
     }
 
     @PostMapping
-    public ResponseEntity<ProgrammaAPuntiDto> registraNuovoProgrammaAPunti(@RequestBody @Validated ProgrammaAPuntiDto dto) {
+    public ResponseEntity<ProgrammaAPuntiDTO> registraNuovoProgrammaAPunti(@RequestBody @Validated ProgrammaAPuntiDTO dto) {
         ProgrammaAPunti programmaAPunti = progAPuntiService.addNewProgrammaAPunti(dto);
-        return new ResponseEntity<>(new ProgrammaAPuntiDto(programmaAPunti), HttpStatus.CREATED);
+        return new ResponseEntity<>(new ProgrammaAPuntiDTO(programmaAPunti), HttpStatus.CREATED);
     }
 
     @DeleteMapping(path = "{programmaId}")

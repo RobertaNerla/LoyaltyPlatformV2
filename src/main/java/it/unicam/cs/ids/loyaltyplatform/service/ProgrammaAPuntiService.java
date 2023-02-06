@@ -1,7 +1,7 @@
 package it.unicam.cs.ids.loyaltyplatform.service;
 
 import it.unicam.cs.ids.loyaltyplatform.dao.ProgrammaAPuntiRepository;
-import it.unicam.cs.ids.loyaltyplatform.dto.ProgrammaAPuntiDto;
+import it.unicam.cs.ids.loyaltyplatform.dto.ProgrammaAPuntiDTO;
 import it.unicam.cs.ids.loyaltyplatform.model.ProgrammaAPunti;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -34,7 +34,7 @@ public class ProgrammaAPuntiService {
      * @param programmaAPuntiDto oggetto di trasferimento dati per un programma a punti.
      */
 
-    public ProgrammaAPunti addNewProgrammaAPunti(@Validated ProgrammaAPuntiDto programmaAPuntiDto) {
+    public ProgrammaAPunti addNewProgrammaAPunti(@Validated ProgrammaAPuntiDTO programmaAPuntiDto) {
         ProgrammaAPunti programmaAPunti = new ProgrammaAPunti(programmaAPuntiDto);
         return programmaAPuntiRepository.save(programmaAPunti);
     }

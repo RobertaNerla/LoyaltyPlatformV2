@@ -1,13 +1,20 @@
 package it.unicam.cs.ids.loyaltyplatform.model;
 
 import jakarta.persistence.*;
+import lombok.*;
+import org.hibernate.Hibernate;
 
 import java.time.LocalDate;
+import java.util.Objects;
 
 /**
  * Classe che rappresenta un cliente nel sistema.
  * Corrisponde anche all'omonima entità nel database del progetto.
  */
+
+@Getter
+@Setter
+@ToString
 @Entity(name = "Cliente")
 @Table(name = "cliente",
         uniqueConstraints = {
@@ -92,67 +99,16 @@ public class Cliente {
         this.codiceFiscale = codiceFiscale;
     }
 
-    public Long getClienteId() {
-        return clienteId;
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
+        Cliente cliente = (Cliente) o;
+        return clienteId != null && Objects.equals(clienteId, cliente.clienteId);
     }
 
-    public void setClienteId(Long clienteId) {
-        this.clienteId = clienteId;
-    }
-
-    public String getNome() {
-        return nome;
-    }
-
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
-
-    public String getCognome() {
-        return cognome;
-    }
-
-    public void setCognome(String cognome) {
-        this.cognome = cognome;
-    }
-
-    public String getNumCellulare() {
-        return numCellulare;
-    }
-
-    public void setNumCellulare(String numCellulare) {
-        this.numCellulare = numCellulare;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getIndirizzo() {
-        return indirizzo;
-    }
-
-    public void setIndirizzo(String indirizzo) {
-        this.indirizzo = indirizzo;
-    }
-
-    public LocalDate getDataDiNascita() {
-        return dataDiNascita;
-    }
-
-    public void setDataDiNascita(LocalDate dataDiNascita) {
-        this.dataDiNascita = dataDiNascita;
-    }
-
-    public String getCodiceFiscale() {
-        return codiceFiscale;
-    }
-
-    public void setCodiceFiscale(String codiceFiscale) {
-        this.codiceFiscale = codiceFiscale;
+    @Override
+    public int hashCode() {
+        return getClass().hashCode();
     }
 }

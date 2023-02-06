@@ -1,12 +1,19 @@
 package it.unicam.cs.ids.loyaltyplatform.model;
 
 import jakarta.persistence.*;
+import lombok.*;
+import org.hibernate.Hibernate;
+
+import java.util.Objects;
 
 /**
  * Classe che rappresenta un'azienda nel sistema.
  * Corrisponde anche all'omonima entità nel database del progetto.
  */
 
+@Getter
+@Setter
+@ToString
 @Entity(name = "Azienda")
 @Table(name = "azienda")
 public class Azienda {
@@ -41,27 +48,16 @@ public class Azienda {
         this.indirizzo = indirizzo;
     }
 
-    public Long getAziendaId() {
-        return aziendaId;
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
+        Azienda azienda = (Azienda) o;
+        return aziendaId != null && Objects.equals(aziendaId, azienda.aziendaId);
     }
 
-    public void setAziendaId(Long aziendaId) {
-        this.aziendaId = aziendaId;
-    }
-
-    public String getNome() {
-        return nome;
-    }
-
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
-
-    public String getIndirizzo() {
-        return indirizzo;
-    }
-
-    public void setIndirizzo(String indirizzo) {
-        this.indirizzo = indirizzo;
+    @Override
+    public int hashCode() {
+        return getClass().hashCode();
     }
 }
