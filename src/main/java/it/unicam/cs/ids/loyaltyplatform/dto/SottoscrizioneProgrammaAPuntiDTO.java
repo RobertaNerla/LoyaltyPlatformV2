@@ -1,29 +1,31 @@
 package it.unicam.cs.ids.loyaltyplatform.dto;
 
+import it.unicam.cs.ids.loyaltyplatform.model.Cliente;
+import it.unicam.cs.ids.loyaltyplatform.model.ProgrammaAPunti;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
-import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 @Getter
 @Setter
 @ToString
 public class SottoscrizioneProgrammaAPuntiDTO {
 
-    @NotBlank
-    private Long programmaId;
-    @NotBlank
-    private Long clienteId;
+    @NotNull
+    private ProgrammaAPunti programma;
+    @NotNull
+    private Cliente cliente;
 
     /**
      * Costruttore che crea un nuovo dto per il caso d'uso della SottoscrizioneProgrammaAPunti
      *
-     * @param programmaId l'id del programma a punti a cui ci si sottoscrive
-     * @param clienteId   l'id del cliente che si sottoscrive
+     * @param programma programma a punti a cui ci si sottoscrive
+     * @param cliente   cliente che si sottoscrive
      */
-    public SottoscrizioneProgrammaAPuntiDTO(Long programmaId, Long clienteId) {
-        this.programmaId = programmaId;
-        this.clienteId = clienteId;
+    public SottoscrizioneProgrammaAPuntiDTO(ProgrammaAPunti programma, Cliente cliente) {
+        this.programma = programma;
+        this.cliente = cliente;
     }
 }

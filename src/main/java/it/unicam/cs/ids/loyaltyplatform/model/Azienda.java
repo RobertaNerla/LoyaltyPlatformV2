@@ -1,9 +1,13 @@
 package it.unicam.cs.ids.loyaltyplatform.model;
 
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 import org.hibernate.Hibernate;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 /**
@@ -28,13 +32,32 @@ public class Azienda {
     @Column(name = "indirizzo", nullable = false, columnDefinition = "TEXT")
     String indirizzo;
 
+    @Column(name = "p_iva", nullable = false, columnDefinition = "TEXT")
+    String pIva;
+
+    @OneToMany(mappedBy = "azienda", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @ToString.Exclude
+    private List<ProgrammaFedelta> programmiFedelta;
+
+    /**
+     * Costruttore di default dell'azienda
+     */
     public Azienda() {
+        programmiFedelta = new ArrayList<>();
     }
 
-    public Azienda(Long aziendaId, String nome, String indirizzo) {
+    /**
+     * @param aziendaId id dell'azienda
+     * @param nome      nome dell'azienda
+     * @param indirizzo indirizzo dell'azienda
+     * @param pIva      partita iva dell'azienda
+     */
+    public Azienda(Long aziendaId, String nome, String indirizzo, String pIva) {
         this.aziendaId = aziendaId;
         this.nome = nome;
         this.indirizzo = indirizzo;
+        this.pIva = pIva;
+        programmiFedelta = new ArrayList<>();
     }
 
     /**
@@ -42,10 +65,13 @@ public class Azienda {
      *
      * @param nome      nome dell'azienda
      * @param indirizzo indirizzo dell'azienda
+     * @param pIva      partita iva dell'azienda
      */
-    public Azienda(String nome, String indirizzo) {
+    public Azienda(String nome, String indirizzo, String pIva) {
         this.nome = nome;
         this.indirizzo = indirizzo;
+        this.pIva = pIva;
+        programmiFedelta = new ArrayList<>();
     }
 
     @Override

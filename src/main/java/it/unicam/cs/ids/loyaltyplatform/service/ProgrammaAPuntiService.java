@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ProgrammaAPuntiService {
@@ -56,7 +57,7 @@ public class ProgrammaAPuntiService {
         boolean exists = programmaAPuntiRepository.existsById(programId);
 
         if (!exists) {
-            throw new IllegalStateException("Programma con id " + programId + " non esiste!");
+            throw new ResourceNotFoundException("Programma con id " + programId + " non esiste!");
         } else {
             programmaAPuntiRepository.deleteById(programId);
         }
@@ -67,21 +68,18 @@ public class ProgrammaAPuntiService {
      *
      * @param programmaId ID del programma a punti
      * @return il programma a punti con l'ID specificato
-     * @throws ResourceNotFoundException se il programma a punti non viene trovato
      */
-    public ProgrammaAPunti getProgramById(Long programmaId) {
-        return programmaAPuntiRepository.findById(programmaId)
-                .orElseThrow(() -> new ResourceNotFoundException("Programma a punti con l'id " + programmaId + " non trovato!"));
+    public Optional<ProgrammaAPunti> getProgrammaById(Long programmaId) {
+        return programmaAPuntiRepository.findById(programmaId);
     }
 
     /**
      * Aggiorna il numero dei clienti di un programma a punti di uno
      *
-     * @param programmaId l'id del programma da aggiornare
+     * @param programmaAPunti l'id del programma da aggiornare
      */
     @Transactional
-    public void aggiornaNumClienti(Long programmaId) {
-        ProgrammaAPunti programmaAPunti = getProgramById(programmaId);
+    public void aggiornaNumClienti(ProgrammaAPunti programmaAPunti) {
         programmaAPunti.setNumClienti(programmaAPunti.getNumClienti() + 1);
         programmaAPuntiRepository.save(programmaAPunti);
     }

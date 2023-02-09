@@ -34,8 +34,9 @@ public class ProgrammaAPunti extends ProgrammaFedelta {
      *
      * @param programmaAPuntiDTO il DTO che contiene i parametri per la creazione di un oggetto ProgrammaAPunti.
      */
+
     public ProgrammaAPunti(ProgrammaAPuntiDTO programmaAPuntiDTO) {
-        super(programmaAPuntiDTO.getAziendaId(), programmaAPuntiDTO.getName());
+        super(programmaAPuntiDTO.getAzienda(), programmaAPuntiDTO.getNome());
         this.pointsEur = programmaAPuntiDTO.getPointsEur();
     }
 
@@ -43,12 +44,12 @@ public class ProgrammaAPunti extends ProgrammaFedelta {
      * Costruttore senza l'id del programma, perchè viene generato automaticamente, e senza
      * il num di clienti, dato che in fase di creazione il num di clienti di default è 0.
      *
-     * @param aziendaId     identificatore dell'azienda che vuole creare il programma fedeltà
+     * @param azienda       azienda che vuole creare il programma fedeltà
      * @param nomeProgramma nome del programma
      * @param pointsEur     rapporto points/eur
      */
-    public ProgrammaAPunti(Long aziendaId, String nomeProgramma, double pointsEur) {
-        super(aziendaId, nomeProgramma);
+    public ProgrammaAPunti(Azienda azienda, String nomeProgramma, double pointsEur) {
+        super(azienda, nomeProgramma);
         this.pointsEur = pointsEur;
     }
 
@@ -56,13 +57,13 @@ public class ProgrammaAPunti extends ProgrammaFedelta {
      * Costruttore con l'id del programma e tutti gli altri parametri.
      *
      * @param programId     l'id del programma.
-     * @param aziendaId     l'id dell'azienda.
+     * @param azienda       azienda che crea il programma
      * @param nomeProgramma il nome del programma.
      * @param pointsEur     il rapporto points/eur.
      * @param numClienti    il numero di clienti del programma.
      */
-    public ProgrammaAPunti(Long programId, Long aziendaId, String nomeProgramma, double pointsEur, int numClienti) {
-        super(programId, aziendaId, nomeProgramma);
+    public ProgrammaAPunti(Long programId, Azienda azienda, String nomeProgramma, double pointsEur, int numClienti) {
+        super(programId, azienda, nomeProgramma);
         this.pointsEur = pointsEur;
     }
 }

@@ -1,7 +1,9 @@
 package it.unicam.cs.ids.loyaltyplatform.service;
 
-import it.unicam.cs.ids.loyaltyplatform.model.Azienda;
 import it.unicam.cs.ids.loyaltyplatform.dao.AziendaRepository;
+import it.unicam.cs.ids.loyaltyplatform.exception.ResourceNotFoundException;
+import it.unicam.cs.ids.loyaltyplatform.model.Azienda;
+import it.unicam.cs.ids.loyaltyplatform.model.ProgrammaFedelta;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -22,7 +24,7 @@ public class AziendaService {
     /**
      * Restituisce tutte le aziende presenti nel database
      *
-     * @return una List<Azienda> contenente tutte le aziende presenti nel databse
+     * @return una List<Azienda> contenente tutte le aziende presenti nel database
      */
     public List<Azienda> getAziende() {
         return aziendaRepository.findAll();
@@ -43,6 +45,12 @@ public class AziendaService {
         aziendaRepository.save(azienda);
     }
 
+    public void addProgrammaToAzienda(Long aziendaId, ProgrammaFedelta programmaFedelta) {
+        Azienda azienda = aziendaRepository.findById(aziendaId)
+                .orElseThrow(() -> new ResourceNotFoundException("Azienda con l'id " + aziendaId + " non trovato!"));
+
+    }
+
     /**
      * Elimina un'azienda con lo specifico aziendaId dal database
      *
@@ -52,10 +60,9 @@ public class AziendaService {
         boolean exists = aziendaRepository.existsById(aziendaId);
 
         if (!exists) {
-            throw new IllegalStateException("azienda con id " + aziendaId + " non esiste!");
+            throw new ResourceNotFoundException("azienda con id " + aziendaId + " non esiste!");
         } else {
             aziendaRepository.deleteById(aziendaId);
         }
-
     }
 }

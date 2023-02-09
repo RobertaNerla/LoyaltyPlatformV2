@@ -1,7 +1,8 @@
 package it.unicam.cs.ids.loyaltyplatform.service;
 
-import it.unicam.cs.ids.loyaltyplatform.model.Cliente;
 import it.unicam.cs.ids.loyaltyplatform.dao.ClienteRepository;
+import it.unicam.cs.ids.loyaltyplatform.exception.ResourceNotFoundException;
+import it.unicam.cs.ids.loyaltyplatform.model.Cliente;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -37,7 +38,7 @@ public class ClienteService {
      * @param cliente cliente che si vuole aggiungere nel database
      */
     public void addNewCliente(Cliente cliente) {
-        Optional<Cliente> clientetByEmailOptional = clienteRepository.findClientetByEmail(cliente.getEmail());
+        Optional<Cliente> clientetByEmailOptional = clienteRepository.findClienteByEmail(cliente.getEmail());
         if (clientetByEmailOptional.isPresent()) {
             throw new IllegalStateException("Email gia' in uso");
         }
@@ -59,7 +60,7 @@ public class ClienteService {
         boolean exists = clienteRepository.existsById(clienteId);
 
         if (!exists) {
-            throw new IllegalStateException("cliente con id " + clienteId + " non esiste!");
+            throw new ResourceNotFoundException("cliente con id " + clienteId + " non esiste!");
         }
         clienteRepository.deleteById(clienteId);
     }
@@ -73,15 +74,25 @@ public class ClienteService {
     @Transactional
     public void updateClienteEmail(Long clienteId, String email) {
         Cliente cliente = clienteRepository.findById(clienteId)
-                .orElseThrow(() -> new IllegalStateException("cliente con id " + clienteId + " non esiste!"));
+                .orElseThrow(() -> new ResourceNotFoundException("cliente con id " + clienteId + " non esiste!"));
 
         if (email != null && email.length() > 0 &&
                 !Objects.equals(cliente.getEmail(), email)) {
-            Optional<Cliente> clienteOptional = clienteRepository.findClientetByEmail(email);
+            Optional<Cliente> clienteOptional = clienteRepository.findClienteByEmail(email);
             if (clienteOptional.isPresent()) {
                 throw new IllegalStateException("email gia' in uso");
             }
             cliente.setEmail(email);
         }
+    }
+
+    /**
+     * Ottiene un certo cliente dal database, altrimenti lancia un'eccezione ResourceNotFoundException
+     *
+     * @param clienteId id del cliente che si vuole ottenere
+     * @return cliente che si vuole ottenere
+     */
+    public Optional<Cliente> getClienteById(Long clienteId) {
+        return clienteRepository.findById(clienteId);
     }
 }

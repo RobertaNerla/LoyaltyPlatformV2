@@ -14,7 +14,7 @@ public interface ClienteRepository extends JpaRepository<Cliente, Long> {
      * @param email l'email del cliente che si desidera trovare
      * @return un Optional<Cliente> che corrisponde al cliente con la specifica email
      */
-    Optional<Cliente> findClientetByEmail(String email);
+    Optional<Cliente> findClienteByEmail(String email);
 
     /**
      * Metodo corrispondente ad una query che cerca un cliente con il corrispondente numero di cellulare

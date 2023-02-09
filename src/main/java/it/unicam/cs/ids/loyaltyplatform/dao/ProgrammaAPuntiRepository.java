@@ -1,5 +1,6 @@
 package it.unicam.cs.ids.loyaltyplatform.dao;
 
+import it.unicam.cs.ids.loyaltyplatform.model.Azienda;
 import it.unicam.cs.ids.loyaltyplatform.model.ProgrammaAPunti;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
@@ -12,10 +13,10 @@ public interface ProgrammaAPuntiRepository extends JpaRepository<ProgrammaAPunti
     /**
      * Metodo corrispondente a una query che cerca un programma a punti di una data azienda
      *
-     * @param aziendaId identificatore dell'azienda che offre il programma fedeltà che si sta cercando
+     * @param azienda identificatore dell'azienda che offre il programma fedeltà che si sta cercando
      * @return se esiste il programma a punti dell'azienda che si sta cercando.
      */
-    Optional<ProgrammaAPunti> findProgrammaAPuntiByAziendaId(Long aziendaId);
+    Optional<ProgrammaAPunti> findProgrammaAPuntiByAzienda(Azienda azienda);
 
     /**
      * Metodo corrispondente a una query che cerca un programma a punti con un certo nome.

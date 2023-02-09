@@ -9,12 +9,11 @@ import java.util.List;
 
 @Service
 public class ProgrammaFedeltaService {
-    @Autowired
     private final ProgrammaFedeltaRepository programmaFedeltaRepository;
 
     @Autowired
-    public ProgrammaFedeltaService(ProgrammaFedeltaRepository progFedeltàRepository) {
-        this.programmaFedeltaRepository = progFedeltàRepository;
+    public ProgrammaFedeltaService(ProgrammaFedeltaRepository progFedeltaRepository) {
+        this.programmaFedeltaRepository = progFedeltaRepository;
     }
 
     /**

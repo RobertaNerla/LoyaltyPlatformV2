@@ -1,6 +1,6 @@
 package it.unicam.cs.ids.loyaltyplatform.model;
 
-import it.unicam.cs.ids.loyaltyplatform.tracker.ProgrammaAPuntiTracker;
+import it.unicam.cs.ids.loyaltyplatform.tracker.ProgrammaFedeltaTracker;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -70,7 +70,7 @@ public class Cliente {
     private String codiceFiscale;
 
     @OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<ProgrammaAPuntiTracker> programmiFedelta;
+    private List<ProgrammaFedeltaTracker> programmiFedelta;
 
 
     public Cliente() {

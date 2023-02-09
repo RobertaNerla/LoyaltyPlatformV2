@@ -1,6 +1,6 @@
 package it.unicam.cs.ids.loyaltyplatform.model;
 
-import it.unicam.cs.ids.loyaltyplatform.tracker.ProgrammaAPuntiTracker;
+import it.unicam.cs.ids.loyaltyplatform.tracker.ProgrammaFedeltaTracker;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -18,12 +18,13 @@ import java.util.Objects;
 @Table(name = "programma_fedelta")
 public class ProgrammaFedelta {
     @Id
-    @Column(name = "program_id", nullable = false, updatable = false)
+    @Column(name = "programma_id", nullable = false, updatable = false)
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long programId;
+    private Long programmaId;
 
-    @Column(name = "azienda_id", nullable = false, updatable = false)
-    private Long aziendaId;
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "azienda_id", referencedColumnName = "azienda_id")
+    private Azienda azienda;
 
     @Column(name = "nome_programma")
     private String nomeProgramma;
@@ -32,22 +33,39 @@ public class ProgrammaFedelta {
     private int numClienti;
 
     @OneToMany(mappedBy = "programma", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<ProgrammaAPuntiTracker> tracker;
+    @ToString.Exclude
+    private List<ProgrammaFedeltaTracker> tracker;
 
+    /**
+     * Costruttore di default del programma fedeltà
+     */
     public ProgrammaFedelta() {
-
+        tracker = new ArrayList<>();
     }
 
-    public ProgrammaFedelta(Long aziendaId, String nomeProgramma) {
-        this.aziendaId = aziendaId;
+    /**
+     * Costruttore in cui viene passata l'azienda che ha creato il programma
+     *
+     * @param azienda       azienda che ha creato il programma fedeltò
+     * @param nomeProgramma nome del programma fedeltà
+     */
+    public ProgrammaFedelta(Azienda azienda, String nomeProgramma) {
+        this.azienda = azienda;
         this.nomeProgramma = nomeProgramma;
         this.numClienti = 0;
         tracker = new ArrayList<>();
     }
 
-    public ProgrammaFedelta(Long programId, Long aziendaId, String nomeProgramma) {
-        this(aziendaId, nomeProgramma);
-        this.programId = programId;
+    /**
+     * Costruttore completo, in cui viene passato come parametro anche l'id del programma fedeltà
+     *
+     * @param programId     id del programma fedeltà
+     * @param azienda       azienda che ha creato il programma fedeltà
+     * @param nomeProgramma nome del programma fedeltà
+     */
+    public ProgrammaFedelta(Long programId, Azienda azienda, String nomeProgramma) {
+        this(azienda, nomeProgramma);
+        this.programmaId = programId;
         tracker = new ArrayList<>();
     }
 
@@ -56,7 +74,7 @@ public class ProgrammaFedelta {
         if (this == o) return true;
         if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
         ProgrammaFedelta that = (ProgrammaFedelta) o;
-        return programId != null && Objects.equals(programId, that.programId);
+        return programmaId != null && Objects.equals(programmaId, that.programmaId);
     }
 
     @Override

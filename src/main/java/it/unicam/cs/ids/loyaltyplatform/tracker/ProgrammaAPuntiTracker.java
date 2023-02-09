@@ -2,7 +2,9 @@ package it.unicam.cs.ids.loyaltyplatform.tracker;
 
 import it.unicam.cs.ids.loyaltyplatform.model.Cliente;
 import it.unicam.cs.ids.loyaltyplatform.model.ProgrammaAPunti;
-import jakarta.persistence.*;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -11,22 +13,8 @@ import lombok.ToString;
 @Setter
 @ToString
 @Entity(name = "ProgrammaAPuntiTracker")
-@Table(name = "programma_punti_tracker",
-        uniqueConstraints = {@UniqueConstraint(columnNames = {"cliente_id", "programma_id"})})
-public class ProgrammaAPuntiTracker implements ProgrammaFedeltaTracker {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "tracker_id")
-    private Long trackerId;
-
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "cliente_id", referencedColumnName = "cliente_id")
-    private Cliente cliente;
-
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "programma_id", referencedColumnName = "programma_id")
-    private ProgrammaAPunti programma;
+@Table(name = "programma_punti_tracker")
+public class ProgrammaAPuntiTracker extends ProgrammaFedeltaTracker {
     @Column(name = "punti_accumulati", nullable = false)
     private int puntiAccumulati;
 
@@ -44,8 +32,7 @@ public class ProgrammaAPuntiTracker implements ProgrammaFedeltaTracker {
      * @param puntiAccumulati punti che il cliente accumula
      */
     public ProgrammaAPuntiTracker(Cliente cliente, ProgrammaAPunti programma, int puntiAccumulati) {
-        this.cliente = cliente;
-        this.programma = programma;
+        super(cliente, programma);
         this.puntiAccumulati = puntiAccumulati;
     }
 
@@ -56,8 +43,7 @@ public class ProgrammaAPuntiTracker implements ProgrammaFedeltaTracker {
      * @param programma programma a cui il cliente si sottoscrive
      */
     public ProgrammaAPuntiTracker(Cliente cliente, ProgrammaAPunti programma) {
-        this.cliente = cliente;
-        this.programma = programma;
+        super(cliente, programma);
         this.puntiAccumulati = 0;
     }
 }

@@ -12,7 +12,7 @@ import java.util.List;
 @RestController
 @RequestMapping(path = "/api/programmi")
 public class ProgrammaFedeltaController {
-    private final ProgrammaFedeltaService programmaFedeltaService;
+    public final ProgrammaFedeltaService programmaFedeltaService;
 
     @Autowired
     public ProgrammaFedeltaController(ProgrammaFedeltaService programmaFedeltaService) {

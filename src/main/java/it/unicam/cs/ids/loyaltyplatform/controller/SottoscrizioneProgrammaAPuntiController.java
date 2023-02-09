@@ -1,13 +1,13 @@
 package it.unicam.cs.ids.loyaltyplatform.controller;
 
 import it.unicam.cs.ids.loyaltyplatform.dto.SottoscrizioneProgrammaAPuntiDTO;
-import it.unicam.cs.ids.loyaltyplatform.model.ProgrammaAPunti;
-import it.unicam.cs.ids.loyaltyplatform.service.ProgrammaAPuntiService;
+import it.unicam.cs.ids.loyaltyplatform.exception.ResourceNotFoundException;
 import it.unicam.cs.ids.loyaltyplatform.service.ProgrammaAPuntiTrackerService;
 import it.unicam.cs.ids.loyaltyplatform.tracker.ProgrammaAPuntiTracker;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,28 +16,27 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping(path = "/api/sottoscrizioni/ProgrammaAPunti")
 public class SottoscrizioneProgrammaAPuntiController {
-
-    public ProgrammaAPuntiService programmaAPuntiService;
-    public ProgrammaAPuntiTrackerService programmaAPuntiTrackerService;
+    public final ProgrammaAPuntiTrackerService programmaAPuntiTrackerService;
 
     @Autowired
-    public SottoscrizioneProgrammaAPuntiController(ProgrammaAPuntiService programmaAPuntiService,
-                                                   ProgrammaAPuntiTrackerService programmaAPuntiTrackerService) {
-        this.programmaAPuntiService = programmaAPuntiService;
+    public SottoscrizioneProgrammaAPuntiController(ProgrammaAPuntiTrackerService programmaAPuntiTrackerService) {
         this.programmaAPuntiTrackerService = programmaAPuntiTrackerService;
     }
 
+    /**
+     * Sottoscrive un cliente a un programma fedeltà, creando un apposito tracker
+     *
+     * @param dto data transfer object che contiene il cliente e il programma che egli sottoscrive
+     * @return restituisce l'esito dell'operazione sotto forma di una response entity
+     */
     @PostMapping
-    public ResponseEntity<ProgrammaAPuntiTracker> sottoscriviProgrammaAPunti(@RequestBody SottoscrizioneProgrammaAPuntiDTO dto) {
-        ProgrammaAPunti programmaAPunti = programmaAPuntiService.getProgramById(dto.getProgrammaId());
-        if (programmaAPunti == null) {
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+    public ResponseEntity<ProgrammaAPuntiTracker> sottoscriviProgrammaAPunti(
+            @RequestBody @Validated SottoscrizioneProgrammaAPuntiDTO dto) {
+        try {
+            ProgrammaAPuntiTracker programmaAPuntiTracker = programmaAPuntiTrackerService.addNewProgrammaAPuntiTracker(dto.getCliente(), dto.getProgramma());
+            return new ResponseEntity<>(programmaAPuntiTracker, HttpStatus.CREATED);
+        } catch (ResourceNotFoundException e) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
-
-        programmaAPuntiService.aggiornaNumClienti(programmaAPunti.getProgramId());
-        ProgrammaAPuntiTracker programmaAPuntiTracker = ProgrammaAPuntiTrackerService.addNewProgrammaAPuntiTracker(
-                dto.getClienteId(), programmaAPunti.getProgramId());
-
-        return new ResponseEntity<>.(programmaAPuntiTracker, HttpStatus.CREATED);
     }
 }

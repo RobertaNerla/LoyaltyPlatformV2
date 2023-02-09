@@ -13,9 +13,7 @@ import java.util.List;
 @RestController
 @RequestMapping(path = "/api/azienda")
 public class AziendaController {
-
-
-    private final AziendaService aziendaService;
+    public final AziendaService aziendaService;
 
     @Autowired
     public AziendaController(AziendaService aziendaService) {

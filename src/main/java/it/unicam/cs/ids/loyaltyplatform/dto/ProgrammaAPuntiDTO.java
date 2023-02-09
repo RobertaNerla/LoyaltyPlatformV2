@@ -1,5 +1,6 @@
 package it.unicam.cs.ids.loyaltyplatform.dto;
 
+import it.unicam.cs.ids.loyaltyplatform.model.Azienda;
 import it.unicam.cs.ids.loyaltyplatform.model.ProgrammaAPunti;
 import lombok.Getter;
 import lombok.Setter;
@@ -7,6 +8,7 @@ import lombok.ToString;
 
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 /**
  * La classe che rappresenta un Data Transfers Object di una classe ProgrammaAPunti
@@ -15,24 +17,23 @@ import javax.validation.constraints.NotBlank;
 @Setter
 @ToString
 public class ProgrammaAPuntiDTO {
-
-    @Min(value = 0)
-    private Long aziendaId;
+    @NotNull
+    private Azienda azienda;
     @NotBlank
-    private String name;
+    private String nome;
     @Min(value = 0)
     private double pointsEur;
 
     /**
      * Crea un nuovo ProgrammaAPuntiDTO.
      *
-     * @param aziendaId l'id dell'azienda
+     * @param azienda   azienda che crea il programma
      * @param name      il nome del programma
      * @param pointsEur il rateo di conversione tra punti ed euro
      */
-    public ProgrammaAPuntiDTO(Long aziendaId, String name, double pointsEur) {
-        this.aziendaId = aziendaId;
-        this.name = name;
+    public ProgrammaAPuntiDTO(Azienda azienda, String name, double pointsEur) {
+        this.azienda = azienda;
+        this.nome = name;
         this.pointsEur = pointsEur;
     }
 
@@ -42,13 +43,8 @@ public class ProgrammaAPuntiDTO {
      * @param programmaAPunti il programma a punti
      */
     public ProgrammaAPuntiDTO(ProgrammaAPunti programmaAPunti) {
-        this.aziendaId = programmaAPunti.getAziendaId();
-        this.name = programmaAPunti.getNomeProgramma();
+        this.azienda = programmaAPunti.getAzienda();
+        this.nome = programmaAPunti.getNomeProgramma();
         this.pointsEur = programmaAPunti.getPointsEur();
     }
-    /*
-    public boolean isValid() {
-        return pointsEur > 0 && !name.isBlank() && aziendaId > 0;
-    }
-     */
 }
