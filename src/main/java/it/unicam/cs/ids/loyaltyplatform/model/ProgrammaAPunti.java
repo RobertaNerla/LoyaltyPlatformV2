@@ -1,13 +1,21 @@
 package it.unicam.cs.ids.loyaltyplatform.model;
 
 import it.unicam.cs.ids.loyaltyplatform.dto.ProgrammaAPuntiDTO;
-import jakarta.persistence.*;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Table;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 
 /**
  * Classe che rappresenta un generico programma a punti gestito nella piattaforma.
  * Corrisponde anche all'omonima entità nel database del progetto.
  */
 
+@Getter
+@Setter
+@ToString
 @Entity(name = "ProgrammaAPunti")
 @Table(name = "programma_punti")
 public class ProgrammaAPunti extends ProgrammaFedelta {
@@ -15,12 +23,20 @@ public class ProgrammaAPunti extends ProgrammaFedelta {
     @Column(name = "points_eur", nullable = false)
     private double pointsEur;
 
+    /**
+     * Il costruttore di default di ProgrammaAPunti.
+     */
     public ProgrammaAPunti() {
     }
 
-    public ProgrammaAPunti(ProgrammaAPuntiDTO programmaAPuntiDto) {
-        super(programmaAPuntiDto.getAziendaId(), programmaAPuntiDto.getName());
-        this.pointsEur = programmaAPuntiDto.getPointsEur();
+    /**
+     * Costruttore che istanzia un nuovo programma a punti a partire da un ProgrammaAPuntiDTO.
+     *
+     * @param programmaAPuntiDTO il DTO che contiene i parametri per la creazione di un oggetto ProgrammaAPunti.
+     */
+    public ProgrammaAPunti(ProgrammaAPuntiDTO programmaAPuntiDTO) {
+        super(programmaAPuntiDTO.getAziendaId(), programmaAPuntiDTO.getName());
+        this.pointsEur = programmaAPuntiDTO.getPointsEur();
     }
 
     /**
@@ -36,16 +52,17 @@ public class ProgrammaAPunti extends ProgrammaFedelta {
         this.pointsEur = pointsEur;
     }
 
+    /**
+     * Costruttore con l'id del programma e tutti gli altri parametri.
+     *
+     * @param programId     l'id del programma.
+     * @param aziendaId     l'id dell'azienda.
+     * @param nomeProgramma il nome del programma.
+     * @param pointsEur     il rapporto points/eur.
+     * @param numClienti    il numero di clienti del programma.
+     */
     public ProgrammaAPunti(Long programId, Long aziendaId, String nomeProgramma, double pointsEur, int numClienti) {
         super(programId, aziendaId, nomeProgramma);
-        this.pointsEur = pointsEur;
-    }
-
-    public double getPointsEur() {
-        return pointsEur;
-    }
-
-    public void setPointsEur(double pointsEur) {
         this.pointsEur = pointsEur;
     }
 }

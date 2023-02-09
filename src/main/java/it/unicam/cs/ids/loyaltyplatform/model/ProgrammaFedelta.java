@@ -1,9 +1,14 @@
 package it.unicam.cs.ids.loyaltyplatform.model;
 
+import it.unicam.cs.ids.loyaltyplatform.tracker.ProgrammaAPuntiTracker;
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 import org.hibernate.Hibernate;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 @Getter
@@ -26,6 +31,9 @@ public class ProgrammaFedelta {
     @Column(name = "num_clienti", nullable = false)
     private int numClienti;
 
+    @OneToMany(mappedBy = "programma", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<ProgrammaAPuntiTracker> tracker;
+
     public ProgrammaFedelta() {
 
     }
@@ -34,11 +42,13 @@ public class ProgrammaFedelta {
         this.aziendaId = aziendaId;
         this.nomeProgramma = nomeProgramma;
         this.numClienti = 0;
+        tracker = new ArrayList<>();
     }
 
     public ProgrammaFedelta(Long programId, Long aziendaId, String nomeProgramma) {
         this(aziendaId, nomeProgramma);
         this.programId = programId;
+        tracker = new ArrayList<>();
     }
 
     @Override

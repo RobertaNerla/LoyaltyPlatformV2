@@ -14,7 +14,6 @@ import java.util.List;
 @RestController
 @RequestMapping(path = "/api/progPunti")
 public class ProgrammaAPuntiController {
-    @Autowired
     private final ProgrammaAPuntiService progAPuntiService;
 
     @Autowired
@@ -29,7 +28,7 @@ public class ProgrammaAPuntiController {
      */
     @GetMapping
     public List<ProgrammaAPunti> getProgrammiAPunti() {
-        return this.progAPuntiService.getProgrammaAPunti();
+        return this.progAPuntiService.getProgrammiAPunti();
     }
 
     @PostMapping

@@ -1,10 +1,15 @@
 package it.unicam.cs.ids.loyaltyplatform.model;
 
+import it.unicam.cs.ids.loyaltyplatform.tracker.ProgrammaAPuntiTracker;
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 import org.hibernate.Hibernate;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 /**
@@ -64,10 +69,16 @@ public class Cliente {
             columnDefinition = "TEXT")
     private String codiceFiscale;
 
+    @OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<ProgrammaAPuntiTracker> programmiFedelta;
+
+
     public Cliente() {
+        programmiFedelta = new ArrayList<>();
     }
 
-    public Cliente(Long clienteId, String nome, String cognome, String numCellulare, String email, String indirizzo, LocalDate dataDiNascita, String codiceFiscale) {
+    public Cliente(Long clienteId, String nome, String cognome, String numCellulare, String email,
+                   String indirizzo, LocalDate dataDiNascita, String codiceFiscale) {
         this.clienteId = clienteId;
         this.nome = nome;
         this.cognome = cognome;
@@ -76,6 +87,7 @@ public class Cliente {
         this.indirizzo = indirizzo;
         this.dataDiNascita = dataDiNascita;
         this.codiceFiscale = codiceFiscale;
+        programmiFedelta = new ArrayList<>();
     }
 
     /**
@@ -97,6 +109,7 @@ public class Cliente {
         this.indirizzo = indirizzo;
         this.dataDiNascita = dataDiNascita;
         this.codiceFiscale = codiceFiscale;
+        programmiFedelta = new ArrayList<>();
     }
 
     @Override
