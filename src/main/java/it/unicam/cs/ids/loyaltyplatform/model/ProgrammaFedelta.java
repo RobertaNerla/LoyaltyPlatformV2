@@ -15,15 +15,19 @@ import java.util.Objects;
 @Setter
 @ToString
 @Entity(name = "ProgrammaFedelta")
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(name = "tipo_programma", discriminatorType = DiscriminatorType.STRING)
+
 @Table(name = "programma_fedelta")
 public class ProgrammaFedelta {
     @Id
-    @Column(name = "programma_id", nullable = false, updatable = false)
+    @Column(name = "programma_id", nullable = false, updatable = false, unique = true)
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long programmaId;
 
     @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "azienda_id", referencedColumnName = "azienda_id")
+    @JoinColumn(name = "azienda_id", referencedColumnName = "azienda_id",
+            foreignKey = @ForeignKey(name = "fk_a"))
     private Azienda azienda;
 
     @Column(name = "nome_programma")

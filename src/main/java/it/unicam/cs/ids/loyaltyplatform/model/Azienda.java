@@ -22,20 +22,20 @@ import java.util.Objects;
 @Table(name = "azienda")
 public class Azienda {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "azienda_id", nullable = false, updatable = false)
-    Long aziendaId;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long aziendaId;
 
     @Column(name = "nome", nullable = false, columnDefinition = "TEXT")
-    String nome;
+    private String nome;
 
     @Column(name = "indirizzo", nullable = false, columnDefinition = "TEXT")
-    String indirizzo;
+    private String indirizzo;
 
     @Column(name = "p_iva", nullable = false, columnDefinition = "TEXT")
-    String pIva;
+    private String pIva;
 
-    @OneToMany(mappedBy = "azienda", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "azienda", cascade = CascadeType.ALL)
     @ToString.Exclude
     private List<ProgrammaFedelta> programmiFedelta;
 

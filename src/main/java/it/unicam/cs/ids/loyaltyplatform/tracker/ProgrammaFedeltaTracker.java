@@ -12,11 +12,13 @@ import lombok.ToString;
 @Setter
 @ToString
 @Entity(name = "ProgrammaFedeltaTracker")
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(name = "tipo_tracker", discriminatorType = DiscriminatorType.STRING)
 @Table(name = "programma_tracker",
         uniqueConstraints = {@UniqueConstraint(columnNames = {"cliente_id", "programma_id"})})
 public class ProgrammaFedeltaTracker {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "tracker_id")
     private Long trackerId;
 
@@ -24,8 +26,8 @@ public class ProgrammaFedeltaTracker {
     @JoinColumn(name = "cliente_id", referencedColumnName = "cliente_id")
     private Cliente cliente;
 
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "programma_id", referencedColumnName = "programma_id")
+    @ManyToOne()
+    @JoinColumn(name = "programma_id", referencedColumnName = "programma_id", foreignKey = @ForeignKey(name = "fk_programma_fedelta"))
     private ProgrammaFedelta programma;
 
     /**

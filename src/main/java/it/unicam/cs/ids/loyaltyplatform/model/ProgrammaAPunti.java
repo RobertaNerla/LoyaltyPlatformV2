@@ -2,8 +2,8 @@ package it.unicam.cs.ids.loyaltyplatform.model;
 
 import it.unicam.cs.ids.loyaltyplatform.dto.ProgrammaAPuntiDTO;
 import jakarta.persistence.Column;
+import jakarta.persistence.DiscriminatorValue;
 import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -17,7 +17,7 @@ import lombok.ToString;
 @Setter
 @ToString
 @Entity(name = "ProgrammaAPunti")
-@Table(name = "programma_punti")
+@DiscriminatorValue("ProgrammaAPunti")
 public class ProgrammaAPunti extends ProgrammaFedelta {
 
     @Column(name = "points_eur", nullable = false)

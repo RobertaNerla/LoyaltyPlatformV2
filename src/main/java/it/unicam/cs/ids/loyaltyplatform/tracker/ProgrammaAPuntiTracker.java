@@ -3,8 +3,8 @@ package it.unicam.cs.ids.loyaltyplatform.tracker;
 import it.unicam.cs.ids.loyaltyplatform.model.Cliente;
 import it.unicam.cs.ids.loyaltyplatform.model.ProgrammaAPunti;
 import jakarta.persistence.Column;
+import jakarta.persistence.DiscriminatorValue;
 import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -13,7 +13,7 @@ import lombok.ToString;
 @Setter
 @ToString
 @Entity(name = "ProgrammaAPuntiTracker")
-@Table(name = "programma_punti_tracker")
+@DiscriminatorValue("ProgrammaAPuntiTracker")
 public class ProgrammaAPuntiTracker extends ProgrammaFedeltaTracker {
     @Column(name = "punti_accumulati", nullable = false)
     private int puntiAccumulati;
