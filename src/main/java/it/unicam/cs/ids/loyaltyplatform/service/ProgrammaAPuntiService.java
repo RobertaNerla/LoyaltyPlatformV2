@@ -3,6 +3,7 @@ package it.unicam.cs.ids.loyaltyplatform.service;
 import it.unicam.cs.ids.loyaltyplatform.dao.ProgrammaAPuntiRepository;
 import it.unicam.cs.ids.loyaltyplatform.dto.ProgrammaAPuntiDTO;
 import it.unicam.cs.ids.loyaltyplatform.exception.ResourceNotFoundException;
+import it.unicam.cs.ids.loyaltyplatform.model.Azienda;
 import it.unicam.cs.ids.loyaltyplatform.model.ProgrammaAPunti;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +19,7 @@ import java.util.Optional;
 @Service
 public class ProgrammaAPuntiService {
     private final ProgrammaAPuntiRepository programmaAPuntiRepository;
+
 
     @Autowired
     public ProgrammaAPuntiService(ProgrammaAPuntiRepository programmaAPuntiRepository) {
@@ -41,8 +43,9 @@ public class ProgrammaAPuntiService {
      */
 
     @PostMapping
-    public ProgrammaAPunti addNewProgrammaAPunti(@Validated ProgrammaAPuntiDTO programmaAPuntiDto) {
-        ProgrammaAPunti programmaAPunti = new ProgrammaAPunti(programmaAPuntiDto);
+    public ProgrammaAPunti addNewProgrammaAPunti(@Validated ProgrammaAPuntiDTO programmaAPuntiDto, Azienda azienda) {
+
+        ProgrammaAPunti programmaAPunti = new ProgrammaAPunti(programmaAPuntiDto, azienda);
         return programmaAPuntiRepository.save(programmaAPunti);
     }
 

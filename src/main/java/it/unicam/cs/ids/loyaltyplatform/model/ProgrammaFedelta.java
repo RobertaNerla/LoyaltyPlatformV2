@@ -1,5 +1,7 @@
 package it.unicam.cs.ids.loyaltyplatform.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import it.unicam.cs.ids.loyaltyplatform.tracker.ProgrammaFedeltaTracker;
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -24,7 +26,7 @@ public class ProgrammaFedelta {
     @Column(name = "programma_id", nullable = false, updatable = false, unique = true)
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long programmaId;
-
+    @JsonManagedReference
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "azienda_id", referencedColumnName = "azienda_id",
             foreignKey = @ForeignKey(name = "fk_a"))
@@ -35,7 +37,7 @@ public class ProgrammaFedelta {
 
     @Column(name = "num_clienti", nullable = false)
     private int numClienti;
-
+    @JsonBackReference
     @OneToMany(mappedBy = "programma", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @ToString.Exclude
     private List<ProgrammaFedeltaTracker> tracker;

@@ -1,7 +1,9 @@
 package it.unicam.cs.ids.loyaltyplatform.controller;
 
 import it.unicam.cs.ids.loyaltyplatform.dto.ProgrammaAPuntiDTO;
+import it.unicam.cs.ids.loyaltyplatform.model.Azienda;
 import it.unicam.cs.ids.loyaltyplatform.model.ProgrammaAPunti;
+import it.unicam.cs.ids.loyaltyplatform.service.AziendaService;
 import it.unicam.cs.ids.loyaltyplatform.service.ProgrammaAPuntiService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -10,15 +12,19 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping(path = "/api/progPunti")
 public class ProgrammaAPuntiController {
     public final ProgrammaAPuntiService progAPuntiService;
 
+    private final AziendaService aziendaService;
+
     @Autowired
-    public ProgrammaAPuntiController(ProgrammaAPuntiService progAPuntiService) {
+    public ProgrammaAPuntiController(ProgrammaAPuntiService progAPuntiService, AziendaService aziendaService) {
         this.progAPuntiService = progAPuntiService;
+        this.aziendaService = aziendaService;
     }
 
     /**
@@ -33,8 +39,13 @@ public class ProgrammaAPuntiController {
 
     @PostMapping
     public ResponseEntity<ProgrammaAPuntiDTO> registraNuovoProgrammaAPunti(@RequestBody @Validated ProgrammaAPuntiDTO dto) {
-        ProgrammaAPunti programmaAPunti = progAPuntiService.addNewProgrammaAPunti(dto);
-        return new ResponseEntity<>(new ProgrammaAPuntiDTO(programmaAPunti), HttpStatus.CREATED);
+        Optional<Azienda> azienda = aziendaService.getAziendaById(dto.getAziendaId());
+        if(azienda.isPresent()){
+            ProgrammaAPunti programmaAPunti = progAPuntiService.addNewProgrammaAPunti(dto,azienda.get());
+            return new ResponseEntity<>(new ProgrammaAPuntiDTO(programmaAPunti), HttpStatus.CREATED);
+        } else {
+            return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
+        }
     }
 
     @DeleteMapping(path = "{programmaId}")

@@ -1,5 +1,6 @@
 package it.unicam.cs.ids.loyaltyplatform.tracker;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import it.unicam.cs.ids.loyaltyplatform.model.Cliente;
 import it.unicam.cs.ids.loyaltyplatform.model.ProgrammaAPunti;
 import it.unicam.cs.ids.loyaltyplatform.model.ProgrammaFedelta;
@@ -22,10 +23,11 @@ public class ProgrammaFedeltaTracker {
     @Column(name = "tracker_id")
     private Long trackerId;
 
+    @JsonManagedReference
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "cliente_id", referencedColumnName = "cliente_id")
     private Cliente cliente;
-
+    @JsonManagedReference
     @ManyToOne()
     @JoinColumn(name = "programma_id", referencedColumnName = "programma_id", foreignKey = @ForeignKey(name = "fk_programma_fedelta"))
     private ProgrammaFedelta programma;

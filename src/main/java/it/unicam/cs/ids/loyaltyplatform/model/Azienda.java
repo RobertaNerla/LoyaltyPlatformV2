@@ -1,5 +1,6 @@
 package it.unicam.cs.ids.loyaltyplatform.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -35,6 +36,7 @@ public class Azienda {
     @Column(name = "p_iva", nullable = false, columnDefinition = "TEXT")
     private String pIva;
 
+    @JsonBackReference
     @OneToMany(mappedBy = "azienda", cascade = CascadeType.ALL)
     @ToString.Exclude
     private List<ProgrammaFedelta> programmiFedelta;

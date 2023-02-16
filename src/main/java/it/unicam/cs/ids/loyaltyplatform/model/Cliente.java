@@ -1,5 +1,6 @@
 package it.unicam.cs.ids.loyaltyplatform.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import it.unicam.cs.ids.loyaltyplatform.tracker.ProgrammaFedeltaTracker;
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -68,7 +69,7 @@ public class Cliente {
             nullable = false,
             columnDefinition = "TEXT")
     private String codiceFiscale;
-
+    @JsonBackReference
     @OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<ProgrammaFedeltaTracker> programmiFedelta;
 

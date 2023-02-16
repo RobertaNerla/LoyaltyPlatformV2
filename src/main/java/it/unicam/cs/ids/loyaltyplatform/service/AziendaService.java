@@ -65,4 +65,8 @@ public class AziendaService {
             aziendaRepository.deleteById(aziendaId);
         }
     }
+
+    public Optional<Azienda> getAziendaById(long aziendaId){
+        return aziendaRepository.findById(aziendaId);
+    }
 }

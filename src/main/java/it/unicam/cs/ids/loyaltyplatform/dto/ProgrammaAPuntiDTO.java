@@ -18,7 +18,7 @@ import javax.validation.constraints.NotNull;
 @ToString
 public class ProgrammaAPuntiDTO {
     @NotNull
-    private Azienda azienda;
+    private Long aziendaId;
     @NotBlank
     private String nome;
     @Min(value = 0)
@@ -27,12 +27,12 @@ public class ProgrammaAPuntiDTO {
     /**
      * Crea un nuovo ProgrammaAPuntiDTO.
      *
-     * @param azienda   azienda che crea il programma
+     * @param aziendaId   Id dell'azienda che crea il programma
      * @param name      il nome del programma
      * @param pointsEur il rateo di conversione tra punti ed euro
      */
-    public ProgrammaAPuntiDTO(Azienda azienda, String name, double pointsEur) {
-        this.azienda = azienda;
+    public ProgrammaAPuntiDTO(Long aziendaId, String name, double pointsEur) {
+        this.aziendaId = aziendaId;
         this.nome = name;
         this.pointsEur = pointsEur;
     }
@@ -43,7 +43,7 @@ public class ProgrammaAPuntiDTO {
      * @param programmaAPunti il programma a punti
      */
     public ProgrammaAPuntiDTO(ProgrammaAPunti programmaAPunti) {
-        this.azienda = programmaAPunti.getAzienda();
+        this.aziendaId = programmaAPunti.getAzienda().getAziendaId();
         this.nome = programmaAPunti.getNomeProgramma();
         this.pointsEur = programmaAPunti.getPointsEur();
     }

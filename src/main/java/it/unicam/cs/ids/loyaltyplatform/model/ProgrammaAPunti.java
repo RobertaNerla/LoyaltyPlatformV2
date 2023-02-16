@@ -35,8 +35,8 @@ public class ProgrammaAPunti extends ProgrammaFedelta {
      * @param programmaAPuntiDTO il DTO che contiene i parametri per la creazione di un oggetto ProgrammaAPunti.
      */
 
-    public ProgrammaAPunti(ProgrammaAPuntiDTO programmaAPuntiDTO) {
-        super(programmaAPuntiDTO.getAzienda(), programmaAPuntiDTO.getNome());
+    public ProgrammaAPunti(ProgrammaAPuntiDTO programmaAPuntiDTO, Azienda azienda) {
+        super(azienda, programmaAPuntiDTO.getNome());
         this.pointsEur = programmaAPuntiDTO.getPointsEur();
     }
 
