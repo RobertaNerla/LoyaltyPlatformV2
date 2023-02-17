@@ -35,7 +35,7 @@ public class ClienteController {
      *
      * @param cliente il cliente che verrà inserito nel database
      */
-    @PostMapping
+    @PostMapping(produces = "application/json", consumes = "application/json")
     public void registraNuovoCliente(@RequestBody Cliente cliente) {
         clienteService.addNewCliente(cliente);
     }

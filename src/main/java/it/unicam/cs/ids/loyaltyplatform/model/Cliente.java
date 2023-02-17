@@ -6,12 +6,10 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
-import org.hibernate.Hibernate;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 /**
  * Classe che rappresenta un cliente nel sistema.
@@ -71,6 +69,7 @@ public class Cliente {
     private String codiceFiscale;
     @JsonBackReference
     @OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @ToString.Exclude
     private List<ProgrammaFedeltaTracker> programmiFedelta;
 
 
@@ -88,7 +87,7 @@ public class Cliente {
         this.indirizzo = indirizzo;
         this.dataDiNascita = dataDiNascita;
         this.codiceFiscale = codiceFiscale;
-        programmiFedelta = new ArrayList<>();
+        this.programmiFedelta = new ArrayList<>();
     }
 
     /**
@@ -110,19 +109,6 @@ public class Cliente {
         this.indirizzo = indirizzo;
         this.dataDiNascita = dataDiNascita;
         this.codiceFiscale = codiceFiscale;
-        programmiFedelta = new ArrayList<>();
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
-        Cliente cliente = (Cliente) o;
-        return clienteId != null && Objects.equals(clienteId, cliente.clienteId);
-    }
-
-    @Override
-    public int hashCode() {
-        return getClass().hashCode();
+        this.programmiFedelta = new ArrayList<>();
     }
 }

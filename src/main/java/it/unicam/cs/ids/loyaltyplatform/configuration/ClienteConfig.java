@@ -18,7 +18,7 @@ public class ClienteConfig {
         return args -> {
             Cliente flavio = new Cliente(
                     "Flavio",
-                    "Siumradini",
+                    "Loreto",
                     "3958619432",
                     "Flavione@gmail.com",
                     "Via dei Flavionati 33",
