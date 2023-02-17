@@ -35,7 +35,7 @@ public class AziendaController {
      *
      * @param azienda da inserire nel databse
      */
-    @PostMapping
+    @PostMapping(consumes = "application/json", produces = "application/json")
     public void registraNuovaAzienda(@RequestBody Azienda azienda) {
         aziendaService.addNewAzienda(azienda);
     }

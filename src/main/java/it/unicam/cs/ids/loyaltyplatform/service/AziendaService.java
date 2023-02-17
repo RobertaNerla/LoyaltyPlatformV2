@@ -45,6 +45,7 @@ public class AziendaService {
         aziendaRepository.save(azienda);
     }
 
+    //ToDo finire implementazione
     public void addProgrammaToAzienda(Long aziendaId, ProgrammaFedelta programmaFedelta) {
         Azienda azienda = aziendaRepository.findById(aziendaId)
                 .orElseThrow(() -> new ResourceNotFoundException("Azienda con l'id " + aziendaId + " non trovato!"));
@@ -66,7 +67,7 @@ public class AziendaService {
         }
     }
 
-    public Optional<Azienda> getAziendaById(long aziendaId){
+    public Optional<Azienda> getAziendaById(long aziendaId) {
         return aziendaRepository.findById(aziendaId);
     }
 }

@@ -30,8 +30,9 @@ public class AziendaAndProgrammaFedeltaConfig {
             openAi.getProgrammiFedelta().add(programma2);
             aziendaRepository.deleteAll();
             programmaFedeltaRepository.deleteAll();
-            programmaFedeltaRepository.saveAll(List.of(programma1, programma2));
             aziendaRepository.saveAll(List.of(sony, openAi));
+            programmaFedeltaRepository.saveAll(List.of(programma1, programma2));
+
         };
     }
 }

@@ -1,15 +1,13 @@
 package it.unicam.cs.ids.loyaltyplatform.model;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
-import org.hibernate.Hibernate;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 /**
  * Classe che rappresenta un'azienda nel sistema.
@@ -36,8 +34,8 @@ public class Azienda {
     @Column(name = "p_iva", nullable = false, columnDefinition = "TEXT")
     private String pIva;
 
-    @JsonBackReference
-    @OneToMany(mappedBy = "azienda", cascade = CascadeType.ALL)
+    @JsonIgnore
+    @OneToMany(mappedBy = "azienda", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @ToString.Exclude
     private List<ProgrammaFedelta> programmiFedelta;
 
@@ -74,18 +72,5 @@ public class Azienda {
         this.indirizzo = indirizzo;
         this.pIva = pIva;
         programmiFedelta = new ArrayList<>();
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
-        Azienda azienda = (Azienda) o;
-        return aziendaId != null && Objects.equals(aziendaId, azienda.aziendaId);
-    }
-
-    @Override
-    public int hashCode() {
-        return getClass().hashCode();
     }
 }

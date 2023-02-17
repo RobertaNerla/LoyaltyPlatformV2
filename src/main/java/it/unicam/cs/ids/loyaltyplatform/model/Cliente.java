@@ -1,6 +1,6 @@
 package it.unicam.cs.ids.loyaltyplatform.model;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import it.unicam.cs.ids.loyaltyplatform.tracker.ProgrammaFedeltaTracker;
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -60,18 +60,19 @@ public class Cliente {
             columnDefinition = "TEXT")
     private String indirizzo;
 
-    @Column(name = "data_nascita")
+    @Column(name = "data_nascita",
+            columnDefinition = "DATE")
     private LocalDate dataDiNascita;
 
     @Column(name = "codice_fiscale",
             nullable = false,
             columnDefinition = "TEXT")
     private String codiceFiscale;
-    @JsonBackReference
+
+    @JsonIgnore
     @OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @ToString.Exclude
     private List<ProgrammaFedeltaTracker> programmiFedelta;
-
 
     public Cliente() {
         programmiFedelta = new ArrayList<>();
@@ -101,7 +102,8 @@ public class Cliente {
      * @param dataDiNascita data di nascita del cliente
      * @param codiceFiscale codice fiscale del cliente
      */
-    public Cliente(String nome, String cognome, String numCellulare, String email, String indirizzo, LocalDate dataDiNascita, String codiceFiscale) {
+    public Cliente(String nome, String cognome, String numCellulare, String email, String indirizzo,
+                   LocalDate dataDiNascita, String codiceFiscale) {
         this.nome = nome;
         this.cognome = cognome;
         this.numCellulare = numCellulare;

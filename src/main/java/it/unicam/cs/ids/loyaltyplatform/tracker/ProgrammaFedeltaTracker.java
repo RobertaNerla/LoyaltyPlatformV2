@@ -1,6 +1,5 @@
 package it.unicam.cs.ids.loyaltyplatform.tracker;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import it.unicam.cs.ids.loyaltyplatform.model.Cliente;
 import it.unicam.cs.ids.loyaltyplatform.model.ProgrammaAPunti;
 import it.unicam.cs.ids.loyaltyplatform.model.ProgrammaFedelta;
@@ -20,14 +19,15 @@ import lombok.ToString;
 public class ProgrammaFedeltaTracker {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "tracker_id")
+    @Column(name = "tracker_id",
+            nullable = false,
+            updatable = false)
     private Long trackerId;
 
-    @JsonManagedReference
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "cliente_id", referencedColumnName = "cliente_id")
+    @ManyToOne()
+    @JoinColumn(name = "cliente_id", referencedColumnName = "cliente_id", foreignKey = @ForeignKey(name = "fk_cliente"))
     private Cliente cliente;
-    @JsonManagedReference
+    
     @ManyToOne()
     @JoinColumn(name = "programma_id", referencedColumnName = "programma_id", foreignKey = @ForeignKey(name = "fk_programma_fedelta"))
     private ProgrammaFedelta programma;
