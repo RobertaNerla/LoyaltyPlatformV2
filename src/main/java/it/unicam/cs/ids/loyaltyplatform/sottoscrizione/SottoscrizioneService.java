@@ -30,10 +30,12 @@ public class SottoscrizioneService {
         this.programmaFedeltaService = programmaFedeltaService;
         this.subFactory = subFactory;
     }
+
     @GetMapping
     public List<Sottoscrizione> getSottoscrizioni() {
         return sottoscrizioneRepository.findAll();
     }
+
     @PostMapping
     public Sottoscrizione addNewSottoscrizione(Long clienteId, Long programmaId) throws ResourceNotFoundException {
         Cliente currentClient = getClienteById(clienteId);
@@ -47,29 +49,27 @@ public class SottoscrizioneService {
 
     private Cliente getClienteById(Long clienteId) {
         Optional<Cliente> optionalCliente = clienteService.getClienteById(clienteId);
-        if(optionalCliente.isEmpty()){
+        if (optionalCliente.isEmpty()) {
             throw new ResourceNotFoundException("Cliente con id " + clienteId + "non esiste!");
         } else {
             return optionalCliente.get();
         }
     }
 
-    private ProgrammaFedelta getProgrammaById(Long programmaId){
+    private ProgrammaFedelta getProgrammaById(Long programmaId) {
         Optional<ProgrammaFedelta> optionalProgramma = programmaFedeltaService.getProgrammaById(programmaId);
-        if(optionalProgramma.isEmpty()){
+        if (optionalProgramma.isEmpty()) {
             throw new ResourceNotFoundException("Programma fedeltà con id " + programmaId + "non esiste!");
         } else {
             return optionalProgramma.get();
         }
     }
 
-    private void upgradeSottoscrizioniCliente(Cliente cliente, Sottoscrizione newSub){
+    private void upgradeSottoscrizioniCliente(Cliente cliente, Sottoscrizione newSub) {
         clienteService.aggiungiNuovaSottoscrizione(cliente, newSub);
     }
 
-    private void incrementaNumClienti(ProgrammaFedelta programma){
+    private void incrementaNumClienti(ProgrammaFedelta programma) {
         programmaFedeltaService.incrementaNumClienti(programma);
     }
-
-
 }

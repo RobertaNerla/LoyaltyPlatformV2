@@ -3,6 +3,7 @@ package it.unicam.cs.ids.loyaltyplatform.azienda;
 import it.unicam.cs.ids.loyaltyplatform.exception.ResourceAlreadyExistsException;
 import it.unicam.cs.ids.loyaltyplatform.exception.ResourceNotFoundException;
 import it.unicam.cs.ids.loyaltyplatform.programmaFedelta.ProgrammaFedelta;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -44,6 +45,7 @@ public class AziendaService {
         return aziendaRepository.save(azienda);
     }
 
+    @Transactional
     public void addProgrammaToAzienda(Long aziendaId, ProgrammaFedelta programmaFedelta) {
         Optional<Azienda> aziendaOptional = aziendaRepository.findById(aziendaId);
         if (aziendaOptional.isEmpty()) {
@@ -62,7 +64,8 @@ public class AziendaService {
                     programmaFedelta.getAzienda().toString());
         }
 
-        aziendaOptional.get().getProgrammiFedelta().add(programmaFedelta);
+        Azienda azienda = aziendaOptional.get();
+        azienda.getProgrammiFedelta().add(programmaFedelta);
     }
 
     /**
