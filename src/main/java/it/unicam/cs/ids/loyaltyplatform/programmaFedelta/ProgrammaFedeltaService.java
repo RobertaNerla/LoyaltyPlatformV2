@@ -1,12 +1,11 @@
 package it.unicam.cs.ids.loyaltyplatform.programmaFedelta;
 
-import it.unicam.cs.ids.loyaltyplatform.dto.ProgrammaFedeltaDto;
 import it.unicam.cs.ids.loyaltyplatform.azienda.Azienda;
+import it.unicam.cs.ids.loyaltyplatform.azienda.AziendaService;
+import it.unicam.cs.ids.loyaltyplatform.dto.ProgrammaFedeltaDto;
+import it.unicam.cs.ids.loyaltyplatform.exception.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 
 import java.util.List;
 import java.util.Optional;
@@ -16,24 +15,34 @@ public class ProgrammaFedeltaService {
 
     private final ProgramFactory programFactory;
     private final ProgrammaFedeltaRepository programmaFedeltaRepository;
+    private final AziendaService aziendaService;
+
     @Autowired
-    public ProgrammaFedeltaService(ProgramFactory programFactory, ProgrammaFedeltaRepository programmaFedeltaRepository) {
+    public ProgrammaFedeltaService(ProgramFactory programFactory,
+                                   AziendaService aziendaService,
+                                   ProgrammaFedeltaRepository programmaFedeltaRepository) {
         this.programFactory = programFactory;
+        this.aziendaService = aziendaService;
         this.programmaFedeltaRepository = programmaFedeltaRepository;
     }
 
-    @GetMapping
-    public List<ProgrammaFedelta> getProgrammiFedelta(){
+    public List<ProgrammaFedelta> getProgrammiFedelta() {
         return programmaFedeltaRepository.findAll();
     }
 
-    @PostMapping
-    public ProgrammaFedelta addNewProgrammaFedelta(@Validated ProgrammaFedeltaDto programma, Azienda azienda,TipologiaProgramma tipo){
-        ProgrammaFedelta newProgram = programFactory.create(programma, azienda, tipo);
-        return programmaFedeltaRepository.save(newProgram);
+    public void addNewProgrammaFedelta(ProgrammaFedeltaDto programmaDto, TipologiaProgramma tipo) {
+        Optional<Azienda> aziendaOptional = aziendaService.getAziendaById(programmaDto.getAziendaId());
+        if (aziendaOptional.isEmpty()) {
+            throw new ResourceNotFoundException("Azienda con id " + programmaDto.getAziendaId() +
+                    "non trovata!");
+        }
+        //TODO: azienda.addProgrammaToAzienda(programma)?
+
+        ProgrammaFedelta newProgram = programFactory.create(programmaDto, aziendaOptional.get(), tipo);
+        programmaFedeltaRepository.save(newProgram);
     }
 
-    public Optional<ProgrammaFedelta> getProgrammaById(Long programId){
+    public Optional<ProgrammaFedelta> getProgrammaById(Long programId) {
         return programmaFedeltaRepository.findById(programId);
     }
 }

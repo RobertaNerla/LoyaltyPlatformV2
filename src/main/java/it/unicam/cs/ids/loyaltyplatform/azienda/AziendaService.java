@@ -1,5 +1,6 @@
 package it.unicam.cs.ids.loyaltyplatform.azienda;
 
+import it.unicam.cs.ids.loyaltyplatform.exception.ResourceAlreadyExistsException;
 import it.unicam.cs.ids.loyaltyplatform.exception.ResourceNotFoundException;
 import it.unicam.cs.ids.loyaltyplatform.programmaFedelta.ProgrammaFedelta;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,7 +11,6 @@ import java.util.Optional;
 
 @Service
 public class AziendaService {
-    @Autowired
     private final AziendaRepository aziendaRepository;
 
     @Autowired
@@ -38,16 +38,31 @@ public class AziendaService {
         Optional<Azienda> aziendaOptional = aziendaRepository.findByNomeAndIndirizzo(azienda.getNome(), azienda.getIndirizzo());
 
         if (aziendaOptional.isPresent()) {
-            throw new IllegalStateException("Azienda gia' presente!");
+            throw new ResourceAlreadyExistsException("Azienda con nome " + azienda.getAziendaId() + " e indirizzo " +
+                    azienda.getIndirizzo() + " gia' presente!");
         }
         aziendaRepository.save(azienda);
     }
 
-    //ToDo finire implementazione
     public void addProgrammaToAzienda(Long aziendaId, ProgrammaFedelta programmaFedelta) {
-        Azienda azienda = aziendaRepository.findById(aziendaId)
-                .orElseThrow(() -> new ResourceNotFoundException("Azienda con l'id " + aziendaId + " non trovato!"));
+        Optional<Azienda> aziendaOptional = aziendaRepository.findById(aziendaId);
+        if (aziendaOptional.isEmpty()) {
+            throw new ResourceNotFoundException("Azienda con l'id " + aziendaId + " non trovata!");
+        }
 
+        boolean exists = aziendaOptional.get().getProgrammiFedelta().stream()
+                .anyMatch(pf -> pf.getNomeProgramma().equals(programmaFedelta.getNomeProgramma()));
+        if (exists) {
+            throw new ResourceAlreadyExistsException("Un programma fedeltà con il nome" +
+                    programmaFedelta.getNomeProgramma() + " appartiene già all'azienda");
+        }
+
+        if (programmaFedelta.getAzienda().getAziendaId() != aziendaId) {
+            throw new IllegalArgumentException("Il programma fedeltà non appartiene a questa azienda, ma a " +
+                    programmaFedelta.getAzienda().toString());
+        }
+
+        aziendaOptional.get().getProgrammiFedelta().add(programmaFedelta);
     }
 
     /**

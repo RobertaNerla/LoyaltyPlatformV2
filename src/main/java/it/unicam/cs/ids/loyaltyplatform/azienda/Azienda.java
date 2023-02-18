@@ -3,8 +3,6 @@ package it.unicam.cs.ids.loyaltyplatform.azienda;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import it.unicam.cs.ids.loyaltyplatform.programmaFedelta.ProgrammaFedelta;
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
 import lombok.ToString;
 
 import java.util.ArrayList;
@@ -15,8 +13,6 @@ import java.util.List;
  * Corrisponde anche all'omonima entità nel database del progetto.
  */
 
-@Getter
-@Setter
 @ToString
 @Entity(name = "Azienda")
 @Table(name = "azienda")
@@ -58,7 +54,7 @@ public class Azienda {
         this.nome = nome;
         this.indirizzo = indirizzo;
         this.pIva = pIva;
-        programmiFedelta = new ArrayList<>();
+        this.programmiFedelta = new ArrayList<>();
     }
 
     /**
@@ -72,7 +68,7 @@ public class Azienda {
         this.nome = nome;
         this.indirizzo = indirizzo;
         this.pIva = pIva;
-        programmiFedelta = new ArrayList<>();
+        this.programmiFedelta = new ArrayList<>();
     }
 
     public Long getAziendaId() {
