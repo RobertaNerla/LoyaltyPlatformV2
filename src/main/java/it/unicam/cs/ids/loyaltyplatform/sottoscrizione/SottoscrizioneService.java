@@ -3,7 +3,6 @@ package it.unicam.cs.ids.loyaltyplatform.sottoscrizione;
 import it.unicam.cs.ids.loyaltyplatform.cliente.Cliente;
 import it.unicam.cs.ids.loyaltyplatform.cliente.ClienteService;
 import it.unicam.cs.ids.loyaltyplatform.exception.ResourceNotFoundException;
-import it.unicam.cs.ids.loyaltyplatform.programmaFedelta.ProgrammaAPunti;
 import it.unicam.cs.ids.loyaltyplatform.programmaFedelta.ProgrammaFedelta;
 import it.unicam.cs.ids.loyaltyplatform.programmaFedelta.ProgrammaFedeltaService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,20 +36,40 @@ public class SottoscrizioneService {
     }
     @PostMapping
     public Sottoscrizione addNewSottoscrizione(Long clienteId, Long programmaId) throws ResourceNotFoundException {
-        Optional<Cliente> clienteOptional = clienteService.getClienteById(clienteId);
-        Optional<ProgrammaFedelta> programmaOptional = programmaFedeltaService.getProgrammaById(programmaId);
-        if (clienteOptional.isEmpty()) {
-            throw new ResourceNotFoundException("Cliente con id " + clienteId + "non esiste!");
-        }
-        if (programmaOptional.isEmpty()) {
-            throw new ResourceNotFoundException("Programma fedeltà con id " + programmaId + "non esiste!");
-        }
-        if(programmaOptional.get() instanceof ProgrammaAPunti programmaAPunti){
-            Sottoscrizione newSub = new SottoscrizioneProgrammaAPunti(clienteOptional.get(), programmaAPunti);
-            return sottoscrizioneRepository.save(newSub);
-        }
-        Sottoscrizione newSub = subFactory.submit(clienteOptional.get(), programmaOptional.get());
+        Cliente currentClient = getClienteById(clienteId);
+        ProgrammaFedelta currentProgram = getProgrammaById(programmaId);
+        Sottoscrizione newSub = subFactory.submit(currentClient, currentProgram);
         //TODO: Aggiungere la sottoscrizione su cliente e programma
+        upgradeSottoscrizioniCliente(currentClient, newSub);
+        incrementaNumClienti(currentProgram);
         return sottoscrizioneRepository.save(newSub);
     }
+
+    private Cliente getClienteById(Long clienteId) {
+        Optional<Cliente> optionalCliente = clienteService.getClienteById(clienteId);
+        if(optionalCliente.isEmpty()){
+            throw new ResourceNotFoundException("Cliente con id " + clienteId + "non esiste!");
+        } else {
+            return optionalCliente.get();
+        }
+    }
+
+    private ProgrammaFedelta getProgrammaById(Long programmaId){
+        Optional<ProgrammaFedelta> optionalProgramma = programmaFedeltaService.getProgrammaById(programmaId);
+        if(optionalProgramma.isEmpty()){
+            throw new ResourceNotFoundException("Programma fedeltà con id " + programmaId + "non esiste!");
+        } else {
+            return optionalProgramma.get();
+        }
+    }
+
+    private void upgradeSottoscrizioniCliente(Cliente cliente, Sottoscrizione newSub){
+        clienteService.aggiungiNuovaSottoscrizione(cliente, newSub);
+    }
+
+    private void incrementaNumClienti(ProgrammaFedelta programma){
+        programmaFedeltaService.incrementaNumClienti(programma);
+    }
+
+
 }

@@ -1,6 +1,7 @@
 package it.unicam.cs.ids.loyaltyplatform.cliente;
 
 import it.unicam.cs.ids.loyaltyplatform.exception.ResourceNotFoundException;
+import it.unicam.cs.ids.loyaltyplatform.sottoscrizione.Sottoscrizione;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -92,5 +93,16 @@ public class ClienteService {
      */
     public Optional<Cliente> getClienteById(Long clienteId) {
         return clienteRepository.findById(clienteId);
+    }
+
+    /**
+     * Aggiorna la lista di sottoscrizioni di un cliente, aggiungendo la sottoscrizione data.
+     * @param cliente
+     * @param newSub
+     */
+    public void aggiungiNuovaSottoscrizione(Cliente cliente, Sottoscrizione newSub) throws IllegalStateException{
+        cliente.getProgrammiFedelta().add(newSub);
+        clienteRepository.save(cliente);
+        //TODO: finire/controllare
     }
 }

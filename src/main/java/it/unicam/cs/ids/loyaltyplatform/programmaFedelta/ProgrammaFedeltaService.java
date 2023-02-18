@@ -44,4 +44,9 @@ public class ProgrammaFedeltaService {
     public Optional<ProgrammaFedelta> getProgrammaById(Long programId) {
         return programmaFedeltaRepository.findById(programId);
     }
+
+    public void incrementaNumClienti(ProgrammaFedelta programma){
+        programma.setNumClienti(programma.getNumClienti()+1);
+        programmaFedeltaRepository.save(programma);
+    }
 }
