@@ -1,8 +1,8 @@
 package it.unicam.cs.ids.loyaltyplatform.configuration;
 
 
-import it.unicam.cs.ids.loyaltyplatform.dao.ClienteRepository;
-import it.unicam.cs.ids.loyaltyplatform.model.Cliente;
+import it.unicam.cs.ids.loyaltyplatform.cliente.ClienteRepository;
+import it.unicam.cs.ids.loyaltyplatform.cliente.Cliente;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

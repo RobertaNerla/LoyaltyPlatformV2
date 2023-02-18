@@ -1,8 +1,6 @@
-package it.unicam.cs.ids.loyaltyplatform.controller;
+package it.unicam.cs.ids.loyaltyplatform.deprecated;
 
-import it.unicam.cs.ids.loyaltyplatform.dto.SottoscrizioneProgrammaAPuntiDTO;
 import it.unicam.cs.ids.loyaltyplatform.exception.ResourceNotFoundException;
-import it.unicam.cs.ids.loyaltyplatform.service.ProgrammaAPuntiTrackerService;
 import it.unicam.cs.ids.loyaltyplatform.sottoscrizione.SottoscrizioneProgrammaAPunti;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -15,11 +13,11 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping(path = "/api/sottoscrizioni/ProgrammaAPunti")
-public class SottoscrizioneProgrammaAPuntiController {
-    public final ProgrammaAPuntiTrackerService programmaAPuntiTrackerService;
+public class SottoscrizioneProgrammaAPuntiController_Deprecated {
+    public final ProgrammaAPuntiTrackerService_deprecated programmaAPuntiTrackerService;
 
     @Autowired
-    public SottoscrizioneProgrammaAPuntiController(ProgrammaAPuntiTrackerService programmaAPuntiTrackerService) {
+    public SottoscrizioneProgrammaAPuntiController_Deprecated(ProgrammaAPuntiTrackerService_deprecated programmaAPuntiTrackerService) {
         this.programmaAPuntiTrackerService = programmaAPuntiTrackerService;
     }
 
@@ -31,7 +29,7 @@ public class SottoscrizioneProgrammaAPuntiController {
      */
     @PostMapping
     public ResponseEntity<SottoscrizioneProgrammaAPunti> sottoscriviProgrammaAPunti(
-            @RequestBody @Validated SottoscrizioneProgrammaAPuntiDTO dto) {
+            @RequestBody @Validated SottoscrizioneProgrammaAPuntiDTO_deprecated dto) {
         try {
             SottoscrizioneProgrammaAPunti programmaAPuntiTracker = programmaAPuntiTrackerService.addNewProgrammaAPuntiTracker(dto.getCliente(), dto.getProgramma());
             return new ResponseEntity<>(programmaAPuntiTracker, HttpStatus.CREATED);

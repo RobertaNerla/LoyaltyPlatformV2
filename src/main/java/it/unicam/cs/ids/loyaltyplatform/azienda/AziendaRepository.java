@@ -1,6 +1,6 @@
-package it.unicam.cs.ids.loyaltyplatform.dao;
+package it.unicam.cs.ids.loyaltyplatform.azienda;
 
-import it.unicam.cs.ids.loyaltyplatform.model.Azienda;
+import it.unicam.cs.ids.loyaltyplatform.azienda.Azienda;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

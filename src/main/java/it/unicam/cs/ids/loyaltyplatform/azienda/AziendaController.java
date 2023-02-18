@@ -1,7 +1,7 @@
-package it.unicam.cs.ids.loyaltyplatform.controller;
+package it.unicam.cs.ids.loyaltyplatform.azienda;
 
-import it.unicam.cs.ids.loyaltyplatform.model.Azienda;
-import it.unicam.cs.ids.loyaltyplatform.service.AziendaService;
+import it.unicam.cs.ids.loyaltyplatform.azienda.Azienda;
+import it.unicam.cs.ids.loyaltyplatform.azienda.AziendaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

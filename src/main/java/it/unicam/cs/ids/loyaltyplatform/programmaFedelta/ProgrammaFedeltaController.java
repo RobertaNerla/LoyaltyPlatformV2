@@ -1,8 +1,8 @@
 package it.unicam.cs.ids.loyaltyplatform.programmaFedelta;
 
 import it.unicam.cs.ids.loyaltyplatform.dto.ProgrammaFedeltaDto;
-import it.unicam.cs.ids.loyaltyplatform.model.Azienda;
-import it.unicam.cs.ids.loyaltyplatform.service.AziendaService;
+import it.unicam.cs.ids.loyaltyplatform.azienda.Azienda;
+import it.unicam.cs.ids.loyaltyplatform.azienda.AziendaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -16,16 +16,16 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping (path = "api/programma")
-public class ProgrammaFedeltaControllerr {
+public class ProgrammaFedeltaController {
 
     private final List<Template> availableTemplates;
-    private final ProgrammaFedeltaServicee programmaFedeltaService;
+    private final ProgrammaFedeltaService programmaFedeltaService;
 
     private final AziendaService aziendaService;
 
 
     @Autowired
-    public ProgrammaFedeltaControllerr(ProgrammaFedeltaServicee programmaFedeltaService, AziendaService aziendaService) {
+    public ProgrammaFedeltaController(ProgrammaFedeltaService programmaFedeltaService, AziendaService aziendaService) {
         this.programmaFedeltaService = programmaFedeltaService;
         this.aziendaService = aziendaService;
         this.availableTemplates = new ArrayList<>(List.of(

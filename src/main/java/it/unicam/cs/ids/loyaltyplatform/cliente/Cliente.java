@@ -1,4 +1,4 @@
-package it.unicam.cs.ids.loyaltyplatform.model;
+package it.unicam.cs.ids.loyaltyplatform.cliente;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import it.unicam.cs.ids.loyaltyplatform.sottoscrizione.Sottoscrizione;

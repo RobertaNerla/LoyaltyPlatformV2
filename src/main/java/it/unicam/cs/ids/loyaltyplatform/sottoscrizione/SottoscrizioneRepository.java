@@ -1,4 +1,4 @@
-package it.unicam.cs.ids.loyaltyplatform.dao;
+package it.unicam.cs.ids.loyaltyplatform.sottoscrizione;
 
 import it.unicam.cs.ids.loyaltyplatform.sottoscrizione.Sottoscrizione;
 import it.unicam.cs.ids.loyaltyplatform.sottoscrizione.SottoscrizioneProgrammaAPunti;

@@ -1,12 +1,11 @@
-package it.unicam.cs.ids.loyaltyplatform.controller;
+package it.unicam.cs.ids.loyaltyplatform.deprecated;
 
 import it.unicam.cs.ids.loyaltyplatform.dto.ProgrammaAPuntiDTO;
 import it.unicam.cs.ids.loyaltyplatform.dto.ProgrammaFedeltaDto;
-import it.unicam.cs.ids.loyaltyplatform.model.Azienda;
+import it.unicam.cs.ids.loyaltyplatform.azienda.Azienda;
 import it.unicam.cs.ids.loyaltyplatform.programmaFedelta.ProgrammaAPunti;
 import it.unicam.cs.ids.loyaltyplatform.programmaFedelta.ProgrammaFedelta;
-import it.unicam.cs.ids.loyaltyplatform.service.AziendaService;
-import it.unicam.cs.ids.loyaltyplatform.service.ProgrammaAPuntiService;
+import it.unicam.cs.ids.loyaltyplatform.azienda.AziendaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,13 +17,13 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping(path = "/api/progPunti")
-public class ProgrammaAPuntiController {
-    public final ProgrammaAPuntiService progAPuntiService;
+public class ProgrammaAPuntiController_Deprecated {
+    public final ProgrammaAPuntiService_deprecated progAPuntiService;
 
     private final AziendaService aziendaService;
 
     @Autowired
-    public ProgrammaAPuntiController(ProgrammaAPuntiService progAPuntiService, AziendaService aziendaService) {
+    public ProgrammaAPuntiController_Deprecated(ProgrammaAPuntiService_deprecated progAPuntiService, AziendaService aziendaService) {
         this.progAPuntiService = progAPuntiService;
         this.aziendaService = aziendaService;
     }

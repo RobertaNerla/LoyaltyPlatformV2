@@ -1,7 +1,6 @@
 package it.unicam.cs.ids.loyaltyplatform.sottoscrizione;
 
-import it.unicam.cs.ids.loyaltyplatform.dao.SottoscrizioneRepository;
-import it.unicam.cs.ids.loyaltyplatform.model.Cliente;
+import it.unicam.cs.ids.loyaltyplatform.cliente.Cliente;
 import it.unicam.cs.ids.loyaltyplatform.programmaFedelta.ProgrammaFedelta;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,11 +14,11 @@ public class SottoscrizioneService {
 
     private final SottoscrizioneRepository sottoscrizioneRepository;
 
-    private final SubsFactory subsFactory;
+    private final SubFactory subFactory;
     @Autowired
-    public SottoscrizioneService(SottoscrizioneRepository sottoscrizioneRepository, SubsFactory subsFactory) {
+    public SottoscrizioneService(SottoscrizioneRepository sottoscrizioneRepository, SubFactory subFactory) {
         this.sottoscrizioneRepository = sottoscrizioneRepository;
-        this.subsFactory = subsFactory;
+        this.subFactory = subFactory;
     }
 
     @GetMapping
@@ -28,7 +27,7 @@ public class SottoscrizioneService {
     }
     @PostMapping
     public Sottoscrizione addNewSottoscrizione(Cliente cliente, ProgrammaFedelta programma) {
-        Sottoscrizione newSub = subsFactory.submit(cliente,programma);
+        Sottoscrizione newSub = subFactory.submit(cliente,programma);
         return sottoscrizioneRepository.save(newSub);
     }
 }

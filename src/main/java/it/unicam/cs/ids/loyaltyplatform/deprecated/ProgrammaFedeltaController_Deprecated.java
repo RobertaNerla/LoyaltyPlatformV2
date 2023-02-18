@@ -1,7 +1,6 @@
-package it.unicam.cs.ids.loyaltyplatform.controller;
+package it.unicam.cs.ids.loyaltyplatform.deprecated;
 
 import it.unicam.cs.ids.loyaltyplatform.programmaFedelta.ProgrammaFedelta;
-import it.unicam.cs.ids.loyaltyplatform.service.ProgrammaFedeltaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -11,11 +10,11 @@ import java.util.List;
 
 @RestController
 @RequestMapping(path = "/api/programmi")
-public class ProgrammaFedeltaController {
-    public final ProgrammaFedeltaService programmaFedeltaService;
+public class ProgrammaFedeltaController_Deprecated {
+    public final ProgrammaFedeltaService_deprecated programmaFedeltaService;
 
     @Autowired
-    public ProgrammaFedeltaController(ProgrammaFedeltaService programmaFedeltaService) {
+    public ProgrammaFedeltaController_Deprecated(ProgrammaFedeltaService_deprecated programmaFedeltaService) {
         this.programmaFedeltaService = programmaFedeltaService;
     }
 

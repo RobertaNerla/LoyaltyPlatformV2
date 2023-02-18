@@ -1,8 +1,9 @@
-package it.unicam.cs.ids.loyaltyplatform.service;
+package it.unicam.cs.ids.loyaltyplatform.deprecated;
 
-import it.unicam.cs.ids.loyaltyplatform.dao.SottoscrizioneRepository;
+import it.unicam.cs.ids.loyaltyplatform.cliente.ClienteService;
+import it.unicam.cs.ids.loyaltyplatform.sottoscrizione.SottoscrizioneRepository;
 import it.unicam.cs.ids.loyaltyplatform.exception.ResourceNotFoundException;
-import it.unicam.cs.ids.loyaltyplatform.model.Cliente;
+import it.unicam.cs.ids.loyaltyplatform.cliente.Cliente;
 import it.unicam.cs.ids.loyaltyplatform.programmaFedelta.ProgrammaAPunti;
 import it.unicam.cs.ids.loyaltyplatform.sottoscrizione.SottoscrizioneProgrammaAPunti;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,16 +12,16 @@ import org.springframework.stereotype.Service;
 import java.util.Optional;
 
 @Service
-public class ProgrammaAPuntiTrackerService {
+public class ProgrammaAPuntiTrackerService_deprecated {
 
     SottoscrizioneRepository programmaAPuntiTrackerRepository;
-    ProgrammaAPuntiService programmaAPuntiService;
+    ProgrammaAPuntiService_deprecated programmaAPuntiService;
     ClienteService clienteService;
 
     @Autowired
-    public ProgrammaAPuntiTrackerService(SottoscrizioneRepository programmaAPuntiTrackerRepository,
-                                         ProgrammaAPuntiService programmaAPuntiService,
-                                         ClienteService clienteService) {
+    public ProgrammaAPuntiTrackerService_deprecated(SottoscrizioneRepository programmaAPuntiTrackerRepository,
+                                                    ProgrammaAPuntiService_deprecated programmaAPuntiService,
+                                                    ClienteService clienteService) {
         this.programmaAPuntiTrackerRepository = programmaAPuntiTrackerRepository;
         this.programmaAPuntiService = programmaAPuntiService;
         this.clienteService = clienteService;

@@ -1,8 +1,7 @@
 package it.unicam.cs.ids.loyaltyplatform.programmaFedelta;
 
-import it.unicam.cs.ids.loyaltyplatform.dao.ProgrammaFedeltaRepository;
 import it.unicam.cs.ids.loyaltyplatform.dto.ProgrammaFedeltaDto;
-import it.unicam.cs.ids.loyaltyplatform.model.Azienda;
+import it.unicam.cs.ids.loyaltyplatform.azienda.Azienda;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
@@ -13,12 +12,12 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class ProgrammaFedeltaServicee {
+public class ProgrammaFedeltaService {
 
     private final ProgramFactory programFactory;
     private final ProgrammaFedeltaRepository programmaFedeltaRepository;
     @Autowired
-    public ProgrammaFedeltaServicee(ProgramFactory programFactory, ProgrammaFedeltaRepository programmaFedeltaRepository) {
+    public ProgrammaFedeltaService(ProgramFactory programFactory, ProgrammaFedeltaRepository programmaFedeltaRepository) {
         this.programFactory = programFactory;
         this.programmaFedeltaRepository = programmaFedeltaRepository;
     }

@@ -1,11 +1,10 @@
-package it.unicam.cs.ids.loyaltyplatform.service;
+package it.unicam.cs.ids.loyaltyplatform.deprecated;
 
-import it.unicam.cs.ids.loyaltyplatform.dao.ProgrammaAPuntiRepository;
-import it.unicam.cs.ids.loyaltyplatform.dao.ProgrammaFedeltaRepository;
+import it.unicam.cs.ids.loyaltyplatform.programmaFedelta.ProgrammaFedeltaRepository;
 import it.unicam.cs.ids.loyaltyplatform.dto.ProgrammaAPuntiDTO;
 import it.unicam.cs.ids.loyaltyplatform.dto.ProgrammaFedeltaDto;
 import it.unicam.cs.ids.loyaltyplatform.exception.ResourceNotFoundException;
-import it.unicam.cs.ids.loyaltyplatform.model.Azienda;
+import it.unicam.cs.ids.loyaltyplatform.azienda.Azienda;
 import it.unicam.cs.ids.loyaltyplatform.programmaFedelta.ProgrammaAPunti;
 import it.unicam.cs.ids.loyaltyplatform.programmaFedelta.ProgrammaFedelta;
 import jakarta.transaction.Transactional;
@@ -20,14 +19,14 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class ProgrammaAPuntiService {
-    private final ProgrammaAPuntiRepository programmaAPuntiRepository;
+public class ProgrammaAPuntiService_deprecated {
+    private final ProgrammaAPuntiRepository_deprecated programmaAPuntiRepository;
 
     private final ProgrammaFedeltaRepository repo;
 
 
     @Autowired
-    public ProgrammaAPuntiService(ProgrammaAPuntiRepository programmaAPuntiRepository, ProgrammaFedeltaRepository repo) {
+    public ProgrammaAPuntiService_deprecated(ProgrammaAPuntiRepository_deprecated programmaAPuntiRepository, ProgrammaFedeltaRepository repo) {
         this.programmaAPuntiRepository = programmaAPuntiRepository;
         this.repo = repo;
     }

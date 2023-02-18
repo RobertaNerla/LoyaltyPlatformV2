@@ -1,6 +1,6 @@
-package it.unicam.cs.ids.loyaltyplatform.dto;
+package it.unicam.cs.ids.loyaltyplatform.deprecated;
 
-import it.unicam.cs.ids.loyaltyplatform.model.Cliente;
+import it.unicam.cs.ids.loyaltyplatform.cliente.Cliente;
 import it.unicam.cs.ids.loyaltyplatform.programmaFedelta.ProgrammaAPunti;
 import lombok.Getter;
 import lombok.Setter;
@@ -11,7 +11,7 @@ import javax.validation.constraints.NotNull;
 @Getter
 @Setter
 @ToString
-public class SottoscrizioneProgrammaAPuntiDTO {
+public class SottoscrizioneProgrammaAPuntiDTO_deprecated {
 
     @NotNull
     private ProgrammaAPunti programma;
@@ -24,7 +24,7 @@ public class SottoscrizioneProgrammaAPuntiDTO {
      * @param programma programma a punti a cui ci si sottoscrive
      * @param cliente   cliente che si sottoscrive
      */
-    public SottoscrizioneProgrammaAPuntiDTO(ProgrammaAPunti programma, Cliente cliente) {
+    public SottoscrizioneProgrammaAPuntiDTO_deprecated(ProgrammaAPunti programma, Cliente cliente) {
         this.programma = programma;
         this.cliente = cliente;
     }

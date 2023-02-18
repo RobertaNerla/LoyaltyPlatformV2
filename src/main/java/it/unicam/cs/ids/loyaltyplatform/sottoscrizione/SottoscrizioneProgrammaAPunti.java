@@ -1,6 +1,6 @@
 package it.unicam.cs.ids.loyaltyplatform.sottoscrizione;
 
-import it.unicam.cs.ids.loyaltyplatform.model.Cliente;
+import it.unicam.cs.ids.loyaltyplatform.cliente.Cliente;
 import it.unicam.cs.ids.loyaltyplatform.programmaFedelta.ProgrammaAPunti;
 import jakarta.persistence.Column;
 import jakarta.persistence.DiscriminatorValue;

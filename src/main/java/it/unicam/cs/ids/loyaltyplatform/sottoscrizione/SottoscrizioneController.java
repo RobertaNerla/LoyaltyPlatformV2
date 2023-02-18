@@ -1,11 +1,10 @@
 package it.unicam.cs.ids.loyaltyplatform.sottoscrizione;
 
 import it.unicam.cs.ids.loyaltyplatform.dto.SottoscrizioneDto;
-import it.unicam.cs.ids.loyaltyplatform.model.Azienda;
-import it.unicam.cs.ids.loyaltyplatform.model.Cliente;
+import it.unicam.cs.ids.loyaltyplatform.cliente.Cliente;
 import it.unicam.cs.ids.loyaltyplatform.programmaFedelta.ProgrammaFedelta;
-import it.unicam.cs.ids.loyaltyplatform.programmaFedelta.ProgrammaFedeltaServicee;
-import it.unicam.cs.ids.loyaltyplatform.service.ClienteService;
+import it.unicam.cs.ids.loyaltyplatform.programmaFedelta.ProgrammaFedeltaService;
+import it.unicam.cs.ids.loyaltyplatform.cliente.ClienteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -23,10 +22,10 @@ public class SottoscrizioneController {
 
     private final SottoscrizioneService sottoscrizioneService;
     private final ClienteService clienteService;
-    private final ProgrammaFedeltaServicee programmaFedeltaService;
+    private final ProgrammaFedeltaService programmaFedeltaService;
 
     @Autowired
-    public SottoscrizioneController(SottoscrizioneService sottoscrizioneService, ClienteService clienteService, ProgrammaFedeltaServicee programmaFedeltaService) {
+    public SottoscrizioneController(SottoscrizioneService sottoscrizioneService, ClienteService clienteService, ProgrammaFedeltaService programmaFedeltaService) {
         this.sottoscrizioneService = sottoscrizioneService;
         this.clienteService = clienteService;
         this.programmaFedeltaService = programmaFedeltaService;

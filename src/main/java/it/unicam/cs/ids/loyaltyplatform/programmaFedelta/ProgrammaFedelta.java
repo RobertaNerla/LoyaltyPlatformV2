@@ -1,7 +1,7 @@
 package it.unicam.cs.ids.loyaltyplatform.programmaFedelta;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import it.unicam.cs.ids.loyaltyplatform.model.Azienda;
+import it.unicam.cs.ids.loyaltyplatform.azienda.Azienda;
 import it.unicam.cs.ids.loyaltyplatform.sottoscrizione.Sottoscrizione;
 import jakarta.persistence.*;
 import lombok.Getter;

@@ -1,8 +1,6 @@
-package it.unicam.cs.ids.loyaltyplatform.service;
+package it.unicam.cs.ids.loyaltyplatform.cliente;
 
-import it.unicam.cs.ids.loyaltyplatform.dao.ClienteRepository;
 import it.unicam.cs.ids.loyaltyplatform.exception.ResourceNotFoundException;
-import it.unicam.cs.ids.loyaltyplatform.model.Cliente;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

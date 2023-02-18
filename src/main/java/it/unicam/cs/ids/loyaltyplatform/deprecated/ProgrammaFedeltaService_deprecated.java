@@ -1,6 +1,6 @@
-package it.unicam.cs.ids.loyaltyplatform.service;
+package it.unicam.cs.ids.loyaltyplatform.deprecated;
 
-import it.unicam.cs.ids.loyaltyplatform.dao.ProgrammaFedeltaRepository;
+import it.unicam.cs.ids.loyaltyplatform.programmaFedelta.ProgrammaFedeltaRepository;
 import it.unicam.cs.ids.loyaltyplatform.programmaFedelta.ProgrammaFedelta;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -8,11 +8,11 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class ProgrammaFedeltaService {
+public class ProgrammaFedeltaService_deprecated {
     private final ProgrammaFedeltaRepository programmaFedeltaRepository;
 
     @Autowired
-    public ProgrammaFedeltaService(ProgrammaFedeltaRepository progFedeltaRepository) {
+    public ProgrammaFedeltaService_deprecated(ProgrammaFedeltaRepository progFedeltaRepository) {
         this.programmaFedeltaRepository = progFedeltaRepository;
     }
 
