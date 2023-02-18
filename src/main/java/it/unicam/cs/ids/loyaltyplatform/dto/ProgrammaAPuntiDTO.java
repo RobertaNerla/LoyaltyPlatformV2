@@ -1,5 +1,7 @@
 package it.unicam.cs.ids.loyaltyplatform.dto;
 
+import com.fasterxml.jackson.annotation.JsonSubTypes;
+import com.fasterxml.jackson.annotation.JsonTypeName;
 import it.unicam.cs.ids.loyaltyplatform.model.Azienda;
 import it.unicam.cs.ids.loyaltyplatform.model.ProgrammaAPunti;
 import lombok.Getter;
@@ -16,7 +18,8 @@ import javax.validation.constraints.NotNull;
 @Getter
 @Setter
 @ToString
-public class ProgrammaAPuntiDTO {
+@JsonTypeName("punti")
+public class ProgrammaAPuntiDTO implements ProgrammaFedeltaDto {
     @NotNull
     private Long aziendaId;
     @NotBlank

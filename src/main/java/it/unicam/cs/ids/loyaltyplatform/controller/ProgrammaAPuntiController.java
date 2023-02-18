@@ -1,8 +1,10 @@
 package it.unicam.cs.ids.loyaltyplatform.controller;
 
 import it.unicam.cs.ids.loyaltyplatform.dto.ProgrammaAPuntiDTO;
+import it.unicam.cs.ids.loyaltyplatform.dto.ProgrammaFedeltaDto;
 import it.unicam.cs.ids.loyaltyplatform.model.Azienda;
 import it.unicam.cs.ids.loyaltyplatform.model.ProgrammaAPunti;
+import it.unicam.cs.ids.loyaltyplatform.programmaFedelta.ProgrammaFedelta;
 import it.unicam.cs.ids.loyaltyplatform.service.AziendaService;
 import it.unicam.cs.ids.loyaltyplatform.service.ProgrammaAPuntiService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,11 +40,11 @@ public class ProgrammaAPuntiController {
     }
 
     @PostMapping
-    public ResponseEntity<ProgrammaAPuntiDTO> registraNuovoProgrammaAPunti(@RequestBody @Validated ProgrammaAPuntiDTO dto) {
+    public ResponseEntity<ProgrammaAPuntiDTO> registraNuovoProgrammaAPunti(@RequestBody @Validated ProgrammaFedeltaDto dto) {
         Optional<Azienda> azienda = aziendaService.getAziendaById(dto.getAziendaId());
         if(azienda.isPresent()){
-            ProgrammaAPunti programmaAPunti = progAPuntiService.addNewProgrammaAPunti(dto,azienda.get());
-            return new ResponseEntity<>(new ProgrammaAPuntiDTO(programmaAPunti), HttpStatus.CREATED);
+            ProgrammaFedelta programmaAPunti = progAPuntiService.addNewProgrammaAPunti(dto,azienda.get());
+            return new ResponseEntity<>(HttpStatus.CREATED);
         } else {
             return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
         }

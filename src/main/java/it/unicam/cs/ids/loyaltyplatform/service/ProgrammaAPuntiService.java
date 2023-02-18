@@ -1,10 +1,13 @@
 package it.unicam.cs.ids.loyaltyplatform.service;
 
 import it.unicam.cs.ids.loyaltyplatform.dao.ProgrammaAPuntiRepository;
+import it.unicam.cs.ids.loyaltyplatform.dao.ProgrammaFedeltaRepository;
 import it.unicam.cs.ids.loyaltyplatform.dto.ProgrammaAPuntiDTO;
+import it.unicam.cs.ids.loyaltyplatform.dto.ProgrammaFedeltaDto;
 import it.unicam.cs.ids.loyaltyplatform.exception.ResourceNotFoundException;
 import it.unicam.cs.ids.loyaltyplatform.model.Azienda;
 import it.unicam.cs.ids.loyaltyplatform.model.ProgrammaAPunti;
+import it.unicam.cs.ids.loyaltyplatform.programmaFedelta.ProgrammaFedelta;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,10 +23,13 @@ import java.util.Optional;
 public class ProgrammaAPuntiService {
     private final ProgrammaAPuntiRepository programmaAPuntiRepository;
 
+    private final ProgrammaFedeltaRepository repo;
+
 
     @Autowired
-    public ProgrammaAPuntiService(ProgrammaAPuntiRepository programmaAPuntiRepository) {
+    public ProgrammaAPuntiService(ProgrammaAPuntiRepository programmaAPuntiRepository, ProgrammaFedeltaRepository repo) {
         this.programmaAPuntiRepository = programmaAPuntiRepository;
+        this.repo = repo;
     }
 
     /**
@@ -43,10 +49,12 @@ public class ProgrammaAPuntiService {
      */
 
     @PostMapping
-    public ProgrammaAPunti addNewProgrammaAPunti(@Validated ProgrammaAPuntiDTO programmaAPuntiDto, Azienda azienda) {
-
-        ProgrammaAPunti programmaAPunti = new ProgrammaAPunti(programmaAPuntiDto, azienda);
-        return programmaAPuntiRepository.save(programmaAPunti);
+    public ProgrammaFedelta addNewProgrammaAPunti(@Validated ProgrammaFedeltaDto programmaAPuntiDto, Azienda azienda) {
+        if(programmaAPuntiDto instanceof ProgrammaAPuntiDTO progPunti){
+            ProgrammaAPunti programmaAPunti = new ProgrammaAPunti(progPunti, azienda);
+            return repo.save(programmaAPunti);
+        }
+        else return null;
     }
 
     /**

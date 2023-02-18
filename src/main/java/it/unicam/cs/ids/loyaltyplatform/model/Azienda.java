@@ -1,6 +1,7 @@
 package it.unicam.cs.ids.loyaltyplatform.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import it.unicam.cs.ids.loyaltyplatform.programmaFedelta.ProgrammaFedelta;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;

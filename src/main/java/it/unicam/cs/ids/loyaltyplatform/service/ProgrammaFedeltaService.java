@@ -1,7 +1,7 @@
 package it.unicam.cs.ids.loyaltyplatform.service;
 
 import it.unicam.cs.ids.loyaltyplatform.dao.ProgrammaFedeltaRepository;
-import it.unicam.cs.ids.loyaltyplatform.model.ProgrammaFedelta;
+import it.unicam.cs.ids.loyaltyplatform.programmaFedelta.ProgrammaFedelta;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

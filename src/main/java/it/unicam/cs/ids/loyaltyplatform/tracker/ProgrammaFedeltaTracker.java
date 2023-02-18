@@ -2,7 +2,7 @@ package it.unicam.cs.ids.loyaltyplatform.tracker;
 
 import it.unicam.cs.ids.loyaltyplatform.model.Cliente;
 import it.unicam.cs.ids.loyaltyplatform.model.ProgrammaAPunti;
-import it.unicam.cs.ids.loyaltyplatform.model.ProgrammaFedelta;
+import it.unicam.cs.ids.loyaltyplatform.programmaFedelta.ProgrammaFedelta;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
