@@ -2,6 +2,7 @@ package it.unicam.cs.ids.loyaltyplatform.sottoscrizione;
 
 import it.unicam.cs.ids.loyaltyplatform.cliente.Cliente;
 import it.unicam.cs.ids.loyaltyplatform.programmaFedelta.ProgrammaAPunti;
+import it.unicam.cs.ids.loyaltyplatform.programmaFedelta.ProgrammaFedelta;
 import jakarta.persistence.Column;
 import jakarta.persistence.DiscriminatorValue;
 import jakarta.persistence.Entity;
@@ -12,8 +13,8 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString
-@Entity(name = "ProgrammaAPuntiTracker")
-@DiscriminatorValue("SottoscrizioneDto")
+@Entity(name = "SottoscrizioneProgrammaPunti")
+@DiscriminatorValue("SottoscrizioneProgrammaPunti")
 public class SottoscrizioneProgrammaAPunti extends Sottoscrizione {
     @Column(name = "punti_accumulati", nullable = false)
     private int puntiAccumulati;
@@ -21,8 +22,7 @@ public class SottoscrizioneProgrammaAPunti extends Sottoscrizione {
     /**
      * Costruttore di default
      */
-    public SottoscrizioneProgrammaAPunti() {
-    }
+    public SottoscrizioneProgrammaAPunti() {}
 
     /**
      * Costruttore che prendi come parametri tutti gli attributi, tolto l'id del tracker

@@ -5,10 +5,8 @@ import it.unicam.cs.ids.loyaltyplatform.exception.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -28,10 +26,10 @@ public class SottoscrizioneController {
     }
 
     @PostMapping
-    public ResponseEntity<Sottoscrizione> registraNuovaSottoscrizione(SottoscrizioneDto dto) {
+    public ResponseEntity<Sottoscrizione> registraNuovaSottoscrizione(@RequestBody @Validated SottoscrizioneDto dto) {
         try {
-            sottoscrizioneService.addNewSottoscrizione(dto.getClienteId(), dto.getProgrammaId());
-            return new ResponseEntity<>(HttpStatus.CREATED);
+            Sottoscrizione newSub = sottoscrizioneService.addNewSottoscrizione(dto.getClienteId(), dto.getProgrammaId());
+            return new ResponseEntity<>(newSub,HttpStatus.CREATED);
         } catch (ResourceNotFoundException e) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }

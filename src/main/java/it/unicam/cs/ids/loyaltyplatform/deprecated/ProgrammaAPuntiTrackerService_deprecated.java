@@ -47,7 +47,7 @@ public class ProgrammaAPuntiTrackerService_deprecated {
         Cliente actualCliente = optionalCliente.get();
         ProgrammaAPunti actualProgramma = optionalProgramma.get();
 
-        SottoscrizioneProgrammaAPunti tracker = new SottoscrizioneProgrammaAPunti();
+        SottoscrizioneProgrammaAPunti tracker = new SottoscrizioneProgrammaAPunti(cliente,programmaAPunti);
         tracker.setCliente(actualCliente);
         tracker.setProgramma(actualProgramma);
         actualCliente.getProgrammiFedelta().add(tracker);

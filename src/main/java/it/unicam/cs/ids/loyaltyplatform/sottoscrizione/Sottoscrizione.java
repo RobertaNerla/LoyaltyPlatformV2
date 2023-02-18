@@ -11,25 +11,24 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString
-@Entity(name = "ProgrammaFedeltaTracker")
+@Entity(name = "Sottoscrizione")
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name = "tipo_tracker", discriminatorType = DiscriminatorType.STRING)
-@Table(name = "programma_tracker",
-        uniqueConstraints = {@UniqueConstraint(columnNames = {"cliente_id", "programma_id"})})
+@Table(name = "sottoscrizione")
 public class Sottoscrizione {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "tracker_id",
+    @Column(name = "sottoscrizione_id",
             nullable = false,
             updatable = false)
-    private Long trackerId;
+    private Long sottoscrizioneId;
 
     @ManyToOne()
-    @JoinColumn(name = "cliente_id", referencedColumnName = "cliente_id", foreignKey = @ForeignKey(name = "fk_cliente"))
+    @JoinColumn(name = "cliente_id", referencedColumnName = "cliente_id")
     private Cliente cliente;
     
     @ManyToOne()
-    @JoinColumn(name = "programma_id", referencedColumnName = "programma_id", foreignKey = @ForeignKey(name = "fk_programma_fedelta"))
+    @JoinColumn(name = "programma_id", referencedColumnName = "programma_id")
     private ProgrammaFedelta programma;
 
     /**
@@ -45,8 +44,8 @@ public class Sottoscrizione {
      * @param cliente   cliente che sottoscrive il programma fedeltà
      * @param programma programma a cui il cliente si sottoscrive
      */
-    public Sottoscrizione(Long trackerId, Cliente cliente, ProgrammaAPunti programma) {
-        this.trackerId = trackerId;
+    public Sottoscrizione(Long trackerId, Cliente cliente, ProgrammaFedelta programma) {
+        this.sottoscrizioneId = trackerId;
         this.cliente = cliente;
         this.programma = programma;
     }
@@ -57,7 +56,7 @@ public class Sottoscrizione {
      * @param cliente   cliente che sottocrive il programma fedeltà
      * @param programma programma a cui il cliente si sottoscrive
      */
-    public Sottoscrizione(Cliente cliente, ProgrammaAPunti programma) {
+    public Sottoscrizione(Cliente cliente, ProgrammaFedelta programma) {
         this.cliente = cliente;
         this.programma = programma;
     }
