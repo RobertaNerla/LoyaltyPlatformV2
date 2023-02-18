@@ -1,6 +1,7 @@
-package it.unicam.cs.ids.loyaltyplatform.model;
+package it.unicam.cs.ids.loyaltyplatform.programmaFedelta;
 
 import it.unicam.cs.ids.loyaltyplatform.dto.ProgrammaAPuntiDTO;
+import it.unicam.cs.ids.loyaltyplatform.model.Azienda;
 import it.unicam.cs.ids.loyaltyplatform.programmaFedelta.ProgrammaFedelta;
 import jakarta.persistence.Column;
 import jakarta.persistence.DiscriminatorValue;

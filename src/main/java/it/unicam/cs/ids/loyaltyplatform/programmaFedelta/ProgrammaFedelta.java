@@ -2,7 +2,7 @@ package it.unicam.cs.ids.loyaltyplatform.programmaFedelta;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import it.unicam.cs.ids.loyaltyplatform.model.Azienda;
-import it.unicam.cs.ids.loyaltyplatform.tracker.ProgrammaFedeltaTracker;
+import it.unicam.cs.ids.loyaltyplatform.sottoscrizione.Sottoscrizione;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -39,7 +39,7 @@ public class ProgrammaFedelta {
     @JsonIgnore
     @OneToMany(mappedBy = "programma", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @ToString.Exclude
-    private List<ProgrammaFedeltaTracker> tracker;
+    private List<Sottoscrizione> tracker;
 
     /**
      * Costruttore di default del programma fedeltà

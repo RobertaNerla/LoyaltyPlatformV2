@@ -1,9 +1,7 @@
 package it.unicam.cs.ids.loyaltyplatform.dto;
 
-import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeName;
-import it.unicam.cs.ids.loyaltyplatform.model.Azienda;
-import it.unicam.cs.ids.loyaltyplatform.model.ProgrammaAPunti;
+import it.unicam.cs.ids.loyaltyplatform.programmaFedelta.ProgrammaAPunti;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;

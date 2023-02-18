@@ -1,10 +1,10 @@
 package it.unicam.cs.ids.loyaltyplatform.service;
 
-import it.unicam.cs.ids.loyaltyplatform.dao.ProgrammaAPuntiTrackerRepository;
+import it.unicam.cs.ids.loyaltyplatform.dao.SottoscrizioneRepository;
 import it.unicam.cs.ids.loyaltyplatform.exception.ResourceNotFoundException;
 import it.unicam.cs.ids.loyaltyplatform.model.Cliente;
-import it.unicam.cs.ids.loyaltyplatform.model.ProgrammaAPunti;
-import it.unicam.cs.ids.loyaltyplatform.tracker.ProgrammaAPuntiTracker;
+import it.unicam.cs.ids.loyaltyplatform.programmaFedelta.ProgrammaAPunti;
+import it.unicam.cs.ids.loyaltyplatform.sottoscrizione.SottoscrizioneProgrammaAPunti;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,12 +13,12 @@ import java.util.Optional;
 @Service
 public class ProgrammaAPuntiTrackerService {
 
-    ProgrammaAPuntiTrackerRepository programmaAPuntiTrackerRepository;
+    SottoscrizioneRepository programmaAPuntiTrackerRepository;
     ProgrammaAPuntiService programmaAPuntiService;
     ClienteService clienteService;
 
     @Autowired
-    public ProgrammaAPuntiTrackerService(ProgrammaAPuntiTrackerRepository programmaAPuntiTrackerRepository,
+    public ProgrammaAPuntiTrackerService(SottoscrizioneRepository programmaAPuntiTrackerRepository,
                                          ProgrammaAPuntiService programmaAPuntiService,
                                          ClienteService clienteService) {
         this.programmaAPuntiTrackerRepository = programmaAPuntiTrackerRepository;
@@ -33,7 +33,7 @@ public class ProgrammaAPuntiTrackerService {
      * @param programmaAPunti programma che il cliente sottoscrive
      * @return il tracker creato con i
      */
-    public ProgrammaAPuntiTracker addNewProgrammaAPuntiTracker(Cliente cliente, ProgrammaAPunti programmaAPunti) {
+    public SottoscrizioneProgrammaAPunti addNewProgrammaAPuntiTracker(Cliente cliente, ProgrammaAPunti programmaAPunti) {
         Optional<Cliente> optionalCliente = clienteService.getClienteById(cliente.getClienteId());
         if (!optionalCliente.isPresent()) {
             throw new ResourceNotFoundException("Cliente with id " + cliente.getClienteId() + " could not be found");
@@ -46,7 +46,7 @@ public class ProgrammaAPuntiTrackerService {
         Cliente actualCliente = optionalCliente.get();
         ProgrammaAPunti actualProgramma = optionalProgramma.get();
 
-        ProgrammaAPuntiTracker tracker = new ProgrammaAPuntiTracker();
+        SottoscrizioneProgrammaAPunti tracker = new SottoscrizioneProgrammaAPunti();
         tracker.setCliente(actualCliente);
         tracker.setProgramma(actualProgramma);
         actualCliente.getProgrammiFedelta().add(tracker);

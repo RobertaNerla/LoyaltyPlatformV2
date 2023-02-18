@@ -1,7 +1,7 @@
 package it.unicam.cs.ids.loyaltyplatform.dto;
 
 import it.unicam.cs.ids.loyaltyplatform.model.Cliente;
-import it.unicam.cs.ids.loyaltyplatform.model.ProgrammaAPunti;
+import it.unicam.cs.ids.loyaltyplatform.programmaFedelta.ProgrammaAPunti;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -19,7 +19,7 @@ public class SottoscrizioneProgrammaAPuntiDTO {
     private Cliente cliente;
 
     /**
-     * Costruttore che crea un nuovo dto per il caso d'uso della SottoscrizioneProgrammaAPunti
+     * Costruttore che crea un nuovo dto per il caso d'uso della SottoscrizioneDto
      *
      * @param programma programma a punti a cui ci si sottoscrive
      * @param cliente   cliente che si sottoscrive

@@ -3,7 +3,7 @@ package it.unicam.cs.ids.loyaltyplatform.controller;
 import it.unicam.cs.ids.loyaltyplatform.dto.ProgrammaAPuntiDTO;
 import it.unicam.cs.ids.loyaltyplatform.dto.ProgrammaFedeltaDto;
 import it.unicam.cs.ids.loyaltyplatform.model.Azienda;
-import it.unicam.cs.ids.loyaltyplatform.model.ProgrammaAPunti;
+import it.unicam.cs.ids.loyaltyplatform.programmaFedelta.ProgrammaAPunti;
 import it.unicam.cs.ids.loyaltyplatform.programmaFedelta.ProgrammaFedelta;
 import it.unicam.cs.ids.loyaltyplatform.service.AziendaService;
 import it.unicam.cs.ids.loyaltyplatform.service.ProgrammaAPuntiService;

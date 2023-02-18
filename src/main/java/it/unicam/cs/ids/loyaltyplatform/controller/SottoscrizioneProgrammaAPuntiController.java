@@ -3,7 +3,7 @@ package it.unicam.cs.ids.loyaltyplatform.controller;
 import it.unicam.cs.ids.loyaltyplatform.dto.SottoscrizioneProgrammaAPuntiDTO;
 import it.unicam.cs.ids.loyaltyplatform.exception.ResourceNotFoundException;
 import it.unicam.cs.ids.loyaltyplatform.service.ProgrammaAPuntiTrackerService;
-import it.unicam.cs.ids.loyaltyplatform.tracker.ProgrammaAPuntiTracker;
+import it.unicam.cs.ids.loyaltyplatform.sottoscrizione.SottoscrizioneProgrammaAPunti;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -30,10 +30,10 @@ public class SottoscrizioneProgrammaAPuntiController {
      * @return restituisce l'esito dell'operazione sotto forma di una response entity
      */
     @PostMapping
-    public ResponseEntity<ProgrammaAPuntiTracker> sottoscriviProgrammaAPunti(
+    public ResponseEntity<SottoscrizioneProgrammaAPunti> sottoscriviProgrammaAPunti(
             @RequestBody @Validated SottoscrizioneProgrammaAPuntiDTO dto) {
         try {
-            ProgrammaAPuntiTracker programmaAPuntiTracker = programmaAPuntiTrackerService.addNewProgrammaAPuntiTracker(dto.getCliente(), dto.getProgramma());
+            SottoscrizioneProgrammaAPunti programmaAPuntiTracker = programmaAPuntiTrackerService.addNewProgrammaAPuntiTracker(dto.getCliente(), dto.getProgramma());
             return new ResponseEntity<>(programmaAPuntiTracker, HttpStatus.CREATED);
         } catch (ResourceNotFoundException e) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);

@@ -6,7 +6,7 @@ import it.unicam.cs.ids.loyaltyplatform.dto.ProgrammaAPuntiDTO;
 import it.unicam.cs.ids.loyaltyplatform.dto.ProgrammaFedeltaDto;
 import it.unicam.cs.ids.loyaltyplatform.exception.ResourceNotFoundException;
 import it.unicam.cs.ids.loyaltyplatform.model.Azienda;
-import it.unicam.cs.ids.loyaltyplatform.model.ProgrammaAPunti;
+import it.unicam.cs.ids.loyaltyplatform.programmaFedelta.ProgrammaAPunti;
 import it.unicam.cs.ids.loyaltyplatform.programmaFedelta.ProgrammaFedelta;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;

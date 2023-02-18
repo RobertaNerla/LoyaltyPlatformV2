@@ -1,7 +1,7 @@
-package it.unicam.cs.ids.loyaltyplatform.tracker;
+package it.unicam.cs.ids.loyaltyplatform.sottoscrizione;
 
 import it.unicam.cs.ids.loyaltyplatform.model.Cliente;
-import it.unicam.cs.ids.loyaltyplatform.model.ProgrammaAPunti;
+import it.unicam.cs.ids.loyaltyplatform.programmaFedelta.ProgrammaAPunti;
 import jakarta.persistence.Column;
 import jakarta.persistence.DiscriminatorValue;
 import jakarta.persistence.Entity;
@@ -13,15 +13,15 @@ import lombok.ToString;
 @Setter
 @ToString
 @Entity(name = "ProgrammaAPuntiTracker")
-@DiscriminatorValue("ProgrammaAPuntiTracker")
-public class ProgrammaAPuntiTracker extends ProgrammaFedeltaTracker {
+@DiscriminatorValue("SottoscrizioneDto")
+public class SottoscrizioneProgrammaAPunti extends Sottoscrizione {
     @Column(name = "punti_accumulati", nullable = false)
     private int puntiAccumulati;
 
     /**
      * Costruttore di default
      */
-    public ProgrammaAPuntiTracker() {
+    public SottoscrizioneProgrammaAPunti() {
     }
 
     /**
@@ -31,7 +31,7 @@ public class ProgrammaAPuntiTracker extends ProgrammaFedeltaTracker {
      * @param programma       programma sottoscritto dal cliente
      * @param puntiAccumulati punti che il cliente accumula
      */
-    public ProgrammaAPuntiTracker(Cliente cliente, ProgrammaAPunti programma, int puntiAccumulati) {
+    public SottoscrizioneProgrammaAPunti(Cliente cliente, ProgrammaAPunti programma, int puntiAccumulati) {
         super(cliente, programma);
         this.puntiAccumulati = puntiAccumulati;
     }
@@ -42,7 +42,7 @@ public class ProgrammaAPuntiTracker extends ProgrammaFedeltaTracker {
      * @param cliente   cliente
      * @param programma programma a cui il cliente si sottoscrive
      */
-    public ProgrammaAPuntiTracker(Cliente cliente, ProgrammaAPunti programma) {
+    public SottoscrizioneProgrammaAPunti(Cliente cliente, ProgrammaAPunti programma) {
         super(cliente, programma);
         this.puntiAccumulati = 0;
     }

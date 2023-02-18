@@ -76,6 +76,7 @@ public class ProgrammaFedeltaControllerr {
         Optional<Azienda> azienda = aziendaService.getAziendaById(dto.getAziendaId());
         if(azienda.isPresent()){
             ProgrammaFedelta programma = programmaFedeltaService.addNewProgrammaFedelta(dto,azienda.get(), tipo);
+            //TODO: azienda.addProgrammaToAzienda(programma)?
             return new ResponseEntity<>(HttpStatus.CREATED);
         } else {
             return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);

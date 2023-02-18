@@ -1,7 +1,7 @@
-package it.unicam.cs.ids.loyaltyplatform.tracker;
+package it.unicam.cs.ids.loyaltyplatform.sottoscrizione;
 
 import it.unicam.cs.ids.loyaltyplatform.model.Cliente;
-import it.unicam.cs.ids.loyaltyplatform.model.ProgrammaAPunti;
+import it.unicam.cs.ids.loyaltyplatform.programmaFedelta.ProgrammaAPunti;
 import it.unicam.cs.ids.loyaltyplatform.programmaFedelta.ProgrammaFedelta;
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -16,7 +16,7 @@ import lombok.ToString;
 @DiscriminatorColumn(name = "tipo_tracker", discriminatorType = DiscriminatorType.STRING)
 @Table(name = "programma_tracker",
         uniqueConstraints = {@UniqueConstraint(columnNames = {"cliente_id", "programma_id"})})
-public class ProgrammaFedeltaTracker {
+public class Sottoscrizione {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "tracker_id",
@@ -35,7 +35,7 @@ public class ProgrammaFedeltaTracker {
     /**
      * Costruttore di default del generico tracker di programmi fedeltà
      */
-    public ProgrammaFedeltaTracker() {
+    public Sottoscrizione() {
     }
 
     /**
@@ -45,7 +45,7 @@ public class ProgrammaFedeltaTracker {
      * @param cliente   cliente che sottoscrive il programma fedeltà
      * @param programma programma a cui il cliente si sottoscrive
      */
-    public ProgrammaFedeltaTracker(Long trackerId, Cliente cliente, ProgrammaAPunti programma) {
+    public Sottoscrizione(Long trackerId, Cliente cliente, ProgrammaAPunti programma) {
         this.trackerId = trackerId;
         this.cliente = cliente;
         this.programma = programma;
@@ -57,7 +57,7 @@ public class ProgrammaFedeltaTracker {
      * @param cliente   cliente che sottocrive il programma fedeltà
      * @param programma programma a cui il cliente si sottoscrive
      */
-    public ProgrammaFedeltaTracker(Cliente cliente, ProgrammaAPunti programma) {
+    public Sottoscrizione(Cliente cliente, ProgrammaAPunti programma) {
         this.cliente = cliente;
         this.programma = programma;
     }

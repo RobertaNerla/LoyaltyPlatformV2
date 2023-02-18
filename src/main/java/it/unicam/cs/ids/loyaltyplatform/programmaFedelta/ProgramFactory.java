@@ -3,7 +3,6 @@ package it.unicam.cs.ids.loyaltyplatform.programmaFedelta;
 import it.unicam.cs.ids.loyaltyplatform.dto.ProgrammaAPuntiDTO;
 import it.unicam.cs.ids.loyaltyplatform.dto.ProgrammaFedeltaDto;
 import it.unicam.cs.ids.loyaltyplatform.model.Azienda;
-import it.unicam.cs.ids.loyaltyplatform.model.ProgrammaAPunti;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

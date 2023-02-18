@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ProgrammaFedeltaServicee {
@@ -31,5 +32,9 @@ public class ProgrammaFedeltaServicee {
     public ProgrammaFedelta addNewProgrammaFedelta(@Validated ProgrammaFedeltaDto programma, Azienda azienda,TipologiaProgramma tipo){
         ProgrammaFedelta newProgram = programFactory.create(programma, azienda, tipo);
         return programmaFedeltaRepository.save(newProgram);
+    }
+
+    public Optional<ProgrammaFedelta> getProgrammaById(Long programId){
+        return programmaFedeltaRepository.findById(programId);
     }
 }

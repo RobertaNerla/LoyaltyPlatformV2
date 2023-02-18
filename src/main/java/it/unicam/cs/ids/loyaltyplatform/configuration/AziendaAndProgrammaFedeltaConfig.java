@@ -3,7 +3,7 @@ package it.unicam.cs.ids.loyaltyplatform.configuration;
 import it.unicam.cs.ids.loyaltyplatform.dao.AziendaRepository;
 import it.unicam.cs.ids.loyaltyplatform.dao.ProgrammaFedeltaRepository;
 import it.unicam.cs.ids.loyaltyplatform.model.Azienda;
-import it.unicam.cs.ids.loyaltyplatform.model.ProgrammaAPunti;
+import it.unicam.cs.ids.loyaltyplatform.programmaFedelta.ProgrammaAPunti;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
