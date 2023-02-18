@@ -74,4 +74,44 @@ public class Azienda {
         this.pIva = pIva;
         programmiFedelta = new ArrayList<>();
     }
+
+    public Long getAziendaId() {
+        return aziendaId;
+    }
+
+    public void setAziendaId(Long aziendaId) {
+        this.aziendaId = aziendaId;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public String getIndirizzo() {
+        return indirizzo;
+    }
+
+    public void setIndirizzo(String indirizzo) {
+        this.indirizzo = indirizzo;
+    }
+
+    public String getpIva() {
+        return pIva;
+    }
+
+    public void setpIva(String pIva) {
+        this.pIva = pIva;
+    }
+
+    public List<ProgrammaFedelta> getProgrammiFedelta() {
+        return programmiFedelta;
+    }
+
+    public void setProgrammiFedelta(List<ProgrammaFedelta> programmiFedelta) {
+        this.programmiFedelta = programmiFedelta;
+    }
 }

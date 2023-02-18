@@ -36,8 +36,8 @@ public class AziendaService {
      * @param azienda azienda che si vuole aggiungere nel database
      */
     public void addNewAzienda(Azienda azienda) {
-        Optional<Azienda> aziendaOptional = aziendaRepository.findByNomeAndIndirizzo
-                (azienda.getNome(), azienda.getIndirizzo());
+
+        Optional<Azienda> aziendaOptional = aziendaRepository.findByNomeAndIndirizzo(azienda.getNome(), azienda.getIndirizzo());
 
         if (aziendaOptional.isPresent()) {
             throw new IllegalStateException("Azienda gia' presente!");
