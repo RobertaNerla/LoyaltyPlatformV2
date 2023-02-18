@@ -47,6 +47,30 @@ public class ProgrammaFedeltaControllerr {
         return this.programmaFedeltaService.getProgrammiFedelta();
     }
 
+    /**
+     *
+     * Questo metodo serve per poter aggiungere un programma fedelta.
+     *
+     * @param tipo Specifica il tipo del programma fedelta che si vuole aggiungere.
+     *             L'utente al click sul template scelto per il suo nuovo programma fedeltà
+     *             viene indirizzato su questo endpoint.
+     *             Se l'utente sceglierà il template per il programma a punti allora il path su cui effettuerà
+     *             la richiesta sarà: api/programma/new/punti
+     * @param dto dati inseriti nel Body della richiesta.
+     * @return Risposta Http.
+     *
+     * COME TESTARLO:
+     * Qui sotto è riportato un esempio di Body per la richiesta POST dell'aggiunta di un programma.
+     * Ovviamente l'id dell'azienda va modificato in base a quello presente nel DB.
+     * Per evitare errori, eseguire la GET sopra per scovare un aziendaId esistente.
+     *
+     *  {
+     *     "tipo" : "punti",
+     *     "aziendaId":"652",
+     *     "name":"prova8",
+     *     "pointsEur" : "4"
+     *  }
+     */
     @PostMapping(path ="/new/{tipo_programma}")
     public ResponseEntity<ProgrammaFedelta> registraNuovoProgrammaFedelta(@PathVariable("tipo_programma") TipologiaProgramma tipo,  @RequestBody @Validated ProgrammaFedeltaDto dto){
         Optional<Azienda> azienda = aziendaService.getAziendaById(dto.getAziendaId());

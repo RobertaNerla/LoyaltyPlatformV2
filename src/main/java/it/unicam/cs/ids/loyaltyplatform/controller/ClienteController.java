@@ -34,6 +34,17 @@ public class ClienteController {
      * Esegue una chiamata POST che salva un nuovo cliente nel database
      *
      * @param cliente il cliente che verrà inserito nel database
+     *
+     * Esempio di body per la richiesta:
+     * {
+     *     "nome" : "Pinco",
+     *     "cognome" : "Pallino",
+     *     "numCellulare" : "12345678910",
+     *     "email" : "pinco.pallino@gmail.com",
+     *     "indirizzo" : "Via Pallini 42",
+     *     "dataDiNascita" : "2000-01-01",
+     *     "codiceFiscale" : "PLLPPT0045V42F"
+     *  }
      */
     @PostMapping(consumes = "application/json", produces = "application/json")
     public void registraNuovoCliente(@RequestBody Cliente cliente) {
