@@ -30,16 +30,15 @@ public class ProgrammaFedeltaService {
         return programmaFedeltaRepository.findAll();
     }
 
-    public void addNewProgrammaFedelta(ProgrammaFedeltaDto programmaDto, TipologiaProgramma tipo) {
+    public ProgrammaFedelta addNewProgrammaFedelta(ProgrammaFedeltaDto programmaDto, TipologiaProgramma tipo) throws ResourceNotFoundException{
         Optional<Azienda> aziendaOptional = aziendaService.getAziendaById(programmaDto.getAziendaId());
         if (aziendaOptional.isEmpty()) {
             throw new ResourceNotFoundException("Azienda con id " + programmaDto.getAziendaId() +
                     "non trovata!");
         }
         //TODO: azienda.addProgrammaToAzienda(programma)?
-
         ProgrammaFedelta newProgram = programFactory.create(programmaDto, aziendaOptional.get(), tipo);
-        programmaFedeltaRepository.save(newProgram);
+        return programmaFedeltaRepository.save(newProgram);
     }
 
     public Optional<ProgrammaFedelta> getProgrammaById(Long programId) {

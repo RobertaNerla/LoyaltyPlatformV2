@@ -3,6 +3,8 @@ package it.unicam.cs.ids.loyaltyplatform.azienda;
 import it.unicam.cs.ids.loyaltyplatform.azienda.Azienda;
 import it.unicam.cs.ids.loyaltyplatform.azienda.AziendaService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -36,8 +38,9 @@ public class AziendaController {
      * @param azienda da inserire nel databse
      */
     @PostMapping(consumes = "application/json", produces = "application/json")
-    public void registraNuovaAzienda(@RequestBody Azienda azienda) {
-        aziendaService.addNewAzienda(azienda);
+    public ResponseEntity<Azienda> registraNuovaAzienda(@RequestBody Azienda azienda) {
+        Azienda newAzienda = aziendaService.addNewAzienda(azienda);
+        return new ResponseEntity<>(newAzienda, HttpStatus.CREATED);
     }
 
     /**

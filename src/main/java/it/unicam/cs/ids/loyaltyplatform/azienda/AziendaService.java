@@ -33,7 +33,7 @@ public class AziendaService {
      *
      * @param azienda azienda che si vuole aggiungere nel database
      */
-    public void addNewAzienda(Azienda azienda) {
+    public Azienda addNewAzienda(Azienda azienda) {
 
         Optional<Azienda> aziendaOptional = aziendaRepository.findByNomeAndIndirizzo(azienda.getNome(), azienda.getIndirizzo());
 
@@ -41,7 +41,7 @@ public class AziendaService {
             throw new ResourceAlreadyExistsException("Azienda con nome " + azienda.getAziendaId() + " e indirizzo " +
                     azienda.getIndirizzo() + " gia' presente!");
         }
-        aziendaRepository.save(azienda);
+        return aziendaRepository.save(azienda);
     }
 
     public void addProgrammaToAzienda(Long aziendaId, ProgrammaFedelta programmaFedelta) {

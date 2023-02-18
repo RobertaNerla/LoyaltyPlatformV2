@@ -1,6 +1,8 @@
 package it.unicam.cs.ids.loyaltyplatform.cliente;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -45,8 +47,14 @@ public class ClienteController {
      *  }
      */
     @PostMapping(consumes = "application/json", produces = "application/json")
-    public void registraNuovoCliente(@RequestBody Cliente cliente) {
-        clienteService.addNewCliente(cliente);
+    public ResponseEntity<Cliente> registraNuovoCliente(@RequestBody Cliente cliente) {
+        try {
+            Cliente newCliente = clienteService.addNewCliente(cliente);
+            return new ResponseEntity<>(newCliente, HttpStatus.CREATED);
+        } catch (IllegalStateException e){
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+
     }
 
     /**

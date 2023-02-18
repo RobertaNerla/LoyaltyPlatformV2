@@ -35,7 +35,7 @@ public class ClienteService {
      *
      * @param cliente cliente che si vuole aggiungere nel database
      */
-    public void addNewCliente(Cliente cliente) {
+    public Cliente addNewCliente(Cliente cliente) throws IllegalStateException {
         Optional<Cliente> clientetByEmailOptional = clienteRepository.findClienteByEmail(cliente.getEmail());
         if (clientetByEmailOptional.isPresent()) {
             throw new IllegalStateException("Email gia' in uso");
@@ -46,7 +46,7 @@ public class ClienteService {
             throw new IllegalStateException("Numero di cellulare gia' in uso");
         }
 
-        clienteRepository.save(cliente);
+        return clienteRepository.save(cliente);
     }
 
     /**

@@ -66,8 +66,8 @@ public class ProgrammaFedeltaController {
     public ResponseEntity<ProgrammaFedelta> registraNuovoProgrammaFedelta(
             @PathVariable("tipo_programma") TipologiaProgramma tipo, @RequestBody @Validated ProgrammaFedeltaDto dto) {
         try {
-            programmaFedeltaService.addNewProgrammaFedelta(dto, tipo);
-            return new ResponseEntity<>(HttpStatus.CREATED);
+            ProgrammaFedelta programma = programmaFedeltaService.addNewProgrammaFedelta(dto, tipo);
+            return new ResponseEntity<>(programma,HttpStatus.CREATED);
         } catch (ResourceNotFoundException e) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
