@@ -1,7 +1,6 @@
 package it.unicam.cs.ids.loyaltyplatform.sottoscrizione;
 
 import it.unicam.cs.ids.loyaltyplatform.cliente.Cliente;
-import it.unicam.cs.ids.loyaltyplatform.programmaFedelta.ProgrammaAPunti;
 import it.unicam.cs.ids.loyaltyplatform.programmaFedelta.ProgrammaFedelta;
 import jakarta.persistence.*;
 import lombok.Getter;
