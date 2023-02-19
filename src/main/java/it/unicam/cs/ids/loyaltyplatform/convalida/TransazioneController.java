@@ -1,7 +1,5 @@
 package it.unicam.cs.ids.loyaltyplatform.convalida;
 
-import it.unicam.cs.ids.loyaltyplatform.azienda.AziendaService;
-import it.unicam.cs.ids.loyaltyplatform.cliente.ClienteService;
 import it.unicam.cs.ids.loyaltyplatform.dto.TransazioneDto;
 import it.unicam.cs.ids.loyaltyplatform.exception.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,9 +16,12 @@ public class TransazioneController {
 
     private final TransazioneService transazioneService;
 
+    private final GestoreConvalida gestoreConvalida;
+
     @Autowired
-    public TransazioneController(TransazioneService transazioneService) {
+    public TransazioneController(TransazioneService transazioneService, GestoreConvalida gestoreConvalida) {
         this.transazioneService = transazioneService;
+        this.gestoreConvalida = gestoreConvalida;
     }
     //TODO: questa operazione può farla solo l'amministratore della piattaforma
     @GetMapping
@@ -40,11 +41,11 @@ public class TransazioneController {
         return null;
     }
 
-    @PostMapping
-    public ResponseEntity<Transazione> registraNuovaTransazione(@RequestBody @Validated TransazioneDto dto){
+    @PostMapping(path = "/{programmaId}")
+    public ResponseEntity<Transazione> registraNuovaTransazione(@PathVariable Long programmaId, @RequestBody @Validated TransazioneDto dto){
         try{
-            Transazione transazione = transazioneService.addNewTransazione(dto);
-            return new ResponseEntity<>(transazione, HttpStatus.CREATED);
+            gestoreConvalida.convalidaTransazione(programmaId,dto);
+            return new ResponseEntity<>(HttpStatus.OK);
         } catch (ResourceNotFoundException e) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }

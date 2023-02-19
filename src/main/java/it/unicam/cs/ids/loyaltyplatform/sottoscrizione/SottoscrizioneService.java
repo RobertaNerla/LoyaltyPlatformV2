@@ -20,6 +20,10 @@ public class SottoscrizioneService {
     private final ProgrammaFedeltaService programmaFedeltaService;
     private final SubFactory subFactory;
 
+    public SottoscrizioneRepository getSottoscrizioneRepository() {
+        return sottoscrizioneRepository;
+    }
+
     @Autowired
     public SottoscrizioneService(SottoscrizioneRepository sottoscrizioneRepository,
                                  ClienteService clienteService,
@@ -47,7 +51,7 @@ public class SottoscrizioneService {
         return sottoscrizioneRepository.save(newSub);
     }
 
-    private Cliente getClienteById(Long clienteId) {
+    private Cliente getClienteById(Long clienteId) throws ResourceNotFoundException {
         Optional<Cliente> optionalCliente = clienteService.getClienteById(clienteId);
         if (optionalCliente.isEmpty()) {
             throw new ResourceNotFoundException("Cliente con id " + clienteId + "non esiste!");
@@ -56,7 +60,7 @@ public class SottoscrizioneService {
         }
     }
 
-    private ProgrammaFedelta getProgrammaById(Long programmaId) {
+    private ProgrammaFedelta getProgrammaById(Long programmaId) throws  ResourceNotFoundException{
         Optional<ProgrammaFedelta> optionalProgramma = programmaFedeltaService.getProgrammaById(programmaId);
         if (optionalProgramma.isEmpty()) {
             throw new ResourceNotFoundException("Programma fedeltà con id " + programmaId + "non esiste!");
@@ -72,4 +76,14 @@ public class SottoscrizioneService {
     private void incrementaNumClienti(ProgrammaFedelta programma) {
         programmaFedeltaService.incrementaNumClienti(programma);
     }
+
+    public Sottoscrizione getSottoscrizioneByProgramIdAndClientId(Long programId, Long clienteId) throws ResourceNotFoundException{
+        Optional<Sottoscrizione> optionalSub = sottoscrizioneRepository.findSottoscrizioneByClienteAndProgramma(getClienteById(clienteId),getProgrammaById(programId));
+        if(optionalSub.isEmpty()){
+            throw new ResourceNotFoundException("Il cliente " + clienteId +" non è sottoscritto al programma " + programId+".");
+        } else {
+            return optionalSub.get();
+        }
+    }
+
 }

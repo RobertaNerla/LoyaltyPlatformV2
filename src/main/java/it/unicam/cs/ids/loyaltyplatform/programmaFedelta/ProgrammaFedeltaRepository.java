@@ -17,6 +17,7 @@ public interface ProgrammaFedeltaRepository extends JpaRepository<ProgrammaFedel
      */
     Optional<ProgrammaFedelta> findProgrammaFedeltaByAzienda(Azienda azienda);
 
+
     /**
      * Metodo corrispondente a una query che cerca un programma a punti con un certo nome.
      *

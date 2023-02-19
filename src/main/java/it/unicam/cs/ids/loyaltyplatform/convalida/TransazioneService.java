@@ -38,20 +38,9 @@ public class TransazioneService {
     public Transazione addNewTransazione(TransazioneDto dto) throws ResourceNotFoundException {
         Azienda currentAzienda = getAziendaById(dto.getAziendaId());
         Cliente currentCliente = getClienteById(dto.getClienteId());
-        if(checkIfIsClienteOfAzienda(currentCliente, currentAzienda)){
-            Date currentDate = getCurrentDate();
-            Transazione newTransazione= new Transazione(currentCliente, currentAzienda, dto.getImporto(), currentDate);
-            return transazioneRepository.save(newTransazione);
-        } else {
-            //TODO: forse qui andrebbe creata una nuova eccezione con HttpStatus.UNAUTHORIZED
-            throw new ResourceNotFoundException("Cliente non è sottoscritto a nessun programma fedeltà dell'azienda");
-        }
-
-    }
-
-    private boolean checkIfIsClienteOfAzienda(Cliente currentCliente, Azienda currentAzienda) {
-        //TODO: completare
-        return true;
+        Date currentDate = getCurrentDate();
+        Transazione newTransazione= new Transazione(currentCliente, currentAzienda, dto.getImporto(), currentDate);
+        return transazioneRepository.save(newTransazione);
     }
 
     private Cliente getClienteById(Long clienteId) {
