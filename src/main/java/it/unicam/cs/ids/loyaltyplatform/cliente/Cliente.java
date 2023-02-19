@@ -1,6 +1,7 @@
 package it.unicam.cs.ids.loyaltyplatform.cliente;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import it.unicam.cs.ids.loyaltyplatform.convalida.Transazione;
 import it.unicam.cs.ids.loyaltyplatform.sottoscrizione.Sottoscrizione;
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -74,6 +75,11 @@ public class Cliente {
     @ToString.Exclude
     private List<Sottoscrizione> programmiFedelta;
 
+    @JsonIgnore
+    @OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @ToString.Exclude
+    private List<Transazione> transazioni;
+
     public Cliente() {
         programmiFedelta = new ArrayList<>();
     }
@@ -89,6 +95,7 @@ public class Cliente {
         this.dataDiNascita = dataDiNascita;
         this.codiceFiscale = codiceFiscale;
         this.programmiFedelta = new ArrayList<>();
+        this.transazioni = new ArrayList<>();
     }
 
     /**
@@ -112,5 +119,6 @@ public class Cliente {
         this.dataDiNascita = dataDiNascita;
         this.codiceFiscale = codiceFiscale;
         this.programmiFedelta = new ArrayList<>();
+        this.transazioni = new ArrayList<>();
     }
 }

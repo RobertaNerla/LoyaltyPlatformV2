@@ -1,6 +1,7 @@
 package it.unicam.cs.ids.loyaltyplatform.azienda;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import it.unicam.cs.ids.loyaltyplatform.convalida.Transazione;
 import it.unicam.cs.ids.loyaltyplatform.programmaFedelta.ProgrammaFedelta;
 import jakarta.persistence.*;
 import lombok.ToString;
@@ -36,11 +37,17 @@ public class Azienda {
     @ToString.Exclude
     private List<ProgrammaFedelta> programmiFedelta;
 
+    @JsonIgnore
+    @OneToMany(mappedBy = "azienda", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @ToString.Exclude
+    private List<Transazione> transazioni;
+
     /**
      * Costruttore di default dell'azienda
      */
     public Azienda() {
         programmiFedelta = new ArrayList<>();
+        transazioni = new ArrayList<>();
     }
 
     /**
@@ -55,6 +62,7 @@ public class Azienda {
         this.indirizzo = indirizzo;
         this.pIva = pIva;
         this.programmiFedelta = new ArrayList<>();
+        this.transazioni = new ArrayList<>();
     }
 
     /**
@@ -69,6 +77,7 @@ public class Azienda {
         this.indirizzo = indirizzo;
         this.pIva = pIva;
         this.programmiFedelta = new ArrayList<>();
+        this.transazioni = new ArrayList<>();
     }
 
     public Long getAziendaId() {

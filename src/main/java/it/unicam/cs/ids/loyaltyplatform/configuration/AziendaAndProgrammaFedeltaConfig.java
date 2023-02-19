@@ -1,6 +1,8 @@
 package it.unicam.cs.ids.loyaltyplatform.configuration;
 
 import it.unicam.cs.ids.loyaltyplatform.azienda.AziendaRepository;
+import it.unicam.cs.ids.loyaltyplatform.convalida.Transazione;
+import it.unicam.cs.ids.loyaltyplatform.convalida.TransazioneRepository;
 import it.unicam.cs.ids.loyaltyplatform.programmaFedelta.ProgrammaFedeltaRepository;
 import it.unicam.cs.ids.loyaltyplatform.azienda.Azienda;
 import it.unicam.cs.ids.loyaltyplatform.programmaFedelta.ProgrammaAPunti;
