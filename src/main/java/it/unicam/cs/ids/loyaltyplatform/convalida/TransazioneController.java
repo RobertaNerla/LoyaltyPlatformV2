@@ -23,29 +23,30 @@ public class TransazioneController {
         this.transazioneService = transazioneService;
         this.gestoreConvalida = gestoreConvalida;
     }
+
     //TODO: questa operazione può farla solo l'amministratore della piattaforma
     @GetMapping
-    public List<Transazione> getAllTransactions(){
+    public List<Transazione> getAllTransactions() {
         return this.transazioneService.getTransazioni();
     }
 
-    @GetMapping (path = "/azienda/{aziendaId}")
-    public List<Transazione> getTransactionsByAzienda(@PathVariable Long aziendaId){
-        //TODO: completare
-        return null;
+    @GetMapping(path = "/azienda/{aziendaId}")
+    public List<Transazione> getTransactionsByAzienda(@PathVariable Long aziendaId) {
+        transazioneService.getTransazioniByAzienda(aziendaId);
+        return transazioneService.getTransazioniByAzienda(aziendaId);
     }
 
-    @GetMapping (path = "/cliente/{clienteId}")
-    public List<Transazione> getTransactionByCliente(@PathVariable Long clienteId){
+    @GetMapping(path = "/cliente/{clienteId}")
+    public List<Transazione> getTransactionByCliente(@PathVariable Long clienteId) {
         //TODO: completare
         return null;
     }
 
     @PostMapping(path = "/{programmaId}")
-    public ResponseEntity<Transazione> registraNuovaTransazione(@PathVariable Long programmaId, @RequestBody @Validated TransazioneDto dto){
-        try{
-            gestoreConvalida.convalidaTransazione(programmaId,dto);
-            return new ResponseEntity<>(HttpStatus.OK);
+    public ResponseEntity<Transazione> registraNuovaTransazione(@PathVariable Long programmaId, @RequestBody @Validated TransazioneDto dto) {
+        try {
+            gestoreConvalida.convalidaTransazione(programmaId, dto);
+            return new ResponseEntity<>(HttpStatus.CREATED);
         } catch (ResourceNotFoundException e) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }

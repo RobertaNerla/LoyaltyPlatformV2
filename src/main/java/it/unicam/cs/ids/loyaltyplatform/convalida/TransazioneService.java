@@ -16,6 +16,7 @@ import java.time.ZoneId;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class TransazioneService {
@@ -23,12 +24,14 @@ public class TransazioneService {
 
     private final ClienteService clienteService;
     private final AziendaService aziendaService;
+
     @Autowired
     public TransazioneService(TransazioneRepository transazioneRepository, ClienteService clienteService, AziendaService aziendaService) {
         this.transazioneRepository = transazioneRepository;
         this.clienteService = clienteService;
         this.aziendaService = aziendaService;
     }
+
     @GetMapping
     public List<Transazione> getTransazioni() {
         return transazioneRepository.findAll();
@@ -39,7 +42,7 @@ public class TransazioneService {
         Azienda currentAzienda = getAziendaById(dto.getAziendaId());
         Cliente currentCliente = getClienteById(dto.getClienteId());
         Date currentDate = getCurrentDate();
-        Transazione newTransazione= new Transazione(currentCliente, currentAzienda, dto.getImporto(), currentDate);
+        Transazione newTransazione = new Transazione(currentCliente, currentAzienda, dto.getImporto(), currentDate);
         return transazioneRepository.save(newTransazione);
     }
 
@@ -61,8 +64,14 @@ public class TransazioneService {
         }
     }
 
-    private Date getCurrentDate(){
+    private Date getCurrentDate() {
         LocalDateTime now = LocalDateTime.now();
         return Date.from(now.atZone(ZoneId.systemDefault()).toInstant());
+    }
+
+    public List<Transazione> getTransazioniByAzienda(Long aziendaId) {
+        return transazioneRepository.findAll().stream()
+                .filter(transazione -> transazione.getAzienda().getAziendaId().equals(aziendaId))
+                .collect(Collectors.toList());
     }
 }

@@ -8,6 +8,7 @@ import lombok.Setter;
 import lombok.ToString;
 
 import java.util.Date;
+
 @Getter
 @Setter
 @ToString
@@ -32,22 +33,24 @@ public class Transazione {
     @Column(name = "importo")
     private double importo;
 
-    @Column(name = "data_transazione",columnDefinition = "DATE")
+    @Column(name = "data_transazione", columnDefinition = "DATE")
     private Date dataTransazione;
 
     /**
      * Costruttore di default per una transazione
      */
-    public Transazione(){}
+    public Transazione() {
+    }
 
     /**
      * Costruttore in cui vengono passati il cliente che ha eseguito una transazione,
      * l'azienda che convalida la transazione e la data.
-     * @param cliente cliente che ha effettuato la transazione
-     * @param azienda azienda che convalida la transazione
+     *
+     * @param cliente         cliente che ha effettuato la transazione
+     * @param azienda         azienda che convalida la transazione
      * @param dataTransazione data dell'avvenuta transazione
      */
-    public Transazione(Cliente cliente, Azienda azienda, double importo, Date dataTransazione){
+    public Transazione(Cliente cliente, Azienda azienda, double importo, Date dataTransazione) {
         this.cliente = cliente;
         this.azienda = azienda;
         this.importo = importo;
@@ -56,17 +59,14 @@ public class Transazione {
 
     /**
      * Costruttore completo in cui viene passato come parametro anche l'id della transazione.
-     * @param transazioneId id della transazione
-     * @param cliente cliente che ha effettuato la transazione
-     * @param azienda azienda che convalida la transazione
+     *
+     * @param transazioneId   id della transazione
+     * @param cliente         cliente che ha effettuato la transazione
+     * @param azienda         azienda che convalida la transazione
      * @param dataTransazione data dell'avvenuta transazione.
      */
-    public Transazione(Long transazioneId, Cliente cliente, Azienda azienda, double importo, Date dataTransazione){
-        this(cliente, azienda, importo,dataTransazione);
+    public Transazione(Long transazioneId, Cliente cliente, Azienda azienda, double importo, Date dataTransazione) {
+        this(cliente, azienda, importo, dataTransazione);
         this.transazioneId = transazioneId;
     }
-
-
-
-
 }

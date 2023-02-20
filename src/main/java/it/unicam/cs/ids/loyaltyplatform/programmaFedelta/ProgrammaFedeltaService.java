@@ -39,7 +39,7 @@ public class ProgrammaFedeltaService {
         }
 
         ProgrammaFedelta newProgram = programFactory.create(programmaDto, aziendaOptional.get(), tipo);
-        aziendaService.addProgrammaToAzienda(aziendaOptional.get().getAziendaId(), newProgram);
+        aziendaService.addProgrammaToAzienda(newProgram.getAzienda().getAziendaId(), newProgram);
         return programmaFedeltaRepository.save(newProgram);
     }
 
