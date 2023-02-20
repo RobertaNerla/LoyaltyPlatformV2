@@ -119,4 +119,12 @@ public class Azienda {
     public void setProgrammiFedelta(List<ProgrammaFedelta> programmiFedelta) {
         this.programmiFedelta = programmiFedelta;
     }
+
+    public List<Transazione> getTransazioni() {
+        return transazioni;
+    }
+
+    public void setTransazioni(List<Transazione> transazioni) {
+        this.transazioni = transazioni;
+    }
 }

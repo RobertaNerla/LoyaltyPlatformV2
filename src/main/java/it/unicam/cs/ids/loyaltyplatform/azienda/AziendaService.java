@@ -19,7 +19,6 @@ public class AziendaService {
         this.aziendaRepository = aziendaRepository;
     }
 
-
     /**
      * Restituisce tutte le aziende presenti nel database
      *
@@ -64,6 +63,7 @@ public class AziendaService {
                     programmaFedelta.getAzienda().toString());
         }
 
+        //questa riga serve, altrimenti transactional non funiona
         Azienda azienda = aziendaOptional.get();
         azienda.getProgrammiFedelta().add(programmaFedelta);
     }

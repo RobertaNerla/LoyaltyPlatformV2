@@ -30,10 +30,11 @@ public class Transazione {
     @JoinColumn(name = "azienda_id", referencedColumnName = "azienda_id")
     private Azienda azienda;
 
-    @Column(name = "importo")
+    @Column(name = "importo", nullable = false, updatable = false)
     private double importo;
 
-    @Column(name = "data_transazione", columnDefinition = "DATE")
+    @Column(name = "data_transazione", columnDefinition = "DATE",
+            nullable = false, updatable = false)
     private Date dataTransazione;
 
     /**

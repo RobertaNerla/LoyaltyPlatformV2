@@ -122,6 +122,8 @@ public class ClienteService {
                     newSub.getCliente());
         }
 
-        cliente.getProgrammiFedelta().add(newSub);
+        //questa riga serve, altrimenti transactional non funiona
+        Cliente clienteToBeSaved = clienteOptional.get();
+        clienteToBeSaved.getProgrammiFedelta().add(newSub);
     }
 }

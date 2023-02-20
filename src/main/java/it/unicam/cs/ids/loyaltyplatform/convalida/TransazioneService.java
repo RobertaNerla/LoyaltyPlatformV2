@@ -8,8 +8,6 @@ import it.unicam.cs.ids.loyaltyplatform.dto.TransazioneDto;
 import it.unicam.cs.ids.loyaltyplatform.exception.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 
 import java.time.LocalDateTime;
 import java.time.ZoneId;
@@ -21,7 +19,6 @@ import java.util.stream.Collectors;
 @Service
 public class TransazioneService {
     private final TransazioneRepository transazioneRepository;
-
     private final ClienteService clienteService;
     private final AziendaService aziendaService;
 
@@ -32,12 +29,10 @@ public class TransazioneService {
         this.aziendaService = aziendaService;
     }
 
-    @GetMapping
     public List<Transazione> getTransazioni() {
         return transazioneRepository.findAll();
     }
 
-    @PostMapping
     public Transazione addNewTransazione(TransazioneDto dto) throws ResourceNotFoundException {
         Azienda currentAzienda = getAziendaById(dto.getAziendaId());
         Cliente currentCliente = getClienteById(dto.getClienteId());
@@ -72,6 +67,12 @@ public class TransazioneService {
     public List<Transazione> getTransazioniByAzienda(Long aziendaId) {
         return transazioneRepository.findAll().stream()
                 .filter(transazione -> transazione.getAzienda().getAziendaId().equals(aziendaId))
+                .collect(Collectors.toList());
+    }
+
+    public List<Transazione> getTransazioneByCliente(Long clienteId) {
+        return transazioneRepository.findAll().stream()
+                .filter(transazione -> transazione.getCliente().getClienteId().equals(clienteId))
                 .collect(Collectors.toList());
     }
 }

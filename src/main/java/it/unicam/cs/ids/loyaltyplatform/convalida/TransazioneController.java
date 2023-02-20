@@ -13,9 +13,7 @@ import java.util.List;
 @RestController
 @RequestMapping(path = "api/transazioni")
 public class TransazioneController {
-
     private final TransazioneService transazioneService;
-
     private final GestoreConvalida gestoreConvalida;
 
     @Autowired
@@ -32,18 +30,17 @@ public class TransazioneController {
 
     @GetMapping(path = "/azienda/{aziendaId}")
     public List<Transazione> getTransactionsByAzienda(@PathVariable Long aziendaId) {
-        transazioneService.getTransazioniByAzienda(aziendaId);
         return transazioneService.getTransazioniByAzienda(aziendaId);
     }
 
     @GetMapping(path = "/cliente/{clienteId}")
     public List<Transazione> getTransactionByCliente(@PathVariable Long clienteId) {
-        //TODO: completare
-        return null;
+        return transazioneService.getTransazioneByCliente(clienteId);
     }
 
     @PostMapping(path = "/{programmaId}")
-    public ResponseEntity<Transazione> registraNuovaTransazione(@PathVariable Long programmaId, @RequestBody @Validated TransazioneDto dto) {
+    public ResponseEntity<Transazione> registraNuovaTransazione(@PathVariable Long programmaId
+            , @RequestBody @Validated TransazioneDto dto) {
         try {
             gestoreConvalida.convalidaTransazione(programmaId, dto);
             return new ResponseEntity<>(HttpStatus.CREATED);

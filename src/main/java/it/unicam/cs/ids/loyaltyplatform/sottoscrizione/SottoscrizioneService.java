@@ -45,9 +45,10 @@ public class SottoscrizioneService {
         Cliente currentClient = getClienteById(clienteId);
         ProgrammaFedelta currentProgram = getProgrammaById(programmaId);
         Sottoscrizione newSub = subFactory.submit(currentClient, currentProgram);
-        //TODO: Aggiungere la sottoscrizione su cliente e programma
-        upgradeSottoscrizioniCliente(currentClient, newSub);
-        incrementaNumClienti(currentProgram);
+
+        programmaFedeltaService.addNewSottoscrizione(currentProgram, newSub);
+        clienteService.aggiungiNuovaSottoscrizione(currentClient, newSub);
+        programmaFedeltaService.incrementaNumClienti(currentProgram);
         return sottoscrizioneRepository.save(newSub);
     }
 
@@ -60,7 +61,7 @@ public class SottoscrizioneService {
         }
     }
 
-    private ProgrammaFedelta getProgrammaById(Long programmaId) throws  ResourceNotFoundException{
+    private ProgrammaFedelta getProgrammaById(Long programmaId) throws ResourceNotFoundException {
         Optional<ProgrammaFedelta> optionalProgramma = programmaFedeltaService.getProgrammaById(programmaId);
         if (optionalProgramma.isEmpty()) {
             throw new ResourceNotFoundException("Programma fedeltà con id " + programmaId + "non esiste!");
@@ -69,21 +70,16 @@ public class SottoscrizioneService {
         }
     }
 
-    private void upgradeSottoscrizioniCliente(Cliente cliente, Sottoscrizione newSub) {
-        clienteService.aggiungiNuovaSottoscrizione(cliente, newSub);
-    }
-
-    private void incrementaNumClienti(ProgrammaFedelta programma) {
-        programmaFedeltaService.incrementaNumClienti(programma);
-    }
-
-    public Sottoscrizione getSottoscrizioneByProgramIdAndClientId(Long programId, Long clienteId) throws ResourceNotFoundException{
-        Optional<Sottoscrizione> optionalSub = sottoscrizioneRepository.findSottoscrizioneByClienteAndProgramma(getClienteById(clienteId),getProgrammaById(programId));
-        if(optionalSub.isEmpty()){
-            throw new ResourceNotFoundException("Il cliente " + clienteId +" non è sottoscritto al programma " + programId+".");
+    public Sottoscrizione getSottoscrizioneByProgramIdAndClientId(Long programId, Long clienteId) throws ResourceNotFoundException {
+        Optional<Sottoscrizione> optionalSub = sottoscrizioneRepository.findSottoscrizioneByClienteAndProgramma(getClienteById(clienteId), getProgrammaById(programId));
+        if (optionalSub.isEmpty()) {
+            throw new ResourceNotFoundException("Il cliente " + clienteId + " non è sottoscritto al programma " + programId + ".");
         } else {
             return optionalSub.get();
         }
     }
 
+    public void saveChangedSottoscrizione(SottoscrizioneProgrammaAPunti sottoscrizione) {
+        sottoscrizioneRepository.save(sottoscrizione);
+    }
 }
