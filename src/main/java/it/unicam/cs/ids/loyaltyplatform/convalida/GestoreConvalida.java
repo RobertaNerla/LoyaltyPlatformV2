@@ -25,11 +25,13 @@ public class GestoreConvalida {
         this.observers = new ArrayList<>(List.of(trackerSottoscrizioneProgAPunti));
     }
 
-    public void convalidaTransazione(Long programId, TransazioneDto dto) throws ResourceNotFoundException {
+    public Sottoscrizione convalidaTransazione(Long programId, TransazioneDto dto) throws ResourceNotFoundException {
         Sottoscrizione currentSub = sottoscrizioneService.
-                getSottoscrizioneByProgramIdAndClientId(dto.getClienteId(), programId);
+                getSottoscrizioneByProgramIdAndClientId(programId, dto.getClienteId());
         transazioneService.addNewTransazione(dto);
         notifyAllObservers(currentSub, dto.getImporto());
+        return sottoscrizioneService.
+                getSottoscrizioneByProgramIdAndClientId(programId, dto.getClienteId());
     }
 
     public void notifyAllObservers(Sottoscrizione sottoscrizione, double importo) {

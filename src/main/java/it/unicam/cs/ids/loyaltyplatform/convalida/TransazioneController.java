@@ -2,6 +2,7 @@ package it.unicam.cs.ids.loyaltyplatform.convalida;
 
 import it.unicam.cs.ids.loyaltyplatform.dto.TransazioneDto;
 import it.unicam.cs.ids.loyaltyplatform.exception.ResourceNotFoundException;
+import it.unicam.cs.ids.loyaltyplatform.sottoscrizione.Sottoscrizione;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -39,13 +40,13 @@ public class TransazioneController {
     }
 
     @PostMapping(path = "/{programmaId}")
-    public ResponseEntity<Transazione> registraNuovaTransazione(@PathVariable Long programmaId
+    public ResponseEntity<Object> registraNuovaTransazione(@PathVariable Long programmaId
             , @RequestBody @Validated TransazioneDto dto) {
         try {
-            gestoreConvalida.convalidaTransazione(programmaId, dto);
-            return new ResponseEntity<>(HttpStatus.CREATED);
+            Sottoscrizione updatedSottoscrizione = gestoreConvalida.convalidaTransazione(programmaId, dto);
+            return ResponseEntity.status(HttpStatus.CREATED).body(updatedSottoscrizione);
         } catch (ResourceNotFoundException e) {
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+            return ResponseEntity.badRequest().body("Error: " + e.getMessage());
         }
     }
 }
