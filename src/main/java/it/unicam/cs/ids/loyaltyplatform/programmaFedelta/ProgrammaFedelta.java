@@ -7,9 +7,11 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
+import org.hibernate.Hibernate;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 @Getter
 @Setter
@@ -37,13 +39,13 @@ public class ProgrammaFedelta {
     @JsonIgnore
     @OneToMany(mappedBy = "programma", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @ToString.Exclude
-    private List<Sottoscrizione> tracker;
+    private List<Sottoscrizione> sottoscrizioni;
 
     /**
      * Costruttore di default del programma fedeltà
      */
     public ProgrammaFedelta() {
-        tracker = new ArrayList<>();
+        sottoscrizioni = new ArrayList<>();
     }
 
     /**
@@ -56,7 +58,7 @@ public class ProgrammaFedelta {
         this.azienda = azienda;
         this.nomeProgramma = nomeProgramma;
         this.numClienti = 0;
-        tracker = new ArrayList<>();
+        sottoscrizioni = new ArrayList<>();
     }
 
     /**
@@ -69,6 +71,19 @@ public class ProgrammaFedelta {
     public ProgrammaFedelta(Long programId, Azienda azienda, String nomeProgramma) {
         this(azienda, nomeProgramma);
         this.programmaId = programId;
-        tracker = new ArrayList<>();
+        sottoscrizioni = new ArrayList<>();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
+        ProgrammaFedelta that = (ProgrammaFedelta) o;
+        return programmaId != null && Objects.equals(programmaId, that.programmaId);
+    }
+
+    @Override
+    public int hashCode() {
+        return getClass().hashCode();
     }
 }

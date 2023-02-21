@@ -6,6 +6,9 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
+import org.hibernate.Hibernate;
+
+import java.util.Objects;
 
 @Getter
 @Setter
@@ -25,7 +28,7 @@ public class Sottoscrizione {
     @ManyToOne()
     @JoinColumn(name = "cliente_id", referencedColumnName = "cliente_id")
     private Cliente cliente;
-    
+
     @ManyToOne()
     @JoinColumn(name = "programma_id", referencedColumnName = "programma_id")
     private ProgrammaFedelta programma;
@@ -58,5 +61,18 @@ public class Sottoscrizione {
     public Sottoscrizione(Cliente cliente, ProgrammaFedelta programma) {
         this.cliente = cliente;
         this.programma = programma;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
+        Sottoscrizione that = (Sottoscrizione) o;
+        return sottoscrizioneId != null && Objects.equals(sottoscrizioneId, that.sottoscrizioneId);
+    }
+
+    @Override
+    public int hashCode() {
+        return getClass().hashCode();
     }
 }

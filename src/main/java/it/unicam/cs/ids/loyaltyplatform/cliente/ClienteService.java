@@ -102,7 +102,6 @@ public class ClienteService {
      * @param cliente
      * @param newSub
      */
-    @Transactional
     public void aggiungiNuovaSottoscrizione(Cliente cliente, Sottoscrizione newSub)
             throws IllegalStateException {
         Optional<Cliente> clienteOptional = clienteRepository.findById(cliente.getClienteId());
@@ -110,20 +109,16 @@ public class ClienteService {
             throw new ResourceNotFoundException("Cliente con l'id " + cliente.getClienteId() + " non trovato!");
         }
 
-        boolean exists = clienteOptional.get().getProgrammiFedelta().stream()
-                .anyMatch(pf -> pf.getProgramma().getNomeProgramma().equals(newSub.getProgramma().getNomeProgramma()));
+        boolean exists = clienteOptional.get().getSottoscrizioni().stream()
+                .anyMatch(pf -> pf.getProgramma().equals(newSub.getProgramma()));
         if (exists) {
             throw new ResourceAlreadyExistsException("Una sottoscrizione del programma fedeltà" +
-                    newSub.getProgramma().getNomeProgramma() + " appartiene già al cliente");
+                    newSub.getProgramma() + " appartiene già al cliente");
         }
 
         if (newSub.getCliente().getClienteId() != clienteOptional.get().getClienteId()) {
             throw new IllegalArgumentException("La sottoscrizione non appartiene a questo cliente, ma a " +
                     newSub.getCliente());
         }
-
-        //questa riga serve, altrimenti transactional non funiona
-        Cliente clienteToBeSaved = clienteOptional.get();
-        clienteToBeSaved.getProgrammiFedelta().add(newSub);
     }
 }

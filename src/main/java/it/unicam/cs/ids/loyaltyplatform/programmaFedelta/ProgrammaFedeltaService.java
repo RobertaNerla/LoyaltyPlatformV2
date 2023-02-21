@@ -6,7 +6,6 @@ import it.unicam.cs.ids.loyaltyplatform.dto.ProgrammaFedeltaDto;
 import it.unicam.cs.ids.loyaltyplatform.exception.ResourceAlreadyExistsException;
 import it.unicam.cs.ids.loyaltyplatform.exception.ResourceNotFoundException;
 import it.unicam.cs.ids.loyaltyplatform.sottoscrizione.Sottoscrizione;
-import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -54,7 +53,6 @@ public class ProgrammaFedeltaService {
         programmaFedeltaRepository.save(programma);
     }
 
-    @Transactional
     public void addNewSottoscrizione(ProgrammaFedelta programma, Sottoscrizione newSub) {
         Optional<ProgrammaFedelta> programmaOptional = programmaFedeltaRepository.findById(programma.getProgrammaId());
         if (programmaOptional.isEmpty()) {
@@ -62,21 +60,17 @@ public class ProgrammaFedeltaService {
                     + programma.getProgrammaId() + " non trovato!");
         }
 
-        boolean exists = programmaOptional.get().getTracker().stream()
-                .anyMatch(sottoscrizione -> sottoscrizione.getCliente().getCodiceFiscale()
-                        .equals(newSub.getCliente().getCodiceFiscale()));
+        boolean exists = programmaOptional.get().getSottoscrizioni().stream()
+                .anyMatch(sottoscrizione -> sottoscrizione.getCliente()
+                        .equals(newSub.getCliente()));
         if (exists) {
-            throw new ResourceAlreadyExistsException("Il cliente " +
-                    newSub.getCliente() + " è già iscritto!");
+            throw new ResourceAlreadyExistsException("Il cliente " + newSub.getCliente()
+                    + " è già iscritto!");
         }
 
         if (newSub.getProgramma().getProgrammaId() != programmaOptional.get().getProgrammaId()) {
             throw new IllegalArgumentException("La sottoscrizione non appartiene a questo programma, ma a " +
                     newSub.getProgramma());
         }
-
-        //questa riga serve, altrimenti transactional non viene eseguito
-        ProgrammaFedelta programmaToBeSaved = programmaOptional.get();
-        programmaToBeSaved.getTracker().add(newSub);
     }
 }

@@ -1,6 +1,7 @@
 package it.unicam.cs.ids.loyaltyplatform.sottoscrizione;
 
 import it.unicam.cs.ids.loyaltyplatform.dto.SottoscrizioneDto;
+import it.unicam.cs.ids.loyaltyplatform.exception.ResourceAlreadyExistsException;
 import it.unicam.cs.ids.loyaltyplatform.exception.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -26,12 +27,12 @@ public class SottoscrizioneController {
     }
 
     @PostMapping
-    public ResponseEntity<Sottoscrizione> registraNuovaSottoscrizione(@RequestBody @Validated SottoscrizioneDto dto) {
+    public ResponseEntity<Object> registraNuovaSottoscrizione(@RequestBody @Validated SottoscrizioneDto dto) {
         try {
             Sottoscrizione newSub = sottoscrizioneService.addNewSottoscrizione(dto.getClienteId(), dto.getProgrammaId());
-            return new ResponseEntity<>(newSub,HttpStatus.CREATED);
-        } catch (ResourceNotFoundException e) {
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+            return ResponseEntity.status(HttpStatus.CREATED).body(newSub);
+        } catch (ResourceNotFoundException | ResourceAlreadyExistsException e) {
+            return ResponseEntity.badRequest().body("Error: " + e.getMessage());
         }
     }
 }
