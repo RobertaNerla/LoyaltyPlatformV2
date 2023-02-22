@@ -77,4 +77,5 @@ public class ClienteController {
     public void updateClienteEmail(@PathVariable("clienteId") Long clienteId, String email) {
         clienteService.updateClienteEmail(clienteId, email);
     }
+
 }

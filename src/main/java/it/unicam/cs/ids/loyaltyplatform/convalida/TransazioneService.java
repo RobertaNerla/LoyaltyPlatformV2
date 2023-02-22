@@ -33,11 +33,10 @@ public class TransazioneService {
         return transazioneRepository.findAll();
     }
 
-    public Transazione addNewTransazione(TransazioneDto dto) throws ResourceNotFoundException {
+    public Transazione addNewTransazione(TransazioneDto dto,Cliente cliente) throws ResourceNotFoundException {
         Azienda currentAzienda = getAziendaById(dto.getAziendaId());
-        Cliente currentCliente = getClienteById(dto.getClienteId());
         Date currentDate = getCurrentDate();
-        Transazione newTransazione = new Transazione(currentCliente, currentAzienda, dto.getImporto(), currentDate);
+        Transazione newTransazione = new Transazione(cliente, currentAzienda, dto.getImporto(), currentDate);
         return transazioneRepository.save(newTransazione);
     }
 

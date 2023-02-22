@@ -35,4 +35,5 @@ public class SottoscrizioneController {
             return ResponseEntity.badRequest().body("Error: " + e.getMessage());
         }
     }
+
 }

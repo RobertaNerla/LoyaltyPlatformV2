@@ -10,7 +10,7 @@ import javax.validation.constraints.NotNull;
 @ToString
 public class TransazioneDto {
     @NotNull
-    private Long clienteId;
+    private Long cartaId;
     @NotNull
     private Long aziendaId;
     @NotNull
@@ -20,12 +20,12 @@ public class TransazioneDto {
     /**
      * Crea una nuova TransazioneDto.
      *
-     * @param clienteId Id del cliente che esegue la transazione
+     * @param cartaId Id del cliente che esegue la transazione
      * @param aziendaId Id dell'azienda che convalida la transazione
      * @param importo importo della transazione
      */
-    public TransazioneDto(Long clienteId, Long aziendaId, double importo) {
-        this.clienteId = clienteId;
+    public TransazioneDto(Long cartaId, Long aziendaId, double importo) {
+        this.cartaId = cartaId;
         this.aziendaId = aziendaId;
         this.importo = importo;
     }

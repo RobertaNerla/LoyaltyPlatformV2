@@ -70,10 +70,10 @@ public class SottoscrizioneService {
         }
     }
 
-    public Sottoscrizione getSottoscrizioneByProgramIdAndClientId(Long programId, Long clienteId) throws ResourceNotFoundException {
-        Optional<Sottoscrizione> optionalSub = sottoscrizioneRepository.findSottoscrizioneByClienteAndProgramma(getClienteById(clienteId), getProgrammaById(programId));
+    public Sottoscrizione getSottoscrizioneByProgramIdAndClientId(Long programId, Cliente cliente) throws ResourceNotFoundException {
+        Optional<Sottoscrizione> optionalSub = sottoscrizioneRepository.findSottoscrizioneByClienteAndProgramma(cliente, getProgrammaById(programId));
         if (optionalSub.isEmpty()) {
-            throw new ResourceNotFoundException("Il cliente " + clienteId + " non è sottoscritto al programma " + programId + ".");
+            throw new ResourceNotFoundException("Il cliente " + cliente.getClienteId() + " non è sottoscritto al programma " + programId + ".");
         } else {
             return optionalSub.get();
         }
