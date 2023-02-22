@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RestController
-@RequestMapping(path = "api/programma")
+@RequestMapping(path = "api/programmi")
 public class ProgrammaFedeltaController {
     private final List<Template> availableTemplates;
     private final ProgrammaFedeltaService programmaFedeltaService;
@@ -62,12 +62,12 @@ public class ProgrammaFedeltaController {
      * "pointsEur" : "4"
      * }
      */
-    @PostMapping(path = "/new/{tipo_programma}")
+    @PostMapping(path = "/nuovoProgramma/{tipo_programma}")
     public ResponseEntity<ProgrammaFedelta> registraNuovoProgrammaFedelta(
             @PathVariable("tipo_programma") TipologiaProgramma tipo, @RequestBody @Validated ProgrammaFedeltaDto dto) {
         try {
             ProgrammaFedelta programma = programmaFedeltaService.addNewProgrammaFedelta(dto, tipo);
-            return new ResponseEntity<>(programma,HttpStatus.CREATED);
+            return new ResponseEntity<>(programma, HttpStatus.CREATED);
         } catch (ResourceNotFoundException e) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }

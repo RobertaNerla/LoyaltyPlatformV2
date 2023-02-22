@@ -1,7 +1,6 @@
 package it.unicam.cs.ids.loyaltyplatform.carta;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import it.unicam.cs.ids.loyaltyplatform.cliente.Cliente;
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -13,8 +12,8 @@ import java.util.Objects;
 @Getter
 @Setter
 @ToString
-@Entity
-@Table(name = "Carta")
+@Entity(name = "Carta")
+@Table(name = "carta")
 public class Carta {
     @Id
     @Column(name = "carta_id", nullable = false, updatable = false)
@@ -34,7 +33,8 @@ public class Carta {
         this.cliente = cliente;
     }
 
-    public Carta() {}
+    public Carta() {
+    }
 
     @Override
     public boolean equals(Object o) {

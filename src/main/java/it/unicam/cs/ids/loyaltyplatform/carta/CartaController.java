@@ -17,15 +17,14 @@ public class CartaController {
     }
 
     @GetMapping
-    public List<Carta> getAllCarte(){
+    public List<Carta> getAllCarte() {
         return cartaService.getCarte();
     }
 
     @PostMapping
-    public ResponseEntity<Carta> registraNuovaCarta(@RequestBody CartaDto dto){
+    public ResponseEntity<Carta> registraNuovaCarta(@RequestBody CartaDto dto) {
         Carta newCarta = cartaService.addNewCarta(dto.getClienteId());
         return new ResponseEntity<>(newCarta, HttpStatus.CREATED);
     }
-
     //TODO: crud
 }

@@ -11,7 +11,7 @@ import java.util.List;
  * Classe che esegue le chiamate CRUD dell'entità cliente
  */
 @RestController
-@RequestMapping(path = "/api/cliente")
+@RequestMapping(path = "/api/clienti")
 public class ClienteController {
     public final ClienteService clienteService;
 
@@ -34,24 +34,24 @@ public class ClienteController {
      * Esegue una chiamata POST che salva un nuovo cliente nel database
      *
      * @param cliente il cliente che verrà inserito nel database
-     *
-     * Esempio di body per la richiesta:
-     * {
-     *     "nome" : "Pinco",
-     *     "cognome" : "Pallino",
-     *     "numCellulare" : "12345678910",
-     *     "email" : "pinco.pallino@gmail.com",
-     *     "indirizzo" : "Via Pallini 42",
-     *     "dataDiNascita" : "2000-01-01",
-     *     "codiceFiscale" : "PLLPPT0045V42F"
-     *  }
+     *                <p>
+     *                Esempio di body per la richiesta:
+     *                {
+     *                "nome" : "Pinco",
+     *                "cognome" : "Pallino",
+     *                "numCellulare" : "12345678910",
+     *                "email" : "pinco.pallino@gmail.com",
+     *                "indirizzo" : "Via Pallini 42",
+     *                "dataDiNascita" : "2000-01-01",
+     *                "codiceFiscale" : "PLLPPT0045V42F"
+     *                }
      */
     @PostMapping(consumes = "application/json", produces = "application/json")
     public ResponseEntity<Cliente> registraNuovoCliente(@RequestBody Cliente cliente) {
         try {
             Cliente newCliente = clienteService.addNewCliente(cliente);
             return new ResponseEntity<>(newCliente, HttpStatus.CREATED);
-        } catch (IllegalStateException e){
+        } catch (IllegalStateException e) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
 
