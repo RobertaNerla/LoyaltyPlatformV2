@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping(path = "/api/programmi")
+@RequestMapping(path = "/api/programmifedelta")
 public class ProgrammaFedeltaController_Deprecated {
     public final ProgrammaFedeltaService_deprecated programmaFedeltaService;
 

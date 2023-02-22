@@ -31,12 +31,10 @@ public class ClienteController {
         return clienteService.getClienti();
     }
 
-    @GetMapping(path = "{clienteId}")
+    @GetMapping(path = "/sottoscrizioni/{clienteId}")
     public List<Sottoscrizione> getSottoscrizioniCliente(@PathVariable("clienteId") Long clienteId) {
         return clienteService.getSottoscrizioniCliente(clienteId);
     }
-
-    //TODO getmapping per le sottoscrizioni
 
     /**
      * Esegue una chiamata POST che salva un nuovo cliente nel database

@@ -31,7 +31,7 @@ public class AziendaController {
         return aziendaService.getAziende();
     }
 
-    @GetMapping(path = "aziendaId")
+    @GetMapping(path = "/programmi/{aziendaId}")
     public List<ProgrammaFedelta> getProgrammiAzienda(@PathVariable("aziendaId") Long aziendaId) {
         return aziendaService.getProgrammiAzienda(aziendaId);
     }

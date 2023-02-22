@@ -35,7 +35,6 @@ public class AziendaService {
      * @param azienda azienda che si vuole aggiungere nel database
      */
     public Azienda addNewAzienda(Azienda azienda) {
-
         Optional<Azienda> aziendaOptional = aziendaRepository.findByNomeAndIndirizzo(azienda.getNome(), azienda.getIndirizzo());
 
         if (aziendaOptional.isPresent()) {
@@ -87,7 +86,6 @@ public class AziendaService {
     public Optional<Azienda> getAziendaById(long aziendaId) {
         return aziendaRepository.findById(aziendaId);
     }
-
 
     private Azienda retrieveAzienda(Long aziendaId) {
         Optional<Azienda> aziendaOptional = aziendaRepository.findById(aziendaId);

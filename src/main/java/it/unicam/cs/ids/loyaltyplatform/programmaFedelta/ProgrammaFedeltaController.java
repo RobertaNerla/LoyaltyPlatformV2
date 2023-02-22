@@ -28,7 +28,6 @@ public class ProgrammaFedeltaController {
                 new Template(TipologiaProgramma.coalizione)));
     }
 
-    //TODO uso headers
     @GetMapping(path = "/templates")
     public ResponseEntity<List<Template>> getAvailableTemplates() {
         return new ResponseEntity<>(availableTemplates, HttpStatus.OK);
