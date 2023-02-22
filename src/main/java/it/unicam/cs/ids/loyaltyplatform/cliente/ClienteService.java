@@ -116,7 +116,7 @@ public class ClienteService {
                     newSub.getProgramma() + " appartiene già al cliente");
         }
 
-        if (newSub.getCliente().getClienteId() != clienteOptional.get().getClienteId()) {
+        if (!Objects.equals(newSub.getCliente().getClienteId(), clienteOptional.get().getClienteId())) {
             throw new IllegalArgumentException("La sottoscrizione non appartiene a questo cliente, ma a " +
                     newSub.getCliente());
         }

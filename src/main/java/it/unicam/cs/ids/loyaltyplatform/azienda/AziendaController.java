@@ -1,5 +1,6 @@
 package it.unicam.cs.ids.loyaltyplatform.azienda;
 
+import it.unicam.cs.ids.loyaltyplatform.programmaFedelta.ProgrammaFedelta;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -28,6 +29,11 @@ public class AziendaController {
     @GetMapping
     public List<Azienda> getAziende() {
         return aziendaService.getAziende();
+    }
+
+    @GetMapping(path = "aziendaId")
+    public List<ProgrammaFedelta> getProgrammiAzienda(@PathVariable("aziendaId") Long aziendaId) {
+        return aziendaService.getProgrammiAzienda(aziendaId);
     }
 
     /**

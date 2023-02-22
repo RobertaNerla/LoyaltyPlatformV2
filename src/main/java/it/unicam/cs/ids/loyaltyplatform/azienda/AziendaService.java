@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 @Service
@@ -58,12 +59,12 @@ public class AziendaService {
                     programmaFedelta.getNomeProgramma() + " appartiene già all'azienda");
         }
 
-        if (programmaFedelta.getAzienda().getAziendaId() != aziendaId) {
+        if (!Objects.equals(programmaFedelta.getAzienda().getAziendaId(), aziendaId)) {
             throw new IllegalArgumentException("Il programma fedeltà non appartiene a questa azienda, ma a " +
                     programmaFedelta.getAzienda().toString());
         }
 
-        //questa riga serve, altrimenti transactional non funiona
+        //questa riga serve, altrimenti transactional non funziona
         Azienda azienda = aziendaOptional.get();
         azienda.getProgrammiFedelta().add(programmaFedelta);
     }
@@ -85,5 +86,19 @@ public class AziendaService {
 
     public Optional<Azienda> getAziendaById(long aziendaId) {
         return aziendaRepository.findById(aziendaId);
+    }
+
+
+    private Azienda retrieveAzienda(Long aziendaId) {
+        Optional<Azienda> aziendaOptional = aziendaRepository.findById(aziendaId);
+        if (aziendaOptional.isEmpty()) {
+            throw new ResourceNotFoundException("Azienda con l'id " + aziendaId + " non trovata!");
+        }
+        return aziendaOptional.get();
+    }
+
+    public List<ProgrammaFedelta> getProgrammiAzienda(Long aziendaId) {
+        Azienda azienda = retrieveAzienda(aziendaId);
+        return azienda.getProgrammiFedelta();
     }
 }
