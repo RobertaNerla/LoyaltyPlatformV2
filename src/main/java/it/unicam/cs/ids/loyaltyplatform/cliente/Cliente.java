@@ -1,6 +1,8 @@
 package it.unicam.cs.ids.loyaltyplatform.cliente;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import it.unicam.cs.ids.loyaltyplatform.carta.Carta;
 import it.unicam.cs.ids.loyaltyplatform.convalida.Transazione;
 import it.unicam.cs.ids.loyaltyplatform.sottoscrizione.Sottoscrizione;
 import jakarta.persistence.*;
@@ -72,6 +74,10 @@ public class Cliente {
             columnDefinition = "TEXT")
     private String codiceFiscale;
 
+    @OneToOne(mappedBy = "cliente", cascade = CascadeType.ALL)
+    @JsonManagedReference
+    private Carta carta;
+
     @JsonIgnore
     @OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @ToString.Exclude
@@ -98,6 +104,7 @@ public class Cliente {
         this.codiceFiscale = codiceFiscale;
         this.sottoscrizioni = new ArrayList<>();
         this.transazioni = new ArrayList<>();
+        this.carta = new Carta(this);
     }
 
     /**
@@ -122,6 +129,7 @@ public class Cliente {
         this.codiceFiscale = codiceFiscale;
         this.sottoscrizioni = new ArrayList<>();
         this.transazioni = new ArrayList<>();
+        this.carta = new Carta(this);
     }
 
     @Override

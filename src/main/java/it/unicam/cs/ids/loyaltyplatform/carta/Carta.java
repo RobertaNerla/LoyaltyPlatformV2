@@ -1,5 +1,7 @@
 package it.unicam.cs.ids.loyaltyplatform.carta;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import it.unicam.cs.ids.loyaltyplatform.cliente.Cliente;
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -19,6 +21,7 @@ public class Carta {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long cartaId;
     @OneToOne
+    @JsonBackReference
     @JoinColumn(name = "cliente_id", referencedColumnName = "cliente_id")
     private Cliente cliente;
 
