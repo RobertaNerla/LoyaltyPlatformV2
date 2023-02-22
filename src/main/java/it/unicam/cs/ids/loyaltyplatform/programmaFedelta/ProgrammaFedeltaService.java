@@ -73,4 +73,14 @@ public class ProgrammaFedeltaService {
                     newSub.getProgramma());
         }
     }
+
+    public void deleteProgrammaFedelta(Long programmaId) {
+        Optional<ProgrammaFedelta> programmaOptional = programmaFedeltaRepository.findById(programmaId);
+        if (programmaOptional.isEmpty()) {
+            throw new ResourceNotFoundException("Un programma fedeltà con id " + programmaId +
+                    "non esiste!");
+        }
+
+        programmaFedeltaRepository.deleteById(programmaId);
+    }
 }

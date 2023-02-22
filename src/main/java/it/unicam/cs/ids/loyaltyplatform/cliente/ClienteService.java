@@ -121,4 +121,18 @@ public class ClienteService {
                     newSub.getCliente());
         }
     }
+
+    private Cliente retrieveCliente(Long clienteId) {
+        Optional<Cliente> clienteOptional = clienteRepository.findById(clienteId);
+        if (clienteOptional.isEmpty()) {
+            throw new ResourceNotFoundException("Cliente con l'id " + clienteId + " non trovato!");
+        }
+        return clienteOptional.get();
+    }
+
+    public List<Sottoscrizione> getSottoscrizioniCliente(Long clienteId) {
+        Cliente cliente = retrieveCliente(clienteId);
+
+        return cliente.getSottoscrizioni();
+    }
 }

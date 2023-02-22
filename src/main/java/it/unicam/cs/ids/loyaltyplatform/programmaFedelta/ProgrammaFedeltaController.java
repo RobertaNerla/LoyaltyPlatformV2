@@ -72,4 +72,9 @@ public class ProgrammaFedeltaController {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
     }
+
+    @DeleteMapping(path = "{programmaId}")
+    public void deleteProgrammaFedelta(@PathVariable("programmaId") Long programmaId) {
+        programmaFedeltaService.deleteProgrammaFedelta(programmaId);
+    }
 }

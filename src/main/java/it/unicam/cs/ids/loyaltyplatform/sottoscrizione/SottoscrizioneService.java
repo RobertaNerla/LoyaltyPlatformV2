@@ -82,4 +82,14 @@ public class SottoscrizioneService {
     public void saveChangedSottoscrizione(SottoscrizioneProgrammaAPunti sottoscrizione) {
         sottoscrizioneRepository.save(sottoscrizione);
     }
+
+    public void deleteSottoscrizione(Long sottoscrizioneId) {
+        Optional<Sottoscrizione> sottoscrizioneOptional = sottoscrizioneRepository.findById(sottoscrizioneId);
+        if (sottoscrizioneOptional.isEmpty()) {
+            throw new ResourceNotFoundException("La sottoscrizione con l'id " + sottoscrizioneId +
+                    "non esiste!");
+        }
+
+        sottoscrizioneRepository.deleteById(sottoscrizioneId);
+    }
 }

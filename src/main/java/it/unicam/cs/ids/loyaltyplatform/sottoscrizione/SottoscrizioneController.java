@@ -35,4 +35,9 @@ public class SottoscrizioneController {
             return ResponseEntity.badRequest().body("Error: " + e.getMessage());
         }
     }
+
+    @DeleteMapping(path = "{sottoscrizioneId}")
+    public void deleteSottoscrizione(@PathVariable("sottoscrizioneId") Long sottoscrizioneId) {
+        sottoscrizioneService.deleteSottoscrizione(sottoscrizioneId);
+    }
 }

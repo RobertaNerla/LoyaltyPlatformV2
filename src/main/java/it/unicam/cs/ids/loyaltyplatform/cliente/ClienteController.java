@@ -1,5 +1,6 @@
 package it.unicam.cs.ids.loyaltyplatform.cliente;
 
+import it.unicam.cs.ids.loyaltyplatform.sottoscrizione.Sottoscrizione;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -29,6 +30,13 @@ public class ClienteController {
     public List<Cliente> getClienti() {
         return clienteService.getClienti();
     }
+
+    @GetMapping(path = "{clienteId}")
+    public List<Sottoscrizione> getSottoscrizioniCliente(@PathVariable("clienteId") Long clienteId) {
+        return clienteService.getSottoscrizioniCliente(clienteId);
+    }
+
+    //TODO getmapping per le sottoscrizioni
 
     /**
      * Esegue una chiamata POST che salva un nuovo cliente nel database
@@ -77,5 +85,4 @@ public class ClienteController {
     public void updateClienteEmail(@PathVariable("clienteId") Long clienteId, String email) {
         clienteService.updateClienteEmail(clienteId, email);
     }
-
 }
