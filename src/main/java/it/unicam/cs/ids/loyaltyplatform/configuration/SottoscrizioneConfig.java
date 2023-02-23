@@ -73,8 +73,7 @@ public class SottoscrizioneConfig {
             SottoscrizioneProgrammaAPunti sottoscrizione1 = new SottoscrizioneProgrammaAPunti(flavio, programma1);
             SottoscrizioneProgrammaAPunti sottoscrizione2 = new SottoscrizioneProgrammaAPunti(michele, programma1);
 
-
-            clienteRepository.saveAll(List.of(flavio, michele,massimo));
+            clienteRepository.saveAll(List.of(flavio, michele, massimo));
             aziendaRepository.saveAll(List.of(sony, openAi));
             programmaFedeltaRepository.saveAll(List.of(programma1, programma2));
             sottoscrizioneRepository.save(sottoscrizione1);

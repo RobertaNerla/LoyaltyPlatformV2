@@ -64,13 +64,13 @@ public class ProgrammaFedeltaController {
      * }
      */
     @PostMapping(path = "/nuovoProgramma/{tipo_programma}")
-    public ResponseEntity<ProgrammaFedelta> registraNuovoProgrammaFedelta(
+    public ResponseEntity<Object> registraNuovoProgrammaFedelta(
             @PathVariable("tipo_programma") TipologiaProgramma tipo, @RequestBody @Validated ProgrammaFedeltaDto dto) {
         try {
             ProgrammaFedelta programma = programmaFedeltaService.addNewProgrammaFedelta(dto, tipo);
             return new ResponseEntity<>(programma, HttpStatus.CREATED);
         } catch (ResourceNotFoundException e) {
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(e, HttpStatus.BAD_REQUEST);
         }
     }
 
@@ -80,13 +80,13 @@ public class ProgrammaFedeltaController {
     }
 
     @PostMapping(path = "punti/{programmaId}/premi")
-    public ResponseEntity<Premio> aggiungiPremioAlCatalogo(@PathVariable("programmaId") Long programmaId, @RequestBody PremioDto dto){
-        try{
-            Premio newPremio = programmaFedeltaService.aggiungiPremio(programmaId,dto);
+    public ResponseEntity<Premio> aggiungiPremioAlCatalogo(@PathVariable("programmaId") Long programmaId, @RequestBody PremioDto dto) {
+        try {
+            Premio newPremio = programmaFedeltaService.aggiungiPremio(programmaId, dto);
             return new ResponseEntity<>(newPremio, HttpStatus.CREATED);
-        } catch(ResourceNotFoundException e){
+        } catch (ResourceNotFoundException e) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-        } catch(IllegalArgumentException e){
+        } catch (IllegalArgumentException e) {
             return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
         }
     }
