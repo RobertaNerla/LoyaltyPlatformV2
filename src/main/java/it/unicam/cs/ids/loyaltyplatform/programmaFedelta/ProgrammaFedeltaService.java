@@ -20,6 +20,7 @@ public class ProgrammaFedeltaService {
     private final ProgrammaFedeltaRepository programmaFedeltaRepository;
     private final AziendaService aziendaService;
 
+
     @Autowired
     public ProgrammaFedeltaService(ProgramFactory programFactory,
                                    AziendaService aziendaService,

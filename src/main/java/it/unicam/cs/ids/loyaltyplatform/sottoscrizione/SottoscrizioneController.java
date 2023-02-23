@@ -3,6 +3,7 @@ package it.unicam.cs.ids.loyaltyplatform.sottoscrizione;
 import it.unicam.cs.ids.loyaltyplatform.dto.SottoscrizioneDto;
 import it.unicam.cs.ids.loyaltyplatform.exception.ResourceAlreadyExistsException;
 import it.unicam.cs.ids.loyaltyplatform.exception.ResourceNotFoundException;
+import it.unicam.cs.ids.loyaltyplatform.premio.Premio;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -39,5 +40,15 @@ public class SottoscrizioneController {
     @DeleteMapping(path = "{sottoscrizioneId}")
     public void deleteSottoscrizione(@PathVariable("sottoscrizioneId") Long sottoscrizioneId) {
         sottoscrizioneService.deleteSottoscrizione(sottoscrizioneId);
+    }
+
+    @GetMapping(path = "/{sottoscrizioneId}/premi/{premioId}/riscatto")
+    public ResponseEntity<Sottoscrizione> riscattaPremio(@PathVariable("sottoscrizioneId") Long sottoscrizioneId, @PathVariable("premioId") Long premioId){
+        try{
+            Sottoscrizione updatedSub = sottoscrizioneService.riscattaPremio(sottoscrizioneId,premioId);
+            return new ResponseEntity<>(updatedSub, HttpStatus.OK);
+        } catch(RuntimeException e){
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
     }
 }

@@ -3,6 +3,8 @@ package it.unicam.cs.ids.loyaltyplatform.sottoscrizione;
 import it.unicam.cs.ids.loyaltyplatform.cliente.Cliente;
 import it.unicam.cs.ids.loyaltyplatform.cliente.ClienteService;
 import it.unicam.cs.ids.loyaltyplatform.exception.ResourceNotFoundException;
+import it.unicam.cs.ids.loyaltyplatform.premio.Premio;
+import it.unicam.cs.ids.loyaltyplatform.programmaFedelta.ProgrammaAPunti;
 import it.unicam.cs.ids.loyaltyplatform.programmaFedelta.ProgrammaFedelta;
 import it.unicam.cs.ids.loyaltyplatform.programmaFedelta.ProgrammaFedeltaService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +21,7 @@ public class SottoscrizioneService {
     private final ClienteService clienteService;
     private final ProgrammaFedeltaService programmaFedeltaService;
     private final SubFactory subFactory;
+
 
     public SottoscrizioneRepository getSottoscrizioneRepository() {
         return sottoscrizioneRepository;
@@ -91,5 +94,49 @@ public class SottoscrizioneService {
         }
 
         sottoscrizioneRepository.deleteById(sottoscrizioneId);
+    }
+
+    private Sottoscrizione getSottoscrizioneById(Long sottoscrizioneId){
+        Optional<Sottoscrizione> optionalSottoscrizione= sottoscrizioneRepository.findById(sottoscrizioneId);
+        if(optionalSottoscrizione.isEmpty()){
+            throw new ResourceNotFoundException("La sottoscrizione " + sottoscrizioneId +" non esiste!");
+        }else {
+            return optionalSottoscrizione.get();
+        }
+    }
+
+    private Premio getPremioFromProgrammaPunti(ProgrammaAPunti progPunti, Long premioId) {
+        Optional<Premio> optionalPremio = progPunti.getPremioById(premioId);
+        if (optionalPremio.isEmpty()) {
+            throw new ResourceNotFoundException("Il premio scelto " + premioId + " non esiste");
+        } else {
+            return optionalPremio.get();
+        }
+    }
+
+
+
+    public Sottoscrizione riscattaPremio(Long sottoscrizioneId, Long premioId) throws ResourceNotFoundException, IllegalArgumentException, RuntimeException {
+        Sottoscrizione sottoscrizione = getSottoscrizioneById(sottoscrizioneId);
+        if(sottoscrizione instanceof SottoscrizioneProgrammaAPunti subPunti){
+            ProgrammaFedelta programma = subPunti.getProgramma();
+            if(programma instanceof ProgrammaAPunti progPunti){
+                Premio premioDaRiscattare = getPremioFromProgrammaPunti(progPunti,premioId);
+                int puntiNecessari = premioDaRiscattare.getCostoPunti();
+                int puntiDisponibili = subPunti.getPuntiAccumulati();
+                if(puntiNecessari > puntiDisponibili){
+                    throw new RuntimeException("Punti insufficienti per riscattare il premio");
+                } else {
+                    subPunti.setPuntiAccumulati(puntiDisponibili - puntiNecessari);
+                    sottoscrizioneRepository.save(subPunti);
+                    return subPunti;
+                }
+            } else{
+                throw new IllegalArgumentException("Non è un programma a punti");
+            }
+        } else {
+            throw new IllegalArgumentException("Non è una sottoscrizione a punti");
+    }
+
     }
 }

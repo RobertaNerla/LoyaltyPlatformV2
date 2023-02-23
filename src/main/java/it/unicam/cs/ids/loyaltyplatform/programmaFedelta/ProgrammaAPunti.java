@@ -11,6 +11,7 @@ import lombok.ToString;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 /**
  * Classe che rappresenta un generico programma a punti gestito nella piattaforma.
@@ -91,5 +92,9 @@ public class ProgrammaAPunti extends ProgrammaFedelta {
 
     public void aggiungiPremio(Premio newPremio) {
         this.catalogoPremi.add(newPremio);
+    }
+
+    public Optional<Premio> getPremioById(Long premioId){
+        return catalogoPremi.stream().filter(p-> p.getPremioId().equals(premioId)).findFirst();
     }
 }
