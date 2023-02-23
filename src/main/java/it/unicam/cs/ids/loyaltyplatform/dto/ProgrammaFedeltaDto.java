@@ -8,8 +8,7 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
         @JsonSubTypes.Type(value = ProgrammaAPuntiDTO.class, name = "punti")})
 //aggiungere altri subtypes per gestire altri tipi di programmi
 public interface ProgrammaFedeltaDto {
-
     Long getAziendaId();
-    String getNome();
 
+    String getNome();
 }

@@ -1,5 +1,6 @@
 package it.unicam.cs.ids.loyaltyplatform.cliente;
 
+import it.unicam.cs.ids.loyaltyplatform.carta.Carta;
 import it.unicam.cs.ids.loyaltyplatform.exception.ResourceAlreadyExistsException;
 import it.unicam.cs.ids.loyaltyplatform.exception.ResourceNotFoundException;
 import it.unicam.cs.ids.loyaltyplatform.sottoscrizione.Sottoscrizione;
@@ -48,6 +49,9 @@ public class ClienteService {
             throw new IllegalStateException("Numero di cellulare gia' in uso");
         }
 
+        if (cliente.getCarta() == null) {
+            cliente.setCarta(new Carta(cliente));
+        }
         return clienteRepository.save(cliente);
     }
 

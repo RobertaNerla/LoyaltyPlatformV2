@@ -71,7 +71,7 @@ public class SottoscrizioneConfig {
             programma1.getCatalogoPremi().add(premio);
 
             SottoscrizioneProgrammaAPunti sottoscrizione1 = new SottoscrizioneProgrammaAPunti(flavio, programma1);
-            SottoscrizioneProgrammaAPunti sottoscrizione2 = new SottoscrizioneProgrammaAPunti(michele, programma1);
+            SottoscrizioneProgrammaAPunti sottoscrizione2 = new SottoscrizioneProgrammaAPunti(michele, programma2);
 
             clienteRepository.saveAll(List.of(flavio, michele, massimo));
             aziendaRepository.saveAll(List.of(sony, openAi));

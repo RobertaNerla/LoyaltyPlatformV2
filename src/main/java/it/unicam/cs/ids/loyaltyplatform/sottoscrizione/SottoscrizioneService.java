@@ -20,11 +20,6 @@ public class SottoscrizioneService {
     private final ProgrammaFedeltaService programmaFedeltaService;
     private final SubFactory subFactory;
 
-
-    public SottoscrizioneRepository getSottoscrizioneRepository() {
-        return sottoscrizioneRepository;
-    }
-
     @Autowired
     public SottoscrizioneService(SottoscrizioneRepository sottoscrizioneRepository,
                                  ClienteService clienteService,
@@ -132,6 +127,5 @@ public class SottoscrizioneService {
         } else {
             throw new IllegalArgumentException("Non è una sottoscrizione a punti");
         }
-
     }
 }

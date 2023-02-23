@@ -60,7 +60,6 @@ public class ClienteController {
         } catch (IllegalStateException e) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
-
     }
 
     /**
