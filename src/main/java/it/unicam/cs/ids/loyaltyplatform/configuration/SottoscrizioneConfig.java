@@ -48,10 +48,18 @@ public class SottoscrizioneConfig {
                     "Michele",
                     "Casa",
                     "3958677432",
-                    "Giovanni@gmail.com",
+                    "michele.casa@gmail.com",
                     "Via Costanzo 30",
                     LocalDate.of(2000, Month.JANUARY, 5),
                     "GHDKSK45D94Z123D");
+            Cliente massimo = new Cliente(
+                    "Massimo",
+                    "Decimo",
+                    "3958677433",
+                    "massimo.decimo@gmail.com",
+                    "Viale della Repubblica 30",
+                    LocalDate.of(2000, Month.JUNE, 24),
+                    "DCMMSK45D94Z123D");
 
             Azienda sony = new Azienda("Sony", "Via sony 1", "GHFKDE345T5");
             Azienda openAi = new Azienda("openAi", "Via openAi 1", "GJFHEUDY432");
@@ -63,13 +71,16 @@ public class SottoscrizioneConfig {
             programma1.getCatalogoPremi().add(premio);
 
             SottoscrizioneProgrammaAPunti sottoscrizione1 = new SottoscrizioneProgrammaAPunti(flavio, programma1);
+            SottoscrizioneProgrammaAPunti sottoscrizione2 = new SottoscrizioneProgrammaAPunti(michele, programma1);
 
-            TransazioneDto transazione = new TransazioneDto(flavio.getCarta().getCartaId());
 
-            clienteRepository.saveAll(List.of(flavio, michele));
+            clienteRepository.saveAll(List.of(flavio, michele,massimo));
             aziendaRepository.saveAll(List.of(sony, openAi));
             programmaFedeltaRepository.saveAll(List.of(programma1, programma2));
             sottoscrizioneRepository.save(sottoscrizione1);
+            sottoscrizioneRepository.save(sottoscrizione2);
+            TransazioneDto transazione = new TransazioneDto(flavio.getCarta().getCartaId(), sony.getAziendaId(), 100);
+            gestoreConvalida.convalidaTransazione(programma1.getProgrammaId(), transazione);
         };
     }
 }
