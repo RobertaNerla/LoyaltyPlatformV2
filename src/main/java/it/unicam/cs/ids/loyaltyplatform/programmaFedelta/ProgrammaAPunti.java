@@ -1,13 +1,16 @@
 package it.unicam.cs.ids.loyaltyplatform.programmaFedelta;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import it.unicam.cs.ids.loyaltyplatform.dto.ProgrammaAPuntiDTO;
 import it.unicam.cs.ids.loyaltyplatform.azienda.Azienda;
-import jakarta.persistence.Column;
-import jakarta.persistence.DiscriminatorValue;
-import jakarta.persistence.Entity;
+import it.unicam.cs.ids.loyaltyplatform.premio.Premio;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Classe che rappresenta un generico programma a punti gestito nella piattaforma.
@@ -23,11 +26,15 @@ public class ProgrammaAPunti extends ProgrammaFedelta {
 
     @Column(name = "points_eur", nullable = false)
     private double pointsEur;
+    @JsonManagedReference
+    @OneToMany(mappedBy = "programmaAPunti", cascade = CascadeType.ALL)
+    private List<Premio> catalogoPremi;
 
     /**
      * Il costruttore di default di ProgrammaAPunti.
      */
     public ProgrammaAPunti() {
+        catalogoPremi = new ArrayList<>();
     }
 
     /**
@@ -49,9 +56,10 @@ public class ProgrammaAPunti extends ProgrammaFedelta {
      * @param nomeProgramma nome del programma
      * @param pointsEur     rapporto points/eur
      */
-    public ProgrammaAPunti(Azienda azienda, String nomeProgramma, double pointsEur) {
+    public ProgrammaAPunti(Azienda azienda, String nomeProgramma, double pointsEur, List<Premio> catalogoPremi) {
         super(azienda, nomeProgramma);
         this.pointsEur = pointsEur;
+        this.catalogoPremi = catalogoPremi;
     }
 
     /**
@@ -63,8 +71,25 @@ public class ProgrammaAPunti extends ProgrammaFedelta {
      * @param pointsEur     il rapporto points/eur.
      * @param numClienti    il numero di clienti del programma.
      */
-    public ProgrammaAPunti(Long programId, Azienda azienda, String nomeProgramma, double pointsEur, int numClienti) {
+    public ProgrammaAPunti(Long programId, Azienda azienda, String nomeProgramma, double pointsEur, int numClienti, List<Premio> catalogoPremi) {
         super(programId, azienda, nomeProgramma);
         this.pointsEur = pointsEur;
+        this.catalogoPremi = catalogoPremi;
+    }
+
+    public ProgrammaAPunti(Long programId, Azienda azienda, String nomeProgramma, double pointsEur) {
+        super(programId, azienda, nomeProgramma);
+        this.pointsEur = pointsEur;
+        this.catalogoPremi = new ArrayList<>();
+    }
+
+    public ProgrammaAPunti(Azienda azienda, String nomeProgramma, double pointsEur) {
+        super(azienda, nomeProgramma);
+        this.pointsEur = pointsEur;
+        this.catalogoPremi = new ArrayList<>();
+    }
+
+    public void aggiungiPremio(Premio newPremio) {
+        this.catalogoPremi.add(newPremio);
     }
 }

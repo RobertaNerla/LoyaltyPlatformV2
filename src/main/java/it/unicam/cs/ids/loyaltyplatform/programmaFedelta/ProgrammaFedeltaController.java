@@ -1,7 +1,9 @@
 package it.unicam.cs.ids.loyaltyplatform.programmaFedelta;
 
+import it.unicam.cs.ids.loyaltyplatform.dto.PremioDto;
 import it.unicam.cs.ids.loyaltyplatform.dto.ProgrammaFedeltaDto;
 import it.unicam.cs.ids.loyaltyplatform.exception.ResourceNotFoundException;
+import it.unicam.cs.ids.loyaltyplatform.premio.Premio;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -75,5 +77,17 @@ public class ProgrammaFedeltaController {
     @DeleteMapping(path = "{programmaId}")
     public void deleteProgrammaFedelta(@PathVariable("programmaId") Long programmaId) {
         programmaFedeltaService.deleteProgrammaFedelta(programmaId);
+    }
+
+    @PostMapping(path = "punti/{programmaId}/premi")
+    public ResponseEntity<Premio> aggiungiPremioAlCatalogo(@PathVariable("programmaId") Long programmaId, @RequestBody PremioDto dto){
+        try{
+            Premio newPremio = programmaFedeltaService.aggiungiPremio(programmaId,dto);
+            return new ResponseEntity<>(newPremio, HttpStatus.CREATED);
+        } catch(ResourceNotFoundException e){
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        } catch(IllegalArgumentException e){
+            return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
+        }
     }
 }

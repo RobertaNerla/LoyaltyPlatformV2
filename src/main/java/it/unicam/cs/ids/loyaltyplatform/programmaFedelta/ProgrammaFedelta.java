@@ -41,6 +41,8 @@ public class ProgrammaFedelta {
     @ToString.Exclude
     private List<Sottoscrizione> sottoscrizioni;
 
+
+
     /**
      * Costruttore di default del programma fedeltà
      */

@@ -2,9 +2,11 @@ package it.unicam.cs.ids.loyaltyplatform.programmaFedelta;
 
 import it.unicam.cs.ids.loyaltyplatform.azienda.Azienda;
 import it.unicam.cs.ids.loyaltyplatform.azienda.AziendaService;
+import it.unicam.cs.ids.loyaltyplatform.dto.PremioDto;
 import it.unicam.cs.ids.loyaltyplatform.dto.ProgrammaFedeltaDto;
 import it.unicam.cs.ids.loyaltyplatform.exception.ResourceAlreadyExistsException;
 import it.unicam.cs.ids.loyaltyplatform.exception.ResourceNotFoundException;
+import it.unicam.cs.ids.loyaltyplatform.premio.Premio;
 import it.unicam.cs.ids.loyaltyplatform.sottoscrizione.Sottoscrizione;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -82,5 +84,22 @@ public class ProgrammaFedeltaService {
         }
 
         programmaFedeltaRepository.deleteById(programmaId);
+    }
+
+    public Premio aggiungiPremio(Long programmaId, PremioDto dto) throws ResourceNotFoundException, IllegalArgumentException {
+        Optional<ProgrammaFedelta> optionalProgrammaFedelta = getProgrammaById(programmaId);
+        if(optionalProgrammaFedelta.isEmpty()){
+            throw new ResourceNotFoundException("Un programma fedeltà con id " + programmaId +
+                    "non esiste!");
+        } else{
+            ProgrammaFedelta programma = optionalProgrammaFedelta.get();
+            if(programma instanceof ProgrammaAPunti programmaAPunti){
+                Premio newPremio = new Premio(dto.getNome(), dto.getDescrizione(), dto.getCostoPunti(), programmaAPunti);
+                programmaAPunti.aggiungiPremio(newPremio);
+                programmaFedeltaRepository.save(programmaAPunti);
+                return newPremio;
+            }
+            else throw new IllegalArgumentException("Il programma indicato non è un programma a punti, pertanto non può avere un catalogo premi");
+        }
     }
 }
