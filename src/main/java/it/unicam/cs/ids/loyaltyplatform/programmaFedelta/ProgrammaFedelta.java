@@ -1,6 +1,8 @@
 package it.unicam.cs.ids.loyaltyplatform.programmaFedelta;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonSubTypes;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import it.unicam.cs.ids.loyaltyplatform.azienda.Azienda;
 import it.unicam.cs.ids.loyaltyplatform.sottoscrizione.Sottoscrizione;
 import jakarta.persistence.*;
@@ -16,9 +18,17 @@ import java.util.Objects;
 @Getter
 @Setter
 @ToString
+@JsonTypeInfo(
+        use = JsonTypeInfo.Id.NAME,
+        include = JsonTypeInfo.As.PROPERTY,
+        property = "tipo_programma",
+        visible = true)
+@JsonSubTypes({
+        @JsonSubTypes.Type(value = ProgrammaAPunti.class, name = "programma a punti")
+})
 @Entity(name = "ProgrammaFedelta")
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-@DiscriminatorColumn(name = "tipo_programma", discriminatorType = DiscriminatorType.STRING)
+@DiscriminatorColumn(name = "tipo_programma", discriminatorType = DiscriminatorType.STRING, columnDefinition = "programma generico")
 
 @Table(name = "programma_fedelta")
 public class ProgrammaFedelta {
@@ -40,7 +50,6 @@ public class ProgrammaFedelta {
     @OneToMany(mappedBy = "programma", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @ToString.Exclude
     private List<Sottoscrizione> sottoscrizioni;
-
 
 
     /**

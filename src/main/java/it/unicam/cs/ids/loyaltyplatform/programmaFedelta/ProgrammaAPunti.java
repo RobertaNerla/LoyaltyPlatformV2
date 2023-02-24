@@ -1,8 +1,8 @@
 package it.unicam.cs.ids.loyaltyplatform.programmaFedelta;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-import it.unicam.cs.ids.loyaltyplatform.dto.ProgrammaAPuntiDTO;
 import it.unicam.cs.ids.loyaltyplatform.azienda.Azienda;
+import it.unicam.cs.ids.loyaltyplatform.dto.ProgrammaAPuntiDTO;
 import it.unicam.cs.ids.loyaltyplatform.premio.Premio;
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -29,6 +29,7 @@ public class ProgrammaAPunti extends ProgrammaFedelta {
     private double pointsEur;
     @JsonManagedReference
     @OneToMany(mappedBy = "programmaAPunti", cascade = CascadeType.ALL)
+    @ToString.Exclude
     private List<Premio> catalogoPremi;
 
     /**
@@ -94,7 +95,7 @@ public class ProgrammaAPunti extends ProgrammaFedelta {
         this.catalogoPremi.add(newPremio);
     }
 
-    public Optional<Premio> getPremioById(Long premioId){
-        return catalogoPremi.stream().filter(p-> p.getPremioId().equals(premioId)).findFirst();
+    public Optional<Premio> getPremioById(Long premioId) {
+        return catalogoPremi.stream().filter(p -> p.getPremioId().equals(premioId)).findFirst();
     }
 }
