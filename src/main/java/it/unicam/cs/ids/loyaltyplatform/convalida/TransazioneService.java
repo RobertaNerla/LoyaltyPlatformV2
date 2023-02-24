@@ -74,4 +74,8 @@ public class TransazioneService {
                 .filter(transazione -> transazione.getCliente().getClienteId().equals(clienteId))
                 .collect(Collectors.toList());
     }
+
+    public void deleteAllTransazioni(){
+        transazioneRepository.deleteAll();
+    }
 }

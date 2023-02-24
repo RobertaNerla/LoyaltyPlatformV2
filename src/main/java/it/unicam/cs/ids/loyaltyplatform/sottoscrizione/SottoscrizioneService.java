@@ -7,6 +7,7 @@ import it.unicam.cs.ids.loyaltyplatform.premio.Premio;
 import it.unicam.cs.ids.loyaltyplatform.programmaFedelta.ProgrammaAPunti;
 import it.unicam.cs.ids.loyaltyplatform.programmaFedelta.ProgrammaFedelta;
 import it.unicam.cs.ids.loyaltyplatform.programmaFedelta.ProgrammaFedeltaService;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -34,7 +35,7 @@ public class SottoscrizioneService {
     public List<Sottoscrizione> getSottoscrizioni() {
         return sottoscrizioneRepository.findAll();
     }
-
+    @Transactional
     public Sottoscrizione addNewSottoscrizione(Long clienteId, Long programmaId) throws ResourceNotFoundException {
         Cliente currentClient = getClienteById(clienteId);
         ProgrammaFedelta currentProgram = getProgrammaById(programmaId);
@@ -127,5 +128,9 @@ public class SottoscrizioneService {
         } else {
             throw new IllegalArgumentException("Non è una sottoscrizione a punti");
         }
+    }
+
+    public void deleteAllSottoscrizioni(){
+        sottoscrizioneRepository.deleteAll();
     }
 }

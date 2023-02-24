@@ -99,4 +99,8 @@ public class AziendaService {
         Azienda azienda = retrieveAzienda(aziendaId);
         return azienda.getProgrammiFedelta();
     }
+
+    public void deleteAllAziende(){
+        aziendaRepository.deleteAll();
+    }
 }

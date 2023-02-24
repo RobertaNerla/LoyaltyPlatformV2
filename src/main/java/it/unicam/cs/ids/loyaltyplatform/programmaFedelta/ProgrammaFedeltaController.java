@@ -47,7 +47,7 @@ public class ProgrammaFedeltaController {
      *             L'utente al click sul template scelto per il suo nuovo programma fedeltà
      *             viene indirizzato su questo endpoint.
      *             Se l'utente sceglierà il template per il programma a punti allora il path su cui effettuerà
-     *             la richiesta sarà: api/programma/new/punti
+     *             la richiesta sarà: api/programmi/nuovoProgramma/punti
      * @param dto  dati inseriti nel Body della richiesta.
      * @return Risposta Http.
      * <p>
@@ -80,10 +80,10 @@ public class ProgrammaFedeltaController {
     }
 
     @PostMapping(path = "punti/{programmaId}/premi")
-    public ResponseEntity<Premio> aggiungiPremioAlCatalogo(@PathVariable("programmaId") Long programmaId, @RequestBody PremioDto dto) {
+    public ResponseEntity<List<Premio>> aggiungiPremioAlCatalogo(@PathVariable("programmaId") Long programmaId, @RequestBody PremioDto dto) {
         try {
-            Premio newPremio = programmaFedeltaService.aggiungiPremio(programmaId, dto);
-            return new ResponseEntity<>(newPremio, HttpStatus.CREATED);
+            List<Premio> updatedCatalogo = programmaFedeltaService.aggiungiPremio(programmaId, dto);
+            return new ResponseEntity<>(updatedCatalogo, HttpStatus.CREATED);
         } catch (ResourceNotFoundException e) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         } catch (IllegalArgumentException e) {

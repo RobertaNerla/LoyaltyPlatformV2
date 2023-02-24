@@ -139,4 +139,8 @@ public class ClienteService {
 
         return cliente.getSottoscrizioni();
     }
+
+    public void deleteAllClienti(){
+        clienteRepository.deleteAll();
+    }
 }
