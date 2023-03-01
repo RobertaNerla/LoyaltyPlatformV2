@@ -80,14 +80,14 @@ public class ProgrammaFedeltaController {
     }
 
     @PostMapping(path = "punti/{programmaId}/premi")
-    public ResponseEntity<List<Premio>> aggiungiPremioAlCatalogo(@PathVariable("programmaId") Long programmaId, @RequestBody PremioDto dto) {
+    public ResponseEntity<Object> aggiungiPremioAlCatalogo(@PathVariable("programmaId") Long programmaId, @RequestBody PremioDto dto) {
         try {
             List<Premio> updatedCatalogo = programmaFedeltaService.aggiungiPremio(programmaId, dto);
             return new ResponseEntity<>(updatedCatalogo, HttpStatus.CREATED);
         } catch (ResourceNotFoundException e) {
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(e, HttpStatus.BAD_REQUEST);
         } catch (IllegalArgumentException e) {
-            return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
+            return new ResponseEntity<>(e, HttpStatus.UNAUTHORIZED);
         }
     }
 }

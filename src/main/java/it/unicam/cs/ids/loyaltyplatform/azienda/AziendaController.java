@@ -1,5 +1,6 @@
 package it.unicam.cs.ids.loyaltyplatform.azienda;
 
+import it.unicam.cs.ids.loyaltyplatform.exception.ResourceAlreadyExistsException;
 import it.unicam.cs.ids.loyaltyplatform.programmaFedelta.ProgrammaFedelta;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -42,9 +43,13 @@ public class AziendaController {
      * @param azienda da inserire nel databse
      */
     @PostMapping(consumes = "application/json", produces = "application/json")
-    public ResponseEntity<Azienda> registraNuovaAzienda(@RequestBody Azienda azienda) {
-        Azienda newAzienda = aziendaService.addNewAzienda(azienda);
-        return new ResponseEntity<>(newAzienda, HttpStatus.CREATED);
+    public ResponseEntity<Object> registraNuovaAzienda(@RequestBody Azienda azienda) {
+        try {
+            Azienda newAzienda = aziendaService.addNewAzienda(azienda);
+            return new ResponseEntity<>(newAzienda, HttpStatus.CREATED);
+        } catch (ResourceAlreadyExistsException e) {
+            return new ResponseEntity<>(e, HttpStatus.BAD_REQUEST);
+        }
     }
 
     /**

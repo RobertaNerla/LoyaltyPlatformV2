@@ -1,5 +1,6 @@
 package it.unicam.cs.ids.loyaltyplatform.cliente;
 
+import it.unicam.cs.ids.loyaltyplatform.exception.ResourceAlreadyExistsException;
 import it.unicam.cs.ids.loyaltyplatform.sottoscrizione.Sottoscrizione;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -53,12 +54,12 @@ public class ClienteController {
      *                }
      */
     @PostMapping(consumes = "application/json", produces = "application/json")
-    public ResponseEntity<Cliente> registraNuovoCliente(@RequestBody Cliente cliente) {
+    public ResponseEntity<Object> registraNuovoCliente(@RequestBody Cliente cliente) {
         try {
             Cliente newCliente = clienteService.addNewCliente(cliente);
             return new ResponseEntity<>(newCliente, HttpStatus.CREATED);
-        } catch (IllegalStateException e) {
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        } catch (ResourceAlreadyExistsException e) {
+            return new ResponseEntity<>(e, HttpStatus.BAD_REQUEST);
         }
     }
 
