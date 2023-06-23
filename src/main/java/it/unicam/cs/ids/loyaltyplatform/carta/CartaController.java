@@ -26,5 +26,4 @@ public class CartaController {
         Carta newCarta = cartaService.addNewCarta(dto.getClienteId());
         return new ResponseEntity<>(newCarta, HttpStatus.CREATED);
     }
-    //TODO: crud
 }
